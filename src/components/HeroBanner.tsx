@@ -108,7 +108,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 {/* Device Image Preview with Glow */}
                 <div className="relative group overflow-hidden rounded-lg bg-slate-950 aspect-video flex items-center justify-center border border-slate-800 p-2 sm:p-3">
                   <img
-                    src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80"
+                    src="/images/Profile/15P_main.jpg"
                     alt="Svicloud 15P Flagship TV Box"
                     className="max-w-full max-h-full w-auto h-auto object-contain object-center group-hover:scale-105 transition-transform duration-300 opacity-95 group-hover:opacity-100"
                   />
@@ -176,4 +176,3 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
     </section>
   );
 };
-
