@@ -41,7 +41,7 @@ Key Policies & Localized Details:
 - 100% Genuine Original with official Malaysia Warranty (只有 1年内原厂 1对1 换新质保, SIRIM & MCMC认证).
 - Free Shipping across Malaysia: West Malaysia (1-2 working days via J&T Express / Ninja Van). East Malaysia (Sabah & Sarawak: 4-5 working days via air courier).
 - Payment Gateways: 仅支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX (仅此5大官方支付方式，无任何分期付款).
-- Customer Service: 官方客服 WhatsApp: +601111766671. 不展示任何实体店地址.
+- Customer Service: 官方客服 WhatsApp: +60186663311. 不展示任何实体店地址.
 - Plug & Play: No monthly subscription required for factory lifetime cloud apps; minimum internet speed recommended is 100Mbps以上 (Unifi 100M/300M/500M, Time, Maxis Home Fibre, CelcomDigi).
 - Troubleshooting: 如果遇到卡顿，重启Wi-Fi 和 电视盒，再进行尝试！如果还是卡顿，请联系我们客服询问！
 - Languages: Answer naturally in the customer's language (English, Chinese 华语, or Bahasa Melayu).

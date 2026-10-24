@@ -560,14 +560,14 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             )}
 
             <a
-              href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20I%20need%20technical%20assistance%20with%20teaching%20guides"
+              href="https://api.whatsapp.com/send?phone=60186663311&text=Hi%20Svi%20Studio%20Malaysia,%20I%20need%20technical%20assistance%20with%20teaching%20guides"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-800/80 text-emerald-300 hover:bg-emerald-900/90 text-xs font-bold transition-all shadow-md shadow-emerald-950/40"
             >
               <PhoneCall className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
               <span className="hidden sm:inline">{copy.whatsappEngineer}</span>
-              <span>+601111766671</span>
+              <span>+60186663311</span>
             </a>
           </div>
         </div>
@@ -671,7 +671,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             </div>
           </div>
           <a
-            href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20I%20have%20questions%20about%20my%20TV%20Box"
+            href="https://api.whatsapp.com/send?phone=60186663311&text=Hi%20Svi%20Studio%20Malaysia,%20I%20have%20questions%20about%20my%20TV%20Box"
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-950/50 transition-all active:scale-95"
@@ -813,7 +813,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
             <a
-              href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20I%20need%20help%20with%20my%20TV%20Box"
+              href="https://api.whatsapp.com/send?phone=60186663311&text=Hi%20Svi%20Studio%20Malaysia,%20I%20need%20help%20with%20my%20TV%20Box"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-xl shadow-emerald-500/20 transition-all transform hover:scale-105 active:scale-95"

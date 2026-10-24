@@ -218,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Direct WhatsApp Consultation / Order Button (Hidden on Mobile) */}
           <a
-            href={`https://api.whatsapp.com/send?phone=601111766671&text=${encodeURIComponent(copy.whatsapp)}`}
+            href={`https://api.whatsapp.com/send?phone=60186663311&text=${encodeURIComponent(copy.whatsapp)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-xs shadow-md shadow-emerald-950/40 transition-all active:scale-95 whitespace-nowrap shrink-0"

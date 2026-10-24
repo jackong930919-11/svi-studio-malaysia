@@ -336,7 +336,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
                   const text = encodeURIComponent(
                     copy.whatsapp.replace('{name}', pName).replace('{price}', String(result.product.price))
                   );
-                  window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
+                  window.open(`https://api.whatsapp.com/send?phone=60186663311&text=${text}`, '_blank');
                   onClose();
                 }}
                 className="flex-1 w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 active:scale-95 transition-all"

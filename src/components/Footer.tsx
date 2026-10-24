@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({
 
   const handleOpenWhatsApp = () => {
     const text = encodeURIComponent(copy.whatsappMessage);
-    window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=60186663311&text=${text}`, '_blank');
   };
 
   return (
@@ -92,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-1.5 text-xs text-slate-300">
               <p className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>WhatsApp: +601111766671</span>
+                <span>WhatsApp: +60186663311</span>
               </p>
             </div>
 
@@ -145,7 +145,7 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <div className="grid grid-cols-2 sm:grid-cols-2 gap-2">
               <a
-                href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20我想咨询订购电视盒"
+                href="https://api.whatsapp.com/send?phone=60186663311&text=Hi%20Svi%20Studio%20Malaysia,%20我想咨询订购电视盒"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/30 hover:border-emerald-500 text-left font-bold text-[11px] text-emerald-400 flex items-center gap-2 transition-colors"

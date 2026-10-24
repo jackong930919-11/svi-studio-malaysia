@@ -497,7 +497,7 @@ export const AiCustomerServiceModal: React.FC<AiCustomerServiceModalProps> = ({
     const text = encodeURIComponent(
       `Hi Svi Studio Malaysia, 我通过AI客服排查【${issueSummary}】，遇到困难依然未能解决，需要官方工程师协助排查。`
     );
-    return `https://api.whatsapp.com/send?phone=601111766671&text=${text}`;
+    return `https://api.whatsapp.com/send?phone=60186663311&text=${text}`;
   };
 
   // Chat message send handler
@@ -543,7 +543,7 @@ export const AiCustomerServiceModal: React.FC<AiCustomerServiceModalProps> = ({
         id: `bot-${Date.now()}`,
         sender: 'bot',
         text:
-          '重启 Wi-Fi 和电视盒，再进行尝试！如果还是卡顿或未能解决，请点击下方绿色按钮联络我们 WhatsApp 客服专员 (+601111766671)。',
+          '重启 Wi-Fi 和电视盒，再进行尝试！如果还是卡顿或未能解决，请点击下方绿色按钮联络我们 WhatsApp 客服专员 (+60186663311)。',
         time: new Date().toLocaleTimeString('en-MY', { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, fallbackMsg]);
@@ -677,7 +677,7 @@ export const AiCustomerServiceModal: React.FC<AiCustomerServiceModalProps> = ({
                   className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-emerald-500/30 flex items-center justify-center gap-2 transition-all transform hover:scale-[1.02] active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4 fill-slate-950" />
-                  <span>立即连接 WhatsApp 官方客服 (+601111766671)</span>
+                  <span>立即连接 WhatsApp 官方客服 (+60186663311)</span>
                 </a>
 
                 {/* Sub features for reassurance */}
@@ -857,13 +857,13 @@ export const AiCustomerServiceModal: React.FC<AiCustomerServiceModalProps> = ({
                 {/* Direct WhatsApp help link if user wants immediate human support */}
                 <div className="pt-2 text-center">
                   <a
-                    href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20I%20would%20like%20to%20speak%20with%20an%20engineer%20directly"
+                    href="https://api.whatsapp.com/send?phone=60186663311&text=Hi%20Svi%20Studio%20Malaysia,%20I%20would%20like%20to%20speak%20with%20an%20engineer%20directly"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-[11px] text-slate-400 hover:text-emerald-400 transition-colors"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>不想排查？点击直接联络 WhatsApp 官方技术专员 (+601111766671)</span>
+                    <span>不想排查？点击直接联络 WhatsApp 官方技术专员 (+60186663311)</span>
                   </a>
                 </div>
               </div>

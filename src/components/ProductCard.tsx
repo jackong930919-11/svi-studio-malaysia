@@ -201,7 +201,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   .replace('{name}', productName)
                   .replace('{price}', String(product.price))
               );
-              window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
+              window.open(`https://api.whatsapp.com/send?phone=60186663311&text=${text}`, '_blank');
             }}
             className="w-full py-1.5 sm:py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-[11px] sm:text-xs shadow-md shadow-emerald-950/40 flex items-center justify-center gap-1 transition-all active:scale-95"
             title={copy.productCard.whatsappOrder}

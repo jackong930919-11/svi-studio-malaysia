@@ -14,7 +14,7 @@ Official products and prices: Svicloud 9P RM699, 10S RM549, 10P RM699, 15P RM749
 All TV boxes are genuine Malaysia units with SIRIM and MCMC certification. Warranty is 1-year 1-to-1 replacement.
 Shipping is free: West Malaysia 1-2 working days, Sabah and Sarawak 4-5 working days.
 No monthly subscription is required for the factory cloud apps. Recommended internet speed is 100Mbps or higher.
-Official WhatsApp support: +601111766671. Do not provide a physical store address or invent policies or product claims.`;
+Official WhatsApp support: +60186663311. Do not provide a physical store address or invent policies or product claims.`;
 
 const jsonResponse = (body: unknown, status = 200): Response =>
   new Response(JSON.stringify(body), {

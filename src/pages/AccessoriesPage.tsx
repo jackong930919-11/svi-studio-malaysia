@@ -114,7 +114,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
       `${warrantyNote}\n` +
       `${currentLang === 'zh' ? '请问目前有现货吗？想了解如何安排包邮派送。' : currentLang === 'ms' ? 'Adakah stok tersedia dan bagaimana saya boleh mengatur penghantaran percuma?' : 'Is it in stock, and how can I arrange free delivery?'}`
     );
-    window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=60186663311&text=${text}`, '_blank');
   };
 
   // WhatsApp order for multi-item inquiry
@@ -140,7 +140,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
       `${currentLang === 'zh' ? '预估总计' : currentLang === 'ms' ? 'Jumlah anggaran' : 'Estimated total'}: RM ${total.toFixed(2)}\n` +
       `${currentLang === 'zh' ? '请问这些配件目前都有现货吗？想了解如何一并打包包邮派送。' : currentLang === 'ms' ? 'Adakah semua aksesori ini tersedia dan bolehkah penghantaran percuma dibuat dalam satu bungkusan?' : 'Are these accessories in stock, and can they be shipped together for free?'}`
     );
-    window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=60186663311&text=${text}`, '_blank');
   };
 
   const selectedInquiryCount = cartInquiryItems.length;
@@ -201,7 +201,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
             )}
 
             <a
-              href={`https://api.whatsapp.com/send?phone=601111766671&text=${encodeURIComponent(copy.whatsappSupport)}`}
+              href={`https://api.whatsapp.com/send?phone=60186663311&text=${encodeURIComponent(copy.whatsappSupport)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-xs shadow-md shadow-emerald-950/40 transition-all active:scale-95"
@@ -768,7 +768,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
             )}
             <span>·</span>
             <a
-              href="https://api.whatsapp.com/send?phone=601111766671"
+              href="https://api.whatsapp.com/send?phone=60186663311"
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-400 hover:text-emerald-300"

@@ -102,7 +102,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       `${currentLang === 'zh' ? '预估总计' : currentLang === 'ms' ? 'Jumlah anggaran' : 'Estimated total'}: RM ${grandTotal}\n` +
       `${currentLang === 'zh' ? '请问目前有现货吗？想了解如何安排包邮派送。' : currentLang === 'ms' ? 'Adakah stok tersedia dan bagaimana saya boleh mengatur penghantaran percuma?' : 'Is it in stock, and how can I arrange free delivery?'}`,
     );
-    window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=60186663311&text=${text}`, '_blank');
   };
 
   return (
@@ -504,7 +504,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             {/* Action Buttons */}
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-2.5">
               <a
-                href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20I%20would%20like%20to%20inquire%20about%20the%201-Year%201-to-1%20Replacement%20Warranty"
+                href="https://api.whatsapp.com/send?phone=60186663311&text=Hi%20Svi%20Studio%20Malaysia,%20I%20would%20like%20to%20inquire%20about%20the%201-Year%201-to-1%20Replacement%20Warranty"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 hover:text-emerald-300 font-bold text-xs border border-emerald-500/30 flex items-center justify-center gap-1.5 transition-all"

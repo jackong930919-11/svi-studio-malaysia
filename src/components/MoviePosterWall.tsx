@@ -48,7 +48,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ currentLang, o
     const text = encodeURIComponent(
       copy.orderMessage.replace('{title}', movieTitle)
     );
-    window.open(`https://wa.me/60162080789?text=${text}`, '_blank');
+    window.open(`https://wa.me/60186663311?text=${text}`, '_blank');
   };
 
   return (
