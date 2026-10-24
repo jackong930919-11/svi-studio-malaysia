@@ -53,7 +53,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
       };
     }
 
-    // 3. Sports & Ultimate 8GB Monster Performance
+    // 3. Sports and flagship performance
     if (answers.priority === 'sports' || answers.wifiDistance === 'lan' || answers.tvType === '8k') {
       const p = products.find((prod) => prod.id === 'svi-15p') || products[3];
       return {

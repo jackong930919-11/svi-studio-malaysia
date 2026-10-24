@@ -22,7 +22,7 @@ export function getSmartFallback(message: string, lang: ChatLanguage = 'zh'): st
       return '全马订单一律免运费！西马地区（雪兰莪、吉隆坡、槟城、柔佛等）1-2 个工作日由 J&T Express 或 Ninja Van 送达；东马（沙巴、砂拉越）4-5 个工作日空运送达。';
     }
     if (q.includes('推荐') || q.includes('哪款') || q.includes('区别') || q.includes('买哪') || q.includes('价格') || q.includes('多少钱')) {
-      return '官方最新型号与价格：\n1. Svicloud 9P (经典旗舰 4G+64G) - RM699\n2. Svicloud 10S (简易智选 2G+32G) - RM549\n3. Svicloud 10P (新一代旗舰 8K AV1) - RM699\n4. Svicloud 15P (性能巅峰 8G+128G) - RM749\n5. Svicloud Soundbar 10 (杜比影院音响) - RM1399\n全马现货包邮，支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX 快捷支付！';
+      return '官方最新型号与价格：\n1. Svicloud 9P (4G+64G，支持 2.4G / 5.0G 双频 WiFi) - RM699\n2. Svicloud 10S (简易智选 2G+32G) - RM549\n3. Svicloud 10P (新一代旗舰 8K AV1) - RM699\n4. Svicloud 15P (4GB RAM + 64GB eMMC) - RM749\n5. Svicloud Soundbar 10 (杜比影院音响) - RM1399\n全马现货包邮，支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX 快捷支付！';
     }
     if (q.includes('频道') || q.includes('astro') || q.includes('直播') || q.includes('节目') || q.includes('球赛')) {
       return 'Svicloud 9P / 10S / 10P / 15P 均预装小云官方直播与点播平台，涵盖马来西亚 Astro 全套、新加坡、中港台、欧美及全球超 1000+ 高清频道，并有 4K 体育专线（英超、欧冠、羽球公开赛等），终身免费无月费！';

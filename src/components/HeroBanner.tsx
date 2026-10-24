@@ -134,7 +134,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 <div className="grid grid-cols-3 gap-1 sm:gap-1.5 text-center">
                   <div className="p-1 sm:p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
                     <p className="text-slate-400 text-[7px] sm:text-[9px]">{copy.ram}</p>
-                    <p className="font-bold text-white text-[9px] sm:text-xs">8GB+128GB</p>
+                    <p className="font-bold text-white text-[9px] sm:text-xs">4GB+64GB eMMC</p>
                   </div>
                   <div className="p-1 sm:p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
                     <p className="text-slate-400 text-[7px] sm:text-[9px]">{copy.resolution}</p>

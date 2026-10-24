@@ -31,10 +31,10 @@ const SYSTEM_PROMPT = `You are "SviBot", the 24/7 Senior AI Technical Consultant
 You represent the leading authorized distributor of genuine Svicloud products and Smart TV Boxes in Malaysia.
 
 Your exact product lineup and prices:
-1. Svicloud 9P (小云盒子 9P 经典旗舰版) - RM699: 4GB RAM + 64GB Storage, Android 12, 8K Ultra HD, Dual-band WiFi 6, AI Voice Remote, 1000+ Live Channels (Astro, Taiwan, Hong Kong, Sports HD), 100k+ VOD, Dolby Audio, SIRIM & MCMC Certified.
+1. Svicloud 9P (小云盒子 9P 经典旗舰版) - RM699: 4GB RAM + 64GB Storage, Android 12, 8K Ultra HD, 2.4G / 5.0G dual-band WiFi, AI Voice Remote, 1000+ Live Channels (Astro, Taiwan, Hong Kong, Sports HD), 100k+ VOD, Dolby Audio, SIRIM & MCMC Certified.
 2. Svicloud 10S (小云盒子 10S 简易智选版) - RM549: 2GB RAM + 32GB Storage, 4K HDR10, optimal for elderly & family living rooms, simplified large-tile UI, auto-boot to Live TV, parental controls, high cost-performance.
 3. Svicloud 10P (小云盒子 10P 新一代旗舰版) - RM699: 4GB RAM + 64GB Storage, Next-gen 8K AV1 hardware decoder, WiFi 6, Bluetooth 5.2, Smart Voice Remote + Karaoke K-song app support.
-4. Svicloud 15P (小云盒子 15P 极致性能巅峰版) - RM749: 8GB RAM + 128GB Storage, Next-Gen Amlogic S928X processor, Android 13, WiFi 6E + Gigabit LAN, 4K 120Hz, dedicated live sports zero-lag stream engine, 1-Year 1-to-1 Warranty.
+4. Svicloud 15P (小云盒子 15P 极致性能巅峰版) - RM749: 4GB RAM + 64GB eMMC, Amlogic S928X processor, Android 13, WiFi 6E + Gigabit LAN, 4K 120Hz, dedicated live sports stream engine, 1-Year 1-to-1 Warranty.
 5. Svicloud Soundbar 10 (小云 Soundbar 10 杜比全景声影院音响系统) - RM1399: 300W peak power, True Dolby Atmos 3D spatial surround sound, 6.5-inch wireless deep bass subwoofer, HDMI eARC single-cable sync with Svicloud TV box, ClearVoice speech enhancement.
 
 Key Policies & Localized Details:
@@ -70,7 +70,7 @@ function getSmartFallback(message: string, lang: 'zh' | 'en' | 'ms' = 'zh'): str
       return '全马订单一律免运费！西马地区（雪兰莪、吉隆坡、槟城、柔佛等）1-2 个工作日由 J&T Express 或 Ninja Van 送达；东马（沙巴、砂拉越）4-5 个工作日空运送达。';
     }
     if (q.includes('推荐') || q.includes('哪款') || q.includes('区别') || q.includes('买哪') || q.includes('价格') || q.includes('多少钱')) {
-      return '官方最新型号与价格：\n1. Svicloud 9P (经典旗舰 4G+64G) - RM699\n2. Svicloud 10S (简易智选 2G+32G) - RM549\n3. Svicloud 10P (新一代旗舰 8K AV1) - RM699\n4. Svicloud 15P (性能巅峰 8G+128G) - RM749\n5. Svicloud Soundbar 10 (杜比影院音响) - RM1399\n全马现货包邮，支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX 快捷支付！';
+      return '官方最新型号与价格：\n1. Svicloud 9P (4G+64G，支持 2.4G / 5.0G 双频 WiFi) - RM699\n2. Svicloud 10S (简易智选 2G+32G) - RM549\n3. Svicloud 10P (新一代旗舰 8K AV1) - RM699\n4. Svicloud 15P (4GB RAM + 64GB eMMC) - RM749\n5. Svicloud Soundbar 10 (杜比影院音响) - RM1399\n全马现货包邮，支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX 快捷支付！';
     }
     if (q.includes('频道') || q.includes('astro') || q.includes('直播') || q.includes('节目') || q.includes('球赛')) {
       return 'Svicloud 9P / 10S / 10P / 15P 均预装小云官方直播与点播平台，涵盖马来西亚 Astro 全套、新加坡、中港台、欧美及全球超 1000+ 高清频道，并有 4K 体育专线（英超、欧冠、羽球公开赛等），终身免费无月费！';
