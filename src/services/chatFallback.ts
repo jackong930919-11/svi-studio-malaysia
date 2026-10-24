@@ -29,7 +29,31 @@ export function getSmartFallback(message: string, lang: ChatLanguage = 'zh'): st
   const asksForSpecs =
     /spec|parameter|processor|cpu|ram|rom|storage|wi-?fi|bluetooth|resolution|android|port|specification|参数|规格|配置|处理器|内存|存储|无线|蓝牙|分辨率|接口|系统/.test(q);
   if (requestedModel && asksForSpecs) {
-    return PRODUCT_SPEC_REPLIES[lang][requestedModel];
+    const reply = PRODUCT_SPEC_REPLIES[lang][requestedModel];
+    const normalizedReply = reply
+      .replace(/2\.4GHz/g, '2.4G')
+      .replace(/5(?:\.0)?GHz/g, '5.0G')
+      .replace(/2\.4G \+ 5\.0G/g, '2.4G / 5.0G');
+    if (requestedModel === '15p') {
+      return `${normalizedReply} ${
+        lang === 'zh'
+          ? '另支持绑定安卓手机进行观看。'
+          : lang === 'ms'
+            ? 'Ia juga menyokong pautan telefon Android untuk menonton.'
+            : 'It also supports binding an Android phone for viewing.'
+      }`;
+    }
+    return normalizedReply;
+  }
+  if (
+    requestedModel === '15p' &&
+    /bind|pair|phone|mobile|android|手机|安卓|绑定|配对/.test(q)
+  ) {
+    return lang === 'zh'
+      ? 'Svicloud 15P 支持绑定安卓手机进行观看。'
+      : lang === 'ms'
+        ? 'Svicloud 15P menyokong pautan telefon Android untuk menonton.'
+        : 'Svicloud 15P supports binding an Android phone for viewing.';
   }
 
   if (lang === 'zh' || /小云|电视|频道|发货|保修|直播|几钱|多少钱|网速|astro|soundbar|音响|卡/.test(q)) {

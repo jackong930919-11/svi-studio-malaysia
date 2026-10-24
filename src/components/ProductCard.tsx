@@ -150,7 +150,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
         <div className="flex items-center gap-1 p-1 sm:p-1.5 rounded bg-slate-950/70 border border-slate-800/80">
           <Wifi className="w-3 h-3 text-indigo-400 shrink-0" />
-          <span className="truncate">{product.specs.wifi.split(' ')[0]}</span>
+          <span className="truncate">
+            {product.id === 'svi-soundbar10' ? copy.productCard.subwooferFrequency : copy.productCard.wifiBands}
+          </span>
         </div>
       </div>
 

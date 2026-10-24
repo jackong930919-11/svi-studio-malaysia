@@ -32,9 +32,9 @@ You represent the leading authorized distributor of genuine Svicloud products an
 
 Your exact product lineup and prices:
 1. Svicloud 9P (小云盒子 9P 经典旗舰版) - RM699: Android 12.0, Amlogic S905Y4 quad-core Cortex-A35, 4GB RAM + 64GB ROM, 2.4G / 5.0G dual-band Wi-Fi (2T2R), Bluetooth 5.0, 8K / 4K video, AV1, Dolby Vision, Dolby Audio, HDR10+, Bluetooth voice remote. Supports Google Play, Netflix, YouTube, Disney+, Yogurt Kids, Cherry TV, Happy Family Karaoke, global live channels and VOD with no monthly subscription.
-2. Svicloud 10S (小云盒子 10S 简易智选版) - RM549: Android 12.0, Amlogic S905Y4 quad-core Cortex-A35, ARM G31 MP2 GPU, 2GB DDR3 + 32GB eMMC, dual-band 2.4GHz / 5GHz Wi-Fi (2T2R, 802.11 a/b/g/n/ac), Bluetooth 5.0, up to 4K@60fps, AV1 / VP9 Profile 2 / H.265 Main10 / H.264 / AVS2, HDR10 / 4K HDR, HDMI 2.1, 2x USB 2.0 Type-A, USB-C 5V/2A, optical audio, RJ45 10M/100M, AI voice-search remote with HDMI-CEC. Supports live channels, VOD apps such as Yogurt TV and app installation through Google Play.
-3. Svicloud 10P (小云盒子 10P 新一代旗舰版) - RM699: Android 12.0, Amlogic S905Y4 64-bit quad-core ARM Cortex-A35, ARM Mali-G31 MP2 GPU, 4GB DDR3 + 64GB eMMC, dual-band 2.4GHz / 5.0GHz Wi-Fi (2T2R), Bluetooth 5.0, RJ45 up to 1000M, HDMI 2.1 with up to 4K / 8K output depending on display and decoding, 2x USB 2.0, optical audio, Dolby Audio and Type-C power input.
-4. Svicloud 15P (小云盒子 15P 极致性能巅峰版) - RM749: Android 14, Amlogic S905Y5 Cortex-A55 quad-core, 4GB RAM + 64GB ROM, Wi-Fi 6 dual-band 2.4GHz + 5GHz (2T2R), Bluetooth 5.4, up to 4K@60fps, HDR10 / HDR10+ / HLG, AV1 hardware decoding, Dolby Audio, HDMI 2.1, RJ45 LAN, Type-C power port and AI Voice Air Mouse Remote.
+2. Svicloud 10S (小云盒子 10S 简易智选版) - RM549: Android 12.0, Amlogic S905Y4 quad-core Cortex-A35, ARM G31 MP2 GPU, 2GB DDR3 + 32GB eMMC, dual-band 2.4G / 5.0G Wi-Fi (2T2R, 802.11 a/b/g/n/ac), Bluetooth 5.0, up to 4K@60fps, AV1 / VP9 Profile 2 / H.265 Main10 / H.264 / AVS2, HDR10 / 4K HDR, HDMI 2.1, 2x USB 2.0 Type-A, USB-C 5V/2A, optical audio, RJ45 10M/100M, AI voice-search remote with HDMI-CEC. Supports live channels, VOD apps such as Yogurt TV and app installation through Google Play.
+3. Svicloud 10P (小云盒子 10P 新一代旗舰版) - RM699: Android 12.0, Amlogic S905Y4 64-bit quad-core ARM Cortex-A35, ARM Mali-G31 MP2 GPU, 4GB DDR3 + 64GB eMMC, dual-band 2.4G / 5.0G Wi-Fi (2T2R), Bluetooth 5.0, RJ45 up to 1000M, HDMI 2.1 with up to 4K / 8K output depending on display and decoding, 2x USB 2.0, optical audio, Dolby Audio and Type-C power input.
+4. Svicloud 15P (小云盒子 15P 极致性能巅峰版) - RM749: Android 14, Amlogic S905Y5 Cortex-A55 quad-core, 4GB RAM + 64GB ROM, Wi-Fi 6 dual-band 2.4G / 5.0G (2T2R), Bluetooth 5.4, up to 4K@60fps, HDR10 / HDR10+ / HLG, AV1 hardware decoding, Dolby Audio, HDMI 2.1, RJ45 LAN, Type-C power port, AI Voice Air Mouse Remote, and Android phone binding for viewing.
 Treat these specifications as authoritative; do not transfer claims between models or invent features.
 5. Svicloud Soundbar 10 (小云 Soundbar 10 杜比全景声影院音响系统) - RM1399: 300W peak power, True Dolby Atmos 3D spatial surround sound, 6.5-inch wireless deep bass subwoofer, HDMI eARC single-cable sync with Svicloud TV box, ClearVoice speech enhancement.
 
@@ -51,6 +51,13 @@ Key Policies & Localized Details:
 // Smart Fallback Responses when API key is unavailable or during network hiccup
 function getSmartFallback(message: string, lang: 'zh' | 'en' | 'ms' = 'zh'): string {
   const q = message.toLowerCase();
+  if (/15p/.test(q) && /bind|pair|phone|mobile|android|手机|安卓|绑定|配对/.test(q)) {
+    return lang === 'zh'
+      ? 'Svicloud 15P 支持绑定安卓手机进行观看。'
+      : lang === 'ms'
+        ? 'Svicloud 15P menyokong pautan telefon Android untuk menonton.'
+        : 'Svicloud 15P supports binding an Android phone for viewing.';
+  }
   if (lang === 'zh' || /小云|电视|频道|发货|保修|直播|几钱|多少钱|网速|astro|soundbar|音响|卡/.test(q)) {
     if (q.includes('卡顿') || q.includes('卡') || q.includes('转圈') || q.includes('缓冲')) {
       return '重启Wi-Fi 和 电视盒，再进行尝试！如果还是卡顿，请联系我们客服询问！';

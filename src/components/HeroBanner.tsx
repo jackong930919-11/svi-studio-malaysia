@@ -103,7 +103,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                   </span>
                   <span className="text-[8px] sm:text-[10px] text-slate-400 flex items-center gap-1">
                     <Wifi className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-400" />
-                    Wi-Fi 6 + 4K 60FPS
+                    Wi-Fi 6 · 2.4G / 5.0G
                   </span>
                 </div>
 

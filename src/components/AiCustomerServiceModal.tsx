@@ -112,7 +112,7 @@ export const DECISION_TREE: Record<string, QuestionNode> = {
           title: 'Wi-Fi 卡顿黄金排查方案：',
           steps: [
             '【官方黄金口诀】：先拔掉 Wi-Fi 路由器电源和电视盒电源，静置 30 秒后重新插上通电！通常 90% 的缓存拥堵立即可恢复。',
-            '将电视盒连接至 5GHz 频段 Wi-Fi（若 Wi-Fi 名字有 5G 后缀，请优先连它，避开拥挤的 2.4G 频段）。',
+            '将电视盒连接至 5.0G 频段 Wi-Fi（若 Wi-Fi 名字有 5.0G 后缀，请优先连它，避开拥挤的 2.4G 频段）。',
             '检查路由器与电视盒之间的距离，若隔有承重墙或铁门，建议将电视盒移近或使用网线直连。',
             '在小云直播设置中，将解码模式调整为「硬解 (Hardware)」以降低 CPU 负载。',
           ],
@@ -284,9 +284,9 @@ export const DECISION_TREE: Record<string, QuestionNode> = {
             '进入小云直播，左侧分类选择【体育专区】或【Sports HD】。',
             '包含 Astro SuperSport 1-4 台、Now Sports、BeIN Sports 1-3 台、SPOTV 等国际体育频道。',
             '大型赛事（如英超强强对决、奥运羽毛球决赛）时，优先选择带有「VIP 专线」或「低延迟专线」标识的线路。',
-            '建议插网线或连 5G Wi-Fi，享受 60 帧无拖影流畅体验。',
+            '建议插网线或连 5.0G Wi-Fi，享受 60 帧无拖影流畅体验。',
           ],
-          warningOrTip: '💡 Svicloud 15P 支持 Wi-Fi 6 双频 2.4GHz + 5GHz，并支持最高 4K@60fps。',
+          warningOrTip: '💡 Svicloud 15P 支持 Wi-Fi 6 双频 2.4G / 5.0G，并支持最高 4K@60fps。',
         },
       },
       {
