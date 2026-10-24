@@ -54,7 +54,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
     }
 
     // 3. Sports and flagship performance
-    if (answers.priority === 'sports' || answers.wifiDistance === 'lan' || answers.tvType === '8k') {
+    if (answers.priority === 'sports' || answers.wifiDistance === 'lan') {
       const p = products.find((prod) => prod.id === 'svi-15p') || products[3];
       return {
         product: p,
@@ -63,7 +63,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
       };
     }
 
-    // 4. Next-Gen 8K AV1 & Karaoke
+    // 4. Dual-band Wi-Fi and karaoke
     if (answers.priority === 'karaoke') {
       const p = products.find((prod) => prod.id === 'svi-10p') || products[2];
       return {

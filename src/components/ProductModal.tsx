@@ -282,6 +282,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   <p className="font-semibold text-slate-200">{product.specs.wifi}</p>
                 </div>
               </div>
+              {product.specDetails?.[currentLang].length ? (
+                <ul className="mt-2 space-y-1.5 rounded bg-slate-950 border border-slate-800/80 p-3 text-[11px] text-slate-300">
+                  {product.specDetails[currentLang].map((detail) => (
+                    <li key={detail}>{detail}</li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
 
             {/* Bundled Accessories Add-ons */}

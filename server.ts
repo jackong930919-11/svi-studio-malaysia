@@ -31,10 +31,11 @@ const SYSTEM_PROMPT = `You are "SviBot", the 24/7 Senior AI Technical Consultant
 You represent the leading authorized distributor of genuine Svicloud products and Smart TV Boxes in Malaysia.
 
 Your exact product lineup and prices:
-1. Svicloud 9P (小云盒子 9P 经典旗舰版) - RM699: 4GB RAM + 64GB Storage, Android 12, 8K Ultra HD, 2.4G / 5.0G dual-band WiFi, AI Voice Remote, 1000+ Live Channels (Astro, Taiwan, Hong Kong, Sports HD), 100k+ VOD, Dolby Audio, SIRIM & MCMC Certified.
-2. Svicloud 10S (小云盒子 10S 简易智选版) - RM549: 2GB RAM + 32GB Storage, 4K HDR10, optimal for elderly & family living rooms, simplified large-tile UI, auto-boot to Live TV, parental controls, high cost-performance.
-3. Svicloud 10P (小云盒子 10P 新一代旗舰版) - RM699: 4GB RAM + 64GB Storage, Next-gen 8K AV1 hardware decoder, WiFi 6, Bluetooth 5.2, Smart Voice Remote + Karaoke K-song app support.
-4. Svicloud 15P (小云盒子 15P 极致性能巅峰版) - RM749: 4GB RAM + 64GB eMMC, Amlogic S928X processor, Android 13, WiFi 6E + Gigabit LAN, 4K 120Hz, dedicated live sports stream engine, 1-Year 1-to-1 Warranty.
+1. Svicloud 9P (小云盒子 9P 经典旗舰版) - RM699: Android 12.0, Amlogic S905Y4 quad-core Cortex-A35, 4GB RAM + 64GB ROM, 2.4G / 5.0G dual-band Wi-Fi (2T2R), Bluetooth 5.0, 8K / 4K video, AV1, Dolby Vision, Dolby Audio, HDR10+, Bluetooth voice remote. Supports Google Play, Netflix, YouTube, Disney+, Yogurt Kids, Cherry TV, Happy Family Karaoke, global live channels and VOD with no monthly subscription.
+2. Svicloud 10S (小云盒子 10S 简易智选版) - RM549: Android 12.0, Amlogic S905Y4 quad-core Cortex-A35, ARM G31 MP2 GPU, 2GB DDR3 + 32GB eMMC, dual-band 2.4GHz / 5GHz Wi-Fi (2T2R, 802.11 a/b/g/n/ac), Bluetooth 5.0, up to 4K@60fps, AV1 / VP9 Profile 2 / H.265 Main10 / H.264 / AVS2, HDR10 / 4K HDR, HDMI 2.1, 2x USB 2.0 Type-A, USB-C 5V/2A, optical audio, RJ45 10M/100M, AI voice-search remote with HDMI-CEC. Supports live channels, VOD apps such as Yogurt TV and app installation through Google Play.
+3. Svicloud 10P (小云盒子 10P 新一代旗舰版) - RM699: Android 12.0, Amlogic S905Y4 64-bit quad-core ARM Cortex-A35, ARM Mali-G31 MP2 GPU, 4GB DDR3 + 64GB eMMC, dual-band 2.4GHz / 5.0GHz Wi-Fi (2T2R), Bluetooth 5.0, RJ45 up to 1000M, HDMI 2.1 with up to 4K / 8K output depending on display and decoding, 2x USB 2.0, optical audio, Dolby Audio and Type-C power input.
+4. Svicloud 15P (小云盒子 15P 极致性能巅峰版) - RM749: Android 14, Amlogic S905Y5 Cortex-A55 quad-core, 4GB RAM + 64GB ROM, Wi-Fi 6 dual-band 2.4GHz + 5GHz (2T2R), Bluetooth 5.4, up to 4K@60fps, HDR10 / HDR10+ / HLG, AV1 hardware decoding, Dolby Audio, HDMI 2.1, RJ45 LAN, Type-C power port and AI Voice Air Mouse Remote.
+Treat these specifications as authoritative; do not transfer claims between models or invent features.
 5. Svicloud Soundbar 10 (小云 Soundbar 10 杜比全景声影院音响系统) - RM1399: 300W peak power, True Dolby Atmos 3D spatial surround sound, 6.5-inch wireless deep bass subwoofer, HDMI eARC single-cable sync with Svicloud TV box, ClearVoice speech enhancement.
 
 Key Policies & Localized Details:
@@ -70,7 +71,7 @@ function getSmartFallback(message: string, lang: 'zh' | 'en' | 'ms' = 'zh'): str
       return '全马订单一律免运费！西马地区（雪兰莪、吉隆坡、槟城、柔佛等）1-2 个工作日由 J&T Express 或 Ninja Van 送达；东马（沙巴、砂拉越）4-5 个工作日空运送达。';
     }
     if (q.includes('推荐') || q.includes('哪款') || q.includes('区别') || q.includes('买哪') || q.includes('价格') || q.includes('多少钱')) {
-      return '官方最新型号与价格：\n1. Svicloud 9P (4G+64G，支持 2.4G / 5.0G 双频 WiFi) - RM699\n2. Svicloud 10S (简易智选 2G+32G) - RM549\n3. Svicloud 10P (新一代旗舰 8K AV1) - RM699\n4. Svicloud 15P (4GB RAM + 64GB eMMC) - RM749\n5. Svicloud Soundbar 10 (杜比影院音响) - RM1399\n全马现货包邮，支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX 快捷支付！';
+      return '官方最新型号与价格：\n1. Svicloud 9P (4GB+64GB，Android 12，支持 2.4G / 5.0G 双频 Wi-Fi) - RM699\n2. Svicloud 10S (2GB+32GB，Android 12，最高 4K@60fps) - RM549\n3. Svicloud 10P (4GB DDR3 + 64GB eMMC，Android 12，双频 Wi-Fi) - RM699\n4. Svicloud 15P (4GB RAM + 64GB ROM，Android 14，Wi-Fi 6，最高 4K@60fps) - RM749\n5. Svicloud Soundbar 10 (杜比影院音响) - RM1399\n全马现货包邮，支持 Online Transfer / TNG eWallet / QuitNow QR / Visa Master / FPX 快捷支付！';
     }
     if (q.includes('频道') || q.includes('astro') || q.includes('直播') || q.includes('节目') || q.includes('球赛')) {
       return 'Svicloud 9P / 10S / 10P / 15P 均预装小云官方直播与点播平台，涵盖马来西亚 Astro 全套、新加坡、中港台、欧美及全球超 1000+ 高清频道，并有 4K 体育专线（英超、欧冠、羽球公开赛等），终身免费无月费！';

@@ -30,6 +30,7 @@ export interface TVBoxProduct {
     certification: string;
     warranty: string;
   };
+  specDetails?: Record<Language, string[]>;
   highlights: {
     zh: string[];
     en: string[];

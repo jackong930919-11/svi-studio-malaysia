@@ -51,14 +51,30 @@ class StorageService {
               currentProduct &&
               (product.image !== currentProduct.image || !galleryIsCurrent);
             const priceNeedsUpdate = product.id === 'svi-9p' && product.price === 699;
+            const specificationsNeedUpdate =
+              currentProduct &&
+              (product.subtitle !== currentProduct.subtitle ||
+                product.subtitleZh !== currentProduct.subtitleZh ||
+                product.subtitleMs !== currentProduct.subtitleMs ||
+                JSON.stringify(product.specs) !== JSON.stringify(currentProduct.specs) ||
+                JSON.stringify(product.specDetails) !== JSON.stringify(currentProduct.specDetails) ||
+                JSON.stringify(product.highlights) !== JSON.stringify(currentProduct.highlights));
 
-            if (!currentProduct || (!imagesNeedUpdate && !priceNeedsUpdate)) {
+            if (!currentProduct || (!imagesNeedUpdate && !priceNeedsUpdate && !specificationsNeedUpdate)) {
               return product;
             }
 
             productDataChanged = true;
             return {
               ...product,
+              ...(specificationsNeedUpdate && {
+                subtitle: currentProduct.subtitle,
+                subtitleZh: currentProduct.subtitleZh,
+                subtitleMs: currentProduct.subtitleMs,
+                specs: currentProduct.specs,
+                specDetails: currentProduct.specDetails,
+                highlights: currentProduct.highlights,
+              }),
               ...(imagesNeedUpdate && {
                 image: currentProduct.image,
                 gallery: currentProduct.gallery,
@@ -240,7 +256,19 @@ class StorageService {
     try {
       const data = localStorage.getItem(STORAGE_KEYS.REVIEWS);
       if (data) {
-        return JSON.parse(data);
+        const reviews: CustomerReview[] = JSON.parse(data);
+        const currentSeedReviews = new Map(INITIAL_REVIEWS.map((review) => [review.id, review]));
+        const migratedReviews = reviews.map((review) => {
+          const currentSeed = currentSeedReviews.get(review.id);
+          return currentSeed
+            ? { ...review, ...currentSeed, helpfulCount: review.helpfulCount }
+            : review;
+        });
+
+        if (JSON.stringify(migratedReviews) !== JSON.stringify(reviews)) {
+          this.saveReviews(migratedReviews);
+        }
+        return migratedReviews;
       }
     } catch (e) {
       console.warn('Error reading reviews:', e);
