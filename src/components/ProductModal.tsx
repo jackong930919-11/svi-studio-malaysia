@@ -81,13 +81,13 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   return (
     <div
       onClick={onClose}
-      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
+      className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-md flex items-start justify-center p-3 sm:p-6 animate-in fade-in duration-200 cursor-pointer"
       role="dialog"
       aria-modal="true"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-6xl rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl overflow-hidden my-6 cursor-default"
+        className="relative w-full max-w-6xl max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl overflow-y-auto my-0 cursor-default"
       >
         {/* Prominent Top-Right Exit Button */}
         <button
@@ -112,12 +112,12 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             {/* Thumbnails */}
-            <div className="grid grid-cols-3 gap-3">
+            <div className="flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible">
               {product.gallery.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImg(img)}
-                  className={`relative w-full aspect-square rounded-xl overflow-hidden border-2 bg-slate-950 flex items-center justify-center p-3 transition-colors ${
+                  className={`relative w-28 h-28 shrink-0 md:w-full md:h-auto md:aspect-square rounded-xl overflow-hidden border-2 bg-slate-950 flex items-center justify-center p-3 transition-colors ${
                     activeImage === img ? 'border-cyan-400' : 'border-slate-800 opacity-60 hover:opacity-100'
                   }`}
                   aria-label={`${productName} 图片 ${idx + 1}`}
