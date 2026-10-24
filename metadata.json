@@ -1,0 +1,6 @@
+{
+  "name": "Svi Studio Malaysia - 官方正品旗舰智能电视盒专卖店",
+  "description": "Svi Studio Malaysia 官方授权智能电视盒专卖店。提供SVICloud 9P、9Max、10P Ultra、Elite旗舰版等正品TVBOX，支持FPX、TNG等本地主流快捷支付、实时物流追踪、24/7 AI客服与售后保障。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

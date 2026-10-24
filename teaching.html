@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-MY">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Svi Studio Malaysia - 官方教學視頻庫 · Teaching Videos</title>
+    <meta name="description" content="Svi Studio Malaysia 官方小雲智能電視盒實操視頻庫，涵蓋 15P / 10P / 9P / 9MAX / 10S 新機設定、遙控器學習對頻、YouTube 故障排查及 ORZ 應用市場全套視頻與圖文教學。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // Per AI Studio environment constraints: HMR is disabled, ignore WebSocket errors.
+      (function() {
+        if (typeof window !== 'undefined' && window.WebSocket) {
+          var OrigWebSocket = window.WebSocket;
+          window.WebSocket = function(url, protocols) {
+            if (protocols === 'vite-hmr' || (typeof url === 'string' && (url.indexOf('token=') !== -1 || url.indexOf('vite-hmr') !== -1))) {
+              var listeners = {};
+              var mock = {
+                readyState: 1,
+                OPEN: 1,
+                CLOSED: 3,
+                CLOSING: 2,
+                CONNECTING: 0,
+                send: function() {},
+                close: function() {},
+                addEventListener: function(type, cb) {
+                  listeners[type] = listeners[type] || [];
+                  listeners[type].push(cb);
+                  if (type === 'open') {
+                    setTimeout(cb, 0);
+                  }
+                },
+                removeEventListener: function(type, cb) {
+                  if (listeners[type]) {
+                    listeners[type] = listeners[type].filter(function(fn) { return fn !== cb; });
+                  }
+                },
+                dispatchEvent: function() { return true; }
+              };
+              return mock;
+            }
+            return new OrigWebSocket(url, protocols);
+          };
+          window.WebSocket.prototype = OrigWebSocket.prototype;
+        }
+
+        if (typeof console !== 'undefined' && console.error) {
+          var origConsoleError = console.error;
+          console.error = function() {
+            var args = Array.prototype.slice.call(arguments);
+            var str = args.map(function(a) {
+              return (a && (a.stack || a.message)) ? (a.stack || a.message) : String(a);
+            }).join(' ');
+            if (str.indexOf('@vite/client') !== -1 || str.indexOf('WebSocket') !== -1 || str.indexOf('failed to connect to websocket') !== -1 || str.indexOf('vite:ws') !== -1) {
+              return;
+            }
+            origConsoleError.apply(console, args);
+          };
+        }
+
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event && event.reason;
+          var msg = (reason && (reason.message || reason.stack || reason)) + '';
+          if (msg.indexOf('WebSocket') !== -1 || msg.indexOf('closed without opened') !== -1 || msg.indexOf('@vite/client') !== -1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+
+        window.addEventListener('error', function(event) {
+          var msg = (event && (event.message || '')) + '';
+          var src = (event && (event.filename || '')) + '';
+          var stack = (event && event.error && (event.error.stack || '')) + '';
+          if (msg.indexOf('WebSocket') !== -1 || src.indexOf('@vite/client') !== -1 || stack.indexOf('@vite/client') !== -1 || msg.indexOf('closed without opened') !== -1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            return true;
+          }
+        }, true);
+
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+          var errStr = (msg || '') + ' ' + (url || '') + ' ' + (error && error.stack || '');
+          if (errStr.indexOf('WebSocket') !== -1 || errStr.indexOf('@vite/client') !== -1) {
+            return true;
+          }
+        };
+
+        // Ensure teaching route state is populated
+        if (window.location.pathname.indexOf('/teaching') === -1) {
+          try {
+            window.history.replaceState(null, '', '/teaching');
+          } catch (e) {}
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-black">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
