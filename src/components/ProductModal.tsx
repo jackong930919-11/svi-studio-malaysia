@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Check, Star, ShieldCheck, Truck, Plus, Minus, CheckCircle2, Info, MessageCircle, Sparkles } from 'lucide-react';
+import { X, Check, Star, ShieldCheck, Truck, Plus, Minus, CheckCircle2, Info, MessageCircle, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
 import { TVBoxProduct, AccessoryOption, Language } from '../types';
 import { ACCESSORY_OPTIONS } from '../data/initialData';
 import { TRANSLATIONS } from '../data/translations';
@@ -24,6 +24,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const [showWarrantyModal, setShowWarrantyModal] = useState(false);
 
   useEffect(() => {
+    setSelectedImg('');
+  }, [isOpen, product?.id]);
+
+  useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -32,17 +36,38 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         } else {
           onClose();
         }
+        return;
       }
+      if (showWarrantyModal || (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') || !product) {
+        return;
+      }
+
+      const images = [...new Set([product.image, ...product.gallery])];
+      if (images.length < 2) return;
+
+      e.preventDefault();
+      const currentIndex = Math.max(images.indexOf(selectedImg || product.image), 0);
+      const nextIndex =
+        (currentIndex + (e.key === 'ArrowRight' ? 1 : -1) + images.length) % images.length;
+      setSelectedImg(images[nextIndex]);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, showWarrantyModal, onClose]);
+  }, [isOpen, showWarrantyModal, onClose, product, selectedImg]);
 
   if (!isOpen || !product) return null;
 
   const t = TRANSLATIONS[currentLang];
   const copy = UI_COPY[currentLang].productModal;
-  const activeImage = selectedImg || product.image;
+  const galleryImages = [...new Set([product.image, ...product.gallery])];
+  const activeImage = selectedImg && galleryImages.includes(selectedImg) ? selectedImg : product.image;
+  const activeImageIndex = Math.max(galleryImages.indexOf(activeImage), 0);
+  const previousImage = () => {
+    setSelectedImg(galleryImages[(activeImageIndex - 1 + galleryImages.length) % galleryImages.length]);
+  };
+  const nextImage = () => {
+    setSelectedImg(galleryImages[(activeImageIndex + 1) % galleryImages.length]);
+  };
 
   const productName = currentLang === 'zh' ? product.nameZh : currentLang === 'ms' ? product.nameMs : product.name;
   const productSubtitle = currentLang === 'zh' ? product.subtitleZh : currentLang === 'ms' ? product.subtitleMs : product.subtitle;
@@ -105,12 +130,35 @@ export const ProductModal: React.FC<ProductModalProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
           {/* Left Column: Gallery */}
           <div className="md:col-span-6 space-y-4">
-            <div className="overflow-hidden rounded-xl bg-slate-950 aspect-square border border-slate-800 flex items-center justify-center p-3 sm:p-5">
+            <div className="relative overflow-hidden rounded-xl bg-slate-950 aspect-square border border-slate-800 flex items-center justify-center p-3 sm:p-5">
               <img
                 src={activeImage}
                 alt={productName}
                 className="max-w-full max-h-full w-auto h-auto object-contain object-center transition-all duration-300"
               />
+              {galleryImages.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={previousImage}
+                    aria-label={currentLang === 'zh' ? '上一张图片' : currentLang === 'ms' ? 'Imej sebelumnya' : 'Previous image'}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-slate-900/80 p-2.5 text-white shadow-lg backdrop-blur-sm transition hover:bg-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextImage}
+                    aria-label={currentLang === 'zh' ? '下一张图片' : currentLang === 'ms' ? 'Imej seterusnya' : 'Next image'}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full border border-white/20 bg-slate-900/80 p-2.5 text-white shadow-lg backdrop-blur-sm transition hover:bg-cyan-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                  <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-slate-900/80 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">
+                    {activeImageIndex + 1} / {galleryImages.length}
+                  </span>
+                </>
+              )}
             </div>
 
             {/* Thumbnails */}
