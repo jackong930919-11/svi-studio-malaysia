@@ -92,75 +92,75 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md rounded-2xl bg-gradient-to-b from-slate-800/90 to-slate-900/95 p-1 sm:p-1.5 border border-slate-700/80 shadow-2xl shadow-cyan-950/40">
               {/* Inner Preview Window */}
-              <div className="relative overflow-hidden rounded-xl bg-slate-950 p-2.5 sm:p-5 space-y-2.5 sm:space-y-4">
+              <div className="relative overflow-hidden rounded-xl bg-slate-950 p-2 sm:p-4 space-y-2 sm:space-y-3">
                 {/* Top Badge */}
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[9px] sm:text-xs font-bold">
+                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 sm:px-2 sm:py-0.5 rounded-md bg-amber-500/20 text-amber-400 border border-amber-500/40 text-[8px] sm:text-[10px] font-bold">
                     <Flame className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-400" />
                     Bestseller • Svicloud 15P
                   </span>
-                  <span className="text-[9px] sm:text-xs text-slate-400 flex items-center gap-1">
+                  <span className="text-[8px] sm:text-[10px] text-slate-400 flex items-center gap-1">
                     <Wifi className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-400" />
                     WiFi 6E + 8K Ultra HDR
                   </span>
                 </div>
 
                 {/* Device Image Preview with Glow */}
-                <div className="relative group overflow-hidden rounded-lg bg-slate-950 aspect-video flex items-center justify-center border border-slate-800 p-2 sm:p-3">
+                <div className="relative group overflow-hidden rounded-lg bg-slate-950 aspect-square flex items-center justify-center border border-slate-800 p-1 sm:p-2">
                   <img
                     src="/images/Profile/15P_main.jpg"
                     alt="Svicloud 15P Flagship TV Box"
                     className="max-w-full max-h-full w-auto h-auto object-contain object-center group-hover:scale-105 transition-transform duration-300 opacity-95 group-hover:opacity-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none"></div>
-                  <div className="absolute bottom-1.5 left-1.5 right-1.5 flex items-center justify-between text-white text-[9px] sm:text-xs">
-                    <span className="font-semibold bg-black/60 px-1.5 py-0.5 rounded backdrop-blur truncate max-w-[65%]">
+                  <div className="absolute bottom-1 left-1 right-1 flex items-center justify-between text-white text-[8px] sm:text-[10px]">
+                    <span className="font-semibold bg-black/60 px-1 py-0.5 rounded backdrop-blur truncate max-w-[65%]">
                       小云 15P 极致性能巅峰机皇
                     </span>
-                    <span className="text-emerald-400 font-bold bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800">
+                    <span className="text-emerald-400 font-bold bg-emerald-950/80 px-1 py-0.5 rounded border border-emerald-800">
                       现货 22 台
                     </span>
                   </div>
                 </div>
 
                 {/* Key Spec highlights */}
-                <div className="grid grid-cols-3 gap-1 sm:gap-2 text-center text-xs">
-                  <div className="p-1 sm:p-2 rounded-lg bg-slate-900/90 border border-slate-800">
-                    <p className="text-slate-400 text-[8px] sm:text-[10px]">运行内存</p>
-                    <p className="font-bold text-white text-[11px] sm:text-sm">8GB+128GB</p>
+                <div className="grid grid-cols-3 gap-1 sm:gap-1.5 text-center">
+                  <div className="p-1 sm:p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                    <p className="text-slate-400 text-[7px] sm:text-[9px]">运行内存</p>
+                    <p className="font-bold text-white text-[9px] sm:text-xs">8GB+128GB</p>
                   </div>
-                  <div className="p-1 sm:p-2 rounded-lg bg-slate-900/90 border border-slate-800">
-                    <p className="text-slate-400 text-[8px] sm:text-[10px]">最高分辨率</p>
-                    <p className="font-bold text-cyan-400 text-[11px] sm:text-sm">8K 超高清</p>
+                  <div className="p-1 sm:p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                    <p className="text-slate-400 text-[7px] sm:text-[9px]">最高分辨率</p>
+                    <p className="font-bold text-cyan-400 text-[9px] sm:text-xs">8K 超高清</p>
                   </div>
-                  <div className="p-1 sm:p-2 rounded-lg bg-slate-900/90 border border-slate-800">
-                    <p className="text-slate-400 text-[8px] sm:text-[10px]">官方认证</p>
-                    <p className="font-bold text-emerald-400 text-[11px] sm:text-sm">SIRIM/MCMC</p>
+                  <div className="p-1 sm:p-1.5 rounded-lg bg-slate-900/90 border border-slate-800">
+                    <p className="text-slate-400 text-[7px] sm:text-[9px]">官方认证</p>
+                    <p className="font-bold text-emerald-400 text-[9px] sm:text-xs">SIRIM/MCMC</p>
                   </div>
                 </div>
 
                 {/* Live Channel Strip */}
-                <div className="p-1.5 sm:p-2.5 rounded-lg bg-slate-900/60 border border-slate-800 text-[9px] sm:text-[11px] text-slate-300 flex items-center justify-between gap-1">
-                  <div className="flex items-center gap-1.5 truncate">
+                <div className="p-1 sm:p-2 rounded-lg bg-slate-900/60 border border-slate-800 text-[8px] sm:text-[10px] text-slate-300 flex items-center justify-between gap-1">
+                  <div className="flex items-center gap-1 truncate">
                     <Play className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-red-500 fill-red-500 shrink-0" />
                     <span className="truncate">预装 1,000+ 热门频道 (VIP 体育/4K点播)</span>
                   </div>
-                  <span className="text-amber-400 font-semibold shrink-0">终身无月费</span>
+                  <span className="text-amber-400 font-semibold shrink-0 text-[8px] sm:text-[10px]">终身无月费</span>
                 </div>
 
                 {/* Price and Instant Quick Order */}
                 <div className="flex items-center justify-between pt-1">
                   <div>
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-lg sm:text-2xl font-black text-cyan-400">RM 749</span>
-                      <span className="text-[9px] sm:text-xs text-slate-500 line-through">RM 849</span>
+                      <span className="text-base sm:text-xl font-black text-cyan-400">RM 749</span>
+                      <span className="text-[8px] sm:text-[10px] text-slate-500 line-through">RM 849</span>
                     </div>
-                    <p className="text-[8px] sm:text-[10px] text-emerald-400 font-medium">全马包邮 · 赠千兆网线+8K线+飞鼠键盘</p>
+                    <p className="text-[7px] sm:text-[9px] text-emerald-400 font-medium">全马包邮 · 赠千兆网线+8K线+飞鼠键盘</p>
                   </div>
 
                   <button
                     onClick={onQuickSelectFlagship}
-                    className="px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-[10px] sm:text-xs shadow-md transition-all active:scale-95"
+                    className="px-2.5 py-1 sm:px-3 sm:py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold text-[9px] sm:text-[10px] shadow-md transition-all active:scale-95"
                   >
                     WhatsApp 订购 15P
                   </button>
