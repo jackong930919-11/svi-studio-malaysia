@@ -40,7 +40,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'red',
     rating: '9.6',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-2.jpg',
     tags: ['漫威宇宙', '瑞安·雷诺兹', '休·杰克曼', '爆笑动作'],
     description: '漫威年度现象级巨制！贱虫兄弟爆笑联手拯救时间线，视听特效震撼拉满，小云电视盒秒速点播。',
     features: ['IMAX Enhanced画质', '杜比全景声', '中英双语特效字幕']
@@ -115,7 +115,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'purple',
     rating: '9.9',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/anime-1.jpg',
     tags: ['ufotable', '炭治郎', '柱合训练', '无限城前奏'],
     description: '日本动漫现象级霸权番！经费燃烧的炸裂作画，小云电视盒日本动漫专区同步连载，大屏观影沉浸感十足。',
     features: ['日本原画无压缩4K', '中文字幕秒级更新', '连贯播放不卡顿']

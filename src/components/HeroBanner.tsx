@@ -106,7 +106,12 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 </div>
 
                 {/* Device Image Preview with Glow */}
-                <div className="relative group overflow-hidden rounded-lg bg-slate-950 aspect-square flex items-center justify-center border border-slate-800 p-1 sm:p-2">
+                <button
+                  type="button"
+                  onClick={onQuickSelectFlagship}
+                  aria-label="查看 Svicloud 15P 商品详情"
+                  className="relative group overflow-hidden rounded-lg bg-slate-950 aspect-square flex items-center justify-center border border-slate-800 p-1 sm:p-2 w-full"
+                >
                   <img
                     src="/images/Profile/15P_main.jpg"
                     alt="Svicloud 15P Flagship TV Box"
@@ -121,7 +126,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                       现货 22 台
                     </span>
                   </div>
-                </div>
+                </button>
 
                 {/* Key Spec highlights */}
                 <div className="grid grid-cols-3 gap-1 sm:gap-1.5 text-center">
