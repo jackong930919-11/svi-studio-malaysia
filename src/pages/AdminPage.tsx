@@ -153,12 +153,13 @@ export const AdminPage: React.FC<AdminPageProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
           {/* Logo & Portal Identity */}
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white font-black text-sm shadow-md">
-              SVI
-            </div>
+            <img
+              src="/images/Brand/svi-studio-logo.png"
+              alt="Svi Studio 小云映画"
+              className="w-28 h-auto"
+            />
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-white text-base">Svi Studio Malaysia</span>
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-800">
                   商户管理中心
                 </span>

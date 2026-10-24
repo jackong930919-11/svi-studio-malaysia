@@ -54,22 +54,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="flex items-center gap-2.5 sm:gap-3 text-left focus:outline-none group whitespace-nowrap shrink-0"
         >
-          <div className="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all shrink-0">
-            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-              <span className="font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 text-sm sm:text-base">
-                SVI
-              </span>
-            </div>
-            <span className="absolute -bottom-0.5 -right-0.5 flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-          </div>
+          <img
+            src="/images/Brand/svi-studio-logo.png"
+            alt="Svi Studio 小云映画"
+            className="w-24 sm:w-28 h-auto shrink-0"
+          />
 
           <div className="flex items-center gap-1.5 whitespace-nowrap">
-            <span className="font-extrabold tracking-tight text-base sm:text-lg text-white group-hover:text-cyan-400 transition-colors">
-              Svi Studio
-            </span>
             <span className="rounded bg-cyan-950 px-1.5 py-0.5 text-[9px] sm:text-[10px] font-bold text-cyan-400 border border-cyan-800">
               MALAYSIA
             </span>

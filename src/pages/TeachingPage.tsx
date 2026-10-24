@@ -519,11 +519,12 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             <div className="h-4 w-px bg-slate-800 hidden sm:block"></div>
 
             <div className="flex items-center gap-2">
-              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-xs text-white shadow-md shadow-cyan-500/20">
-                SVI
-              </div>
+              <img
+                src="/images/Brand/svi-studio-logo.png"
+                alt="Svi Studio 小云映画"
+                className="w-24 sm:w-28 h-auto"
+              />
               <div className="hidden sm:block">
-                <span className="font-extrabold text-white text-sm">Svi Studio</span>
                 <span className="text-[10px] text-cyan-400 font-bold ml-1.5 px-1.5 py-0.5 rounded bg-cyan-950 border border-cyan-800">
                   官方教學中心
                 </span>
