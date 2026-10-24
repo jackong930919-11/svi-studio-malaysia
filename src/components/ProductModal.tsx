@@ -87,7 +87,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl overflow-hidden my-6 cursor-default"
+        className="relative w-full max-w-6xl rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl overflow-hidden my-6 cursor-default"
       >
         {/* Prominent Top-Right Exit Button */}
         <button
@@ -102,7 +102,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
           {/* Left Column: Gallery */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-6 space-y-4">
             <div className="overflow-hidden rounded-xl bg-slate-950 aspect-square border border-slate-800 flex items-center justify-center p-3 sm:p-5">
               <img
                 src={activeImage}
@@ -112,16 +112,17 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             </div>
 
             {/* Thumbnails */}
-            <div className="flex gap-2 overflow-x-auto pb-1">
+            <div className="grid grid-cols-3 gap-3">
               {product.gallery.map((img, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedImg(img)}
-                  className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 shrink-0 bg-slate-950 flex items-center justify-center p-1.5 ${
+                  className={`relative w-full aspect-square rounded-xl overflow-hidden border-2 bg-slate-950 flex items-center justify-center p-3 transition-colors ${
                     activeImage === img ? 'border-cyan-400' : 'border-slate-800 opacity-60 hover:opacity-100'
                   }`}
+                  aria-label={`${productName} 图片 ${idx + 1}`}
                 >
-                  <img src={img} alt="thumb" className="max-w-full max-h-full w-auto h-auto object-contain object-center" />
+                  <img src={img} alt="" className="max-w-full max-h-full w-auto h-auto object-contain object-center" />
                 </button>
               ))}
             </div>
@@ -155,7 +156,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           </div>
 
           {/* Right Column: Specs, Highlights & Add-on Bundles */}
-          <div className="md:col-span-7 space-y-5">
+          <div className="md:col-span-6 space-y-5">
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
