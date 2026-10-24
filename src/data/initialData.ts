@@ -1,5 +1,11 @@
 import { TVBoxProduct, AccessoryOption, Order, CustomerReview } from '../types';
 
+const profileImage = (filename: string) => `/images/Profile/${filename}.jpg`;
+const profileGallery = (prefix: string, imageCount: number) => [
+  profileImage(`${prefix}_main`),
+  ...Array.from({ length: imageCount }, (_, index) => profileImage(`${prefix}_image${index + 1}`)),
+];
+
 export const INITIAL_PRODUCTS: TVBoxProduct[] = [
   {
     id: 'svi-9p',
@@ -13,12 +19,8 @@ export const INITIAL_PRODUCTS: TVBoxProduct[] = [
     originalPrice: 769,
     stock: 45,
     lowStockThreshold: 15,
-    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
-    ],
+    image: profileImage('9P_main'),
+    gallery: profileGallery('9P', 10),
     badge: {
       textZh: '经典热销旗舰 9P',
       textEn: 'Classic Popular Flagship 9P',
@@ -72,11 +74,8 @@ export const INITIAL_PRODUCTS: TVBoxProduct[] = [
     originalPrice: 599,
     stock: 38,
     lowStockThreshold: 12,
-    image: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&auto=format&fit=crop&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-    ],
+    image: profileImage('10S_main'),
+    gallery: profileGallery('10S', 11),
     badge: {
       textZh: '高性价比/长辈家庭推荐',
       textEn: 'Best Value & Family Friendly',
@@ -130,12 +129,8 @@ export const INITIAL_PRODUCTS: TVBoxProduct[] = [
     originalPrice: 769,
     stock: 32,
     lowStockThreshold: 10,
-    image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&auto=format&fit=crop&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
-    ],
+    image: profileImage('10P_main'),
+    gallery: profileGallery('10P', 10),
     badge: {
       textZh: '次世代新旗舰/K歌娱乐',
       textEn: 'Next-Gen Flagship & Karaoke',
@@ -189,12 +184,8 @@ export const INITIAL_PRODUCTS: TVBoxProduct[] = [
     originalPrice: 849,
     stock: 22,
     lowStockThreshold: 8,
-    image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&auto=format&fit=crop&q=80',
-    ],
+    image: profileImage('15P_main'),
+    gallery: profileGallery('15P', 15),
     badge: {
       textZh: '全马热销榜首 15P (Best Seller)',
       textEn: 'Malaysia Best Seller #1 (15P)',
@@ -248,12 +239,8 @@ export const INITIAL_PRODUCTS: TVBoxProduct[] = [
     originalPrice: 1599,
     stock: 18,
     lowStockThreshold: 5,
-    image: 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80',
-    gallery: [
-      'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&auto=format&fit=crop&q=80',
-    ],
+    image: profileImage('Soundbar10_main'),
+    gallery: profileGallery('Soundbar10', 12),
     badge: {
       textZh: '殿堂级杜比影院音响',
       textEn: 'Dolby Atmos Cinema Soundbar',
@@ -305,7 +292,7 @@ export const ACCESSORY_OPTIONS: AccessoryOption[] = [
     nameMs: 'Alat Kawalan Pintar Svicloud Asli',
     originalPrice: 89,
     price: 69,
-    image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=300&auto=format&fit=crop&q=80',
+    image: profileImage('9PRemoteController_main'),
   },
   {
     id: 'hdmi-21',
@@ -313,7 +300,7 @@ export const ACCESSORY_OPTIONS: AccessoryOption[] = [
     nameEn: '8K Ultra HD HDMI 2.1 (1M)',
     nameMs: 'Kabel 8K Ultra HD HDMI 2.1 (1M)',
     price: 39,
-    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=300&auto=format&fit=crop&q=80',
+    image: profileImage('HDMI8KCable_main'),
   },
   {
     id: 'backlit-keyboard',
@@ -321,7 +308,7 @@ export const ACCESSORY_OPTIONS: AccessoryOption[] = [
     nameEn: 'RGB Backlit Wireless Mini Air Mouse Keyboard',
     nameMs: 'Papan Kekunci Mini Tanpa Wayar Lampu Latar Penuh',
     price: 49,
-    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=300&auto=format&fit=crop&q=80',
+    image: profileImage('i10minikeyboard_main'),
   },
   {
     id: 'cat7-cable',
@@ -329,7 +316,7 @@ export const ACCESSORY_OPTIONS: AccessoryOption[] = [
     nameEn: 'Gigabit High-Speed LAN Cable Cat 7',
     nameMs: 'Kabel Rangkaian Gigabit Berkelajuan Tinggi Cat 7',
     price: 29,
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&auto=format&fit=crop&q=80',
+    image: profileImage('Cat7LanCable_main'),
   },
 ];
 

@@ -41,7 +41,13 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<StandaloneAccessory | null>(null);
+  const [selectedProductImage, setSelectedProductImage] = useState('');
   const [cartInquiryItems, setCartInquiryItems] = useState<string[]>([]);
+
+  const openProductDetails = (item: StandaloneAccessory) => {
+    setSelectedProduct(item);
+    setSelectedProductImage(item.image);
+  };
 
   // Keyboard Escape listener for modal
   useEffect(() => {
@@ -375,7 +381,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
 
                     {/* Image Area */}
                     <div
-                      onClick={() => setSelectedProduct(item)}
+                      onClick={() => openProductDetails(item)}
                       className="relative aspect-square rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80 mb-3 cursor-pointer group/img flex items-center justify-center p-3 sm:p-4"
                     >
                       <img
@@ -393,7 +399,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                     {/* Titles */}
                     <div className="space-y-1 mb-3">
                       <h3
-                        onClick={() => setSelectedProduct(item)}
+                        onClick={() => openProductDetails(item)}
                         className="font-bold text-sm text-white hover:text-cyan-400 transition-colors cursor-pointer line-clamp-2"
                         title={itemName}
                       >
@@ -446,7 +452,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
 
                     <div className="grid grid-cols-2 gap-1.5">
                       <button
-                        onClick={() => setSelectedProduct(item)}
+                        onClick={() => openProductDetails(item)}
                         className="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 hover:text-cyan-300 font-semibold text-xs border border-slate-700 hover:border-cyan-500/50 flex items-center justify-center gap-1 transition-all active:scale-95"
                       >
                         <Eye className="w-3.5 h-3.5" />
@@ -540,11 +546,34 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
               <div className="md:col-span-5 space-y-4">
                 <div className="aspect-square rounded-xl overflow-hidden bg-slate-950 border border-slate-800 flex items-center justify-center p-4 sm:p-6">
                   <img
-                    src={selectedProduct.image}
+                    src={selectedProductImage || selectedProduct.image}
                     alt={selectedProduct.name}
                     className="max-w-full max-h-full w-auto h-auto object-contain object-center"
                   />
                 </div>
+                {selectedProduct.gallery.length > 0 && (
+                  <div className="flex gap-2 overflow-x-auto pb-1">
+                    {[selectedProduct.image, ...selectedProduct.gallery].map((image, index) => (
+                      <button
+                        key={image}
+                        type="button"
+                        onClick={() => setSelectedProductImage(image)}
+                        className={`relative w-16 h-16 rounded-lg overflow-hidden border-2 shrink-0 bg-slate-950 flex items-center justify-center p-1.5 ${
+                          selectedProductImage === image
+                            ? 'border-cyan-400'
+                            : 'border-slate-800 opacity-60 hover:opacity-100'
+                        }`}
+                        aria-label={`查看${selectedProduct.name}图片 ${index + 1}`}
+                      >
+                        <img
+                          src={image}
+                          alt=""
+                          className="max-w-full max-h-full w-auto h-auto object-contain object-center"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
 
                 <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 text-xs text-slate-300">
                   <div className="flex items-center gap-2">

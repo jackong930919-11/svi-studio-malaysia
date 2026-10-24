@@ -25,6 +25,7 @@ export interface StandaloneAccessory {
     noticeMs: string;
   };
   image: string;
+  gallery: string[];
   summaryZh: string;
   summaryEn: string;
   summaryMs: string;
@@ -44,6 +45,10 @@ export interface StandaloneAccessory {
   inStock: boolean;
   stockCount: number;
 }
+
+const profileImage = (filename: string) => `/images/Profile/${filename}.jpg`;
+const profileGallery = (prefix: string, imageCount: number) =>
+  Array.from({ length: imageCount }, (_, index) => profileImage(`${prefix}_image${index + 1}`));
 
 export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
   {
@@ -72,7 +77,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('8SOEMRemoteController_main'),
+    gallery: profileGallery('8SOEMRemoteController', 0),
     summaryZh: '专为 Svicloud 8S 系列定制 OEM 代工原标遥控器。无需蓝牙繁琐配对，装入2节AAA电池即可直接遥控操作，按键回弹清脆灵敏。提供 1 个月官方质保。',
     summaryEn: 'OEM replacement infrared remote controller designed for Svicloud 8S. No Bluetooth pairing required—insert batteries and ready to use immediately. Includes 1-Month warranty.',
     summaryMs: 'Alat kawalan jauh OEM inframerah khusus untuk siri Svicloud 8S. Tanpa perlu sambungan Bluetooth, pasang bateri terus boleh guna. Dilengkapi waranti 1 bulan.',
@@ -154,7 +160,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('9PRemoteController_main'),
+    gallery: profileGallery('9PRemoteController', 0),
     summaryZh: 'Svicloud 官方原装 9P 智能语音遥控器。内置极速低功耗蓝牙 5.0、AI 麦克风多语言语音搜索，并专配 4 个额外自定义独立快捷按键与电视红外学习功能。提供 1 个月原厂质保。',
     summaryEn: 'Official Svicloud 9P original smart voice remote controller. Features Bluetooth connectivity, AI voice search, and 4 dedicated extra shortcut buttons. Covered by 1-Month warranty.',
     summaryMs: 'Alat kawalan suara pintar asli Svicloud 9P dengan Bluetooth, carian suara AI dan 4 butang pintasan khas tambahan. Dilindungi waranti 1 bulan.',
@@ -239,7 +246,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('HDMI8KCable_main'),
+    gallery: profileGallery('HDMI8KCable', 0),
     summaryZh: '满血 48Gbps 带宽 HDMI 2.1 标准高清线。完美释放 8K@60Hz 与 4K@120Hz 极清画质，支持 Dynamic HDR、eARC 杜比全景声音频回传。提供 1 个月质保。',
     summaryEn: 'Ultra High Speed HDMI 2.1 braided cable (1-Meter). Delivers 48Gbps bandwidth, real 8K@60Hz and 4K@120Hz, Dynamic HDR, and eARC Dolby Atmos. Covered by 1-Month warranty.',
     summaryMs: 'Kabel HDMI 2.1 berjalin 1 Meter dengan jalur lebar 48Gbps, menyokong 8K@60Hz, Dynamic HDR dan eARC Dolby Atmos. Waranti 1 bulan.',
@@ -324,7 +332,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('HDMI8KCable_main'),
+    gallery: profileGallery('HDMI8KCable', 0),
     summaryZh: '2米加长规格 HDMI 2.1 满血线，适合大尺寸壁挂电视与家庭影院长距离走线。48Gbps 高带宽零衰减，无损还原 8K 画质与杜比环绕声。提供 1 个月质保。',
     summaryEn: '2-Meter extended HDMI 2.1 high-speed braided cable. Ideal for large wall-mounted TVs. Covered by 1-Month warranty.',
     summaryMs: 'Kabel HDMI 2.1 berjalin 2 Meter untuk TV lekap dinding. Dilengkapi waranti 1 bulan.',
@@ -409,7 +418,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('i10minikeyboard_main'),
+    gallery: profileGallery('i10minikeyboard', 1),
     summaryZh: '掌心大小的全功能多媒体无线飞鼠键盘。支持蓝牙 5.0 + 2.4G 双模连接，内置多彩炫丽 RGB 背光、多指手势触控板与环保可充锂电池。提供 1 个月质保。',
     summaryEn: 'Palm-sized dual-mode wireless handheld mini keyboard. Features Bluetooth 5.0 + 2.4G connectivity, vibrant full-color RGB backlighting, and rechargeable battery. Covered by 1-Month warranty.',
     summaryMs: 'Papan kekunci mini tanpa wayar dwi-mod dengan Bluetooth 5.0 + 2.4G, lampu latar RGB berwarna-warni dan bateri boleh cas semula. Waranti 1 bulan.',
@@ -494,7 +504,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('Cat7LanCable_main'),
+    gallery: profileGallery('Cat7LanCable', 0),
     summaryZh: '10Gbps 极速与 600MHz 频宽 Cat 7 纯铜双屏蔽网线。彻底杜绝 Wi-Fi 信号衰减与无线杂讯干扰，为小云电视盒提供绝对稳定网络通道。提供 1 个月质保。',
     summaryEn: 'High-speed 10Gbps 600MHz Cat-7 double shielded (STP) network cable (1-Meter). Delivers rock-solid speed for 4K/8K sports and movies. Covered by 1-Month warranty.',
     summaryMs: 'Kabel rangkaian Cat-7 terlindung berkembar 1 Meter dengan kelajuan 10Gbps 600MHz. Waranti 1 bulan.',
@@ -582,7 +593,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: '1-Month official replacement warranty for hardware defects',
       noticeMs: 'Waranti ganti baharu 1 bulan bagi kerosakan perkakasan',
     },
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('Cat7LanCable_main'),
+    gallery: profileGallery('Cat7LanCable', 0),
     summaryZh: '2米加长规格 Cat 7 纯铜双屏蔽网线。客厅电视柜跨格摆放、穿孔暗装或连接墙壁网络插座更宽松自由。10Gbps 极速与多重屏蔽抗干扰。提供 1 个月质保。',
     summaryEn: '2-Meter Cat-7 high-speed shielded network cable. Offers versatile routing across living room TV consoles with lossless 10Gbps stability. Covered by 1-Month warranty.',
     summaryMs: 'Kabel rangkaian Cat-7 terlindung 2 Meter untuk susun atur fleksibel di ruang tamu dengan kelajuan 10Gbps yang sangat stabil. Waranti 1 bulan.',
@@ -670,7 +682,8 @@ export const ACCESSORIES_CATALOG: StandaloneAccessory[] = [
       noticeEn: 'Special Notice: USB cooling fan is a consumable accessory and has no warranty',
       noticeMs: 'Nota Khas: Kipas penyejuk USB adalah aksesori guna habis dan tiada waranti disediakan',
     },
-    image: 'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=700&auto=format&fit=crop&q=80',
+    image: profileImage('USBPowerFan_main'),
+    gallery: profileGallery('USBPowerFan', 0),
     summaryZh: '为电视盒重度用户与马拉松追剧定制的专属散热支架！自带4角防滑支撑垫高脚，直接插入电视盒 USB 口取电，超静音液压风扇强力抽风排热，使机身降温 10-18°C。（特别注明：USB 风扇没有质保）。',
     summaryEn: 'Dedicated ultra-quiet cooling fan stand tailored for TV boxes. Features elevated rubber legs for airflow circulation and direct USB power from your TV box. Lowers temperature by 10-18°C. (Special Notice: USB Fan has no warranty).',
     summaryMs: 'Kipas penyejuk khas yang senyap untuk kotak TV dengan kaki berdiri bergetah dan bekalan kuasa USB terus dari TV Box. Mengurangkan suhu 10-18°C. (Nota Khas: Kipas USB tiada sebarang waranti).',
