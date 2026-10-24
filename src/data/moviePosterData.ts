@@ -25,7 +25,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'amber',
     rating: '9.8',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-1.jpg',
     tags: ['古天乐', '洪金宝', '香港动作', '金像奖巨献'],
     description: '香港影史动作巅峰之作！80年代九龙寨城江湖热血，近身肉搏拳拳到肉，4K超清画质纤毫毕现。',
     features: ['小云独家4K片源', '杜比5.1声道', '粤语/国语双音轨']
@@ -55,7 +55,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'amber',
     rating: '9.9',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1514565131-fce0801e5785?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/drama-1.jpg',
     tags: ['王家卫导演', '胡歌', '马伊琍', '90年代上海'],
     description: '年度现象级国产神作！王家卫执导，阿宝商海沉浮与风云变幻，光影美学登峰造极，30集全剧完整收录。',
     features: ['沪语原声 / 国语双版', '4K 60帧蓝光原盘', '极速缓冲无卡顿']
@@ -70,7 +70,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'emerald',
     rating: '9.9',
     year: '2024-25',
-    posterUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/sports-1.jpg',
     tags: ['曼城', '阿森纳', '利物浦', '曼联', '全程免月费'],
     description: '小云电视盒专属体育频道，380场英超全场次超清直播！含多解说音轨，零延迟，看球不求人。',
     features: ['多路高清直播信号', '华语/粤语/英语多解说', '7天全场赛事回看']
@@ -85,7 +85,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'blue',
     rating: '9.7',
     year: '2023-24',
-    posterUrl: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/drama-2.jpg',
     tags: ['佘诗曼', '文慧心 Man姐', 'TVB大剧', '粤语无删减'],
     description: 'TVB年度收视王者！新闻直播室明争暗斗，全员搞事业不拖泥带水。小云内置TVB专区原声更新。',
     features: ['官方无删减粤语原声', '4K 超清HDR', '终身免费追更']
@@ -100,7 +100,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'amber',
     rating: '9.8',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-3.jpg',
     tags: ['丹尼斯·维伦纽瓦', '甜茶', '科幻史诗', '沙虫大战'],
     description: '影史级科幻巨作！保罗·厄崔迪向沙皇和哈克南家族发起复仇，震撼视效与汉斯·季默配乐完美结合。',
     features: ['IMAX 全画幅 4K', '杜比全景声 Atmos', '蓝光原盘画质']
@@ -130,7 +130,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'red',
     rating: '9.5',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-4.jpg',
     tags: ['阮经天', '陈桂林', '动作犯罪', '反邪教高燃'],
     description: '高口碑黑马动作大片！陈桂林除掉通缉犯排行榜前两位并探寻生命救赎，枪战肉搏极具张力。',
     features: ['未删减完整版', '4K UHD 画质', '原声音轨']
@@ -145,7 +145,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'emerald',
     rating: '9.9',
     year: '2024-25',
-    posterUrl: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/sports-2.jpg',
     tags: ['皇家马德里', '拜仁慕尼黑', '巴塞罗那', '欧洲之巅'],
     description: '欧洲足球俱乐部最高殿堂！小云预装高速国际体育源，强强对话不卡顿，高清画质如同亲临绿茵场。',
     features: ['4K 原画体育专线', '多频道无缝切换', '全天候回放录像']
@@ -160,7 +160,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'amber',
     rating: '9.7',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/drama-3.jpg',
     tags: ['张若昀', '陈道明', '权谋爽剧', '范闲回归'],
     description: '时隔五年王者归来！范闲死里逃生回到京都，再掀朝堂风云。小云电视盒支持全集 4K 连播，畅快过瘾。',
     features: ['4K 臻彩超清', '跳过片头片尾', '终身免VIP会员费']
@@ -175,7 +175,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'amber',
     rating: '9.7',
     year: '2023-24',
-    posterUrl: 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-5.jpg',
     tags: ['诺兰导演', '基里安·墨菲', '三位一体核试', '传记史诗'],
     description: '横扫奥斯卡7项大奖！诺兰导演还原原子弹之父的壮阔与内心挣扎，三位一体试爆震撼视听。',
     features: ['Dolby Vision 视界', '5.1 环绕声', '4K 蓝光收藏级画质']
@@ -190,7 +190,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'pink',
     rating: '9.6',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/drama-4.jpg',
     tags: ['金秀贤', '金智媛', '财阀夫妇', '韩剧天花板'],
     description: '财阀千金与超市王子的婚姻反转与深情重燃！全网爆火韩剧，小云提供韩语原声与官方精准中文字幕。',
     features: ['4K 原画字幕版', '多条高清秒播线路', '无任何插播广告']
@@ -205,7 +205,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'cyan',
     rating: '9.6',
     year: '2023-24',
-    posterUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-6.jpg',
     tags: ['詹姆斯·卡梅隆', '潘多拉星球', '水下奇观', '视效奇迹'],
     description: '詹姆斯·卡梅隆耗时十三年重回潘多拉！美轮美奂的深海世界，小云 8K/4K 电视盒搭配大电视，客厅秒变电影院。',
     features: ['高帧率 4K HDR', '杜比视界色调', '震撼影院级音效']
@@ -220,7 +220,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'purple',
     rating: '9.8',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/anime-2.jpg',
     tags: ['阿尼亚', '黄昏', '约尔太太', '阖家欢爆笑'],
     description: '阿尼亚表情包大冒险！福杰一家首次家庭旅行卷入国家危机，萌趣与动作并存，适合全家老少共同大屏观看。',
     features: ['4K 蓝光画质', '全家欢适龄内容', '日配/国配双音轨']
@@ -235,7 +235,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'emerald',
     rating: '9.9',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1461151304267-38535e780c79?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/sports-3.jpg',
     tags: ['Astro AEC', '欢喜台', '华丽台', '大马本土华人必备'],
     description: '马来西亚华人家庭首选！告别每月高额Astro账单，小云电视盒完美收录大马、新加坡、香港等本地直播电视频道。',
     features: ['永久免费免月租', '云端极速服务器', '画质清晰不转圈']
@@ -250,7 +250,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'blue',
     rating: '9.4',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/drama-5.jpg',
     tags: ['吴谨言', '王星越', '薛芳菲', '肃国公'],
     description: '快节奏爽剧巅峰！薛芳菲借名归来逆风翻盘，智斗恶毒后母与权臣，反转不断让人欲罢不能。',
     features: ['全集4K高码率', '多线并发极速载入', '随点随看无等待']
@@ -265,7 +265,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'amber',
     rating: '9.3',
     year: '2024',
-    posterUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/movie-7.jpg',
     tags: ['怪兽宇宙', '哥斯拉', '金刚', '地心世界'],
     description: '双王联手迎战地心危机！刀疤王与雪魔震撼登场，巨兽轰鸣撕裂屏幕，小云电视盒强悍音画芯片还原地心奇景。',
     features: ['IMAX 视效增强', '低延迟硬解码', '家庭影院级重低音']
@@ -280,7 +280,7 @@ export const MOVIE_POSTERS: MoviePoster[] = [
     badgeColor: 'emerald',
     rating: '9.9',
     year: '2024-25',
-    posterUrl: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?w=600&auto=format&fit=crop&q=80',
+    posterUrl: '/images/Posters/sports-4.jpg',
     tags: ['詹姆斯', '库里', '东契奇', '全场次中文解说'],
     description: '顶级篮球殿堂盛宴！全场次无死角直播，支持中英双语解说，回放录播随时重温绝杀时刻。',
     features: ['60FPS 原画超清', '无延迟看球', '即时比分与精彩集锦']
