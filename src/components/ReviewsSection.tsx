@@ -3,6 +3,7 @@ import { Star, CheckCircle, ThumbsUp, MessageSquare, Plus, ShieldCheck, MapPin }
 import { CustomerReview, TVBoxProduct, Language } from '../types';
 import { storageService } from '../services/storageService';
 import { TRANSLATIONS } from '../data/translations';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface ReviewsSectionProps {
   reviews: CustomerReview[];
@@ -31,6 +32,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
   });
 
   const t = TRANSLATIONS[currentLang];
+  const copy = UI_COPY[currentLang].reviews;
 
   const filteredReviews = reviews.filter((r) => {
     if (selectedFilter === 'all') return true;
@@ -118,7 +120,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
             }`}
           >
             <Star className="w-3 h-3 fill-current" />
-            <span>5 星好评 (98%)</span>
+            <span>{copy.fiveStar}</span>
           </button>
         </div>
 
@@ -193,7 +195,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     }`}
                   >
                     <ThumbsUp className="w-3 h-3" />
-                    <span>有帮助 ({rev.helpfulCount + (isLiked ? 1 : 0)})</span>
+                    <span>{copy.helpful} ({rev.helpfulCount + (isLiked ? 1 : 0)})</span>
                   </button>
                 </div>
               </div>
@@ -216,7 +218,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
 
               <form onSubmit={handleSubmit} className="space-y-3 text-xs">
                 <div>
-                  <label className="text-slate-400 block mb-1">评价机型</label>
+                  <label className="text-slate-400 block mb-1">{copy.productModel}</label>
                   <select
                     value={form.productId}
                     onChange={(e) => setForm({ ...form, productId: e.target.value })}
@@ -238,7 +240,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     value={form.author}
                     onChange={(e) => setForm({ ...form, author: e.target.value })}
                     className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"
-                    placeholder="e.g. Jason Lim (林先生)"
+                    placeholder={copy.namePlaceholder}
                   />
                 </div>
 
@@ -278,7 +280,7 @@ export const ReviewsSection: React.FC<ReviewsSectionProps> = ({
                     value={form.comment}
                     onChange={(e) => setForm({ ...form, comment: e.target.value })}
                     className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-white"
-                    placeholder="分享关于画质、操作简便性、发货速度的感受..."
+                    placeholder={copy.commentPlaceholder}
                   />
                 </div>
 

@@ -17,15 +17,19 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import { MOVIE_POSTERS, MoviePoster } from '../data/moviePosterData';
+import { Language } from '../types';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface MoviePosterWallProps {
+  currentLang: Language;
   onSelectBox?: (boxId?: string) => void;
 }
 
-export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox }) => {
+export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ currentLang, onSelectBox }) => {
   const [selectedFilter, setSelectedFilter] = useState<'all' | 'movie' | 'drama' | 'anime' | 'sports'>('all');
   const [activePoster, setActivePoster] = useState<MoviePoster | null>(null);
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const copy = UI_COPY[currentLang].movieWall;
 
   // Filter items
   const filteredPosters = selectedFilter === 'all'
@@ -42,7 +46,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
 
   const handleOpenWhatsApp = (movieTitle: string) => {
     const text = encodeURIComponent(
-      `你好！我在小云电视盒官网看到了电影/节目《${movieTitle}》，想了解哪一款小云电视盒（如 15P 或 10P）看这部片最流畅、画质最好？有现货包邮吗？`
+      copy.orderMessage.replace('{title}', movieTitle)
     );
     window.open(`https://wa.me/60162080789?text=${text}`, '_blank');
   };
@@ -58,17 +62,17 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-950/90 border border-cyan-800 text-cyan-300 text-[10px] sm:text-xs font-semibold mb-1.5 shadow-sm">
               <Film className="w-3 h-3 text-cyan-400 animate-pulse" />
-              <span>海量片库 • 每日无感云端更新</span>
+              <span>{copy.eyebrow}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping ml-1" />
             </div>
             <h2 className="text-lg sm:text-2xl lg:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-              <span>小云专属 4K 院线与热播剧移动大屏墙</span>
+              <span>{copy.title}</span>
               <span className="hidden sm:inline-block text-xs font-bold px-2 py-0.5 rounded bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950">
-                终身免VIP
+                {copy.lifetime}
               </span>
             </h2>
             <p className="text-[11px] sm:text-xs text-slate-300 mt-1 max-w-2xl leading-relaxed">
-              无需逐个开通昂贵影视 VIP！小云电视盒内置高速点播与全球直播专线，最新院线大片、TVB港剧、4K动漫、英超体育实时畅享。
+              {copy.description}
             </p>
           </div>
 
@@ -83,7 +87,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                全部片源
+                {copy.all}
               </button>
               <button
                 onClick={() => setSelectedFilter('movie')}
@@ -93,7 +97,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                院线大片
+                {copy.movies}
               </button>
               <button
                 onClick={() => setSelectedFilter('drama')}
@@ -103,7 +107,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                热门剧集
+                {copy.dramas}
               </button>
               <button
                 onClick={() => setSelectedFilter('anime')}
@@ -113,7 +117,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                动漫综艺
+                {copy.anime}
               </button>
               <button
                 onClick={() => setSelectedFilter('sports')}
@@ -123,25 +127,25 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                体育/Astro
+                {copy.sports}
               </button>
             </div>
 
             {/* Pause / Resume Button */}
             <button
               onClick={() => setIsPaused(!isPaused)}
-              title={isPaused ? '恢复滚动' : '暂停滚动'}
+              title={isPaused ? copy.resumeTitle : copy.pauseTitle}
               className="p-1.5 sm:p-2 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 hover:text-cyan-400 transition-colors flex items-center gap-1 text-[10px] sm:text-xs"
             >
               {isPaused ? (
                 <>
                   <PlayCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="hidden sm:inline">继续移动</span>
+                  <span className="hidden sm:inline">{copy.resume}</span>
                 </>
               ) : (
                 <>
                   <Pause className="w-3.5 h-3.5 text-amber-400" />
-                  <span className="hidden sm:inline">暂停</span>
+                  <span className="hidden sm:inline">{copy.pause}</span>
                 </>
               )}
             </button>
@@ -166,6 +170,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
               <PosterCard
                 key={`r1-${movie.id}-${index}`}
                 movie={movie}
+                currentLang={currentLang}
                 onSelect={() => setActivePoster(movie)}
               />
             ))}
@@ -183,6 +188,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
               <PosterCard
                 key={`r2-${movie.id}-${index}`}
                 movie={movie}
+                currentLang={currentLang}
                 onSelect={() => setActivePoster(movie)}
               />
             ))}
@@ -194,17 +200,17 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mt-3 sm:mt-4 flex flex-wrap items-center justify-between text-[10px] sm:text-xs text-slate-400 gap-2">
         <div className="flex items-center gap-2">
           <span className="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-          <span>点击任意海报即可查看片源详情与小云播放画质 • 悬停可自动暂停浏览</span>
+          <span>{copy.hint}</span>
         </div>
         <div className="flex items-center gap-3 text-slate-300">
           <span className="flex items-center gap-1 text-emerald-400">
-            <CheckCircle2 className="w-3 h-3" /> 4K 60FPS 原画
+            <CheckCircle2 className="w-3 h-3" /> {copy.originalQuality}
           </span>
           <span className="flex items-center gap-1 text-cyan-400">
-            <CheckCircle2 className="w-3 h-3" /> 杜比全景声
+            <CheckCircle2 className="w-3 h-3" /> {copy.dolby}
           </span>
           <span className="flex items-center gap-1 text-amber-400">
-            <CheckCircle2 className="w-3 h-3" /> 0 广告秒播
+            <CheckCircle2 className="w-3 h-3" /> {copy.adFree}
           </span>
         </div>
       </div>
@@ -223,7 +229,7 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
             <button
               onClick={() => setActivePoster(null)}
               className="absolute top-3 right-3 p-1.5 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors z-20"
-              title="关闭详情"
+              title={copy.close}
             >
               <X className="w-4 h-4" />
             </button>
@@ -234,12 +240,12 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                 <div className="relative w-40 sm:w-full aspect-[2/3] rounded-xl overflow-hidden bg-slate-950 border border-slate-700 shadow-xl flex items-center justify-center">
                   <img
                     src={activePoster.posterUrl}
-                    alt={activePoster.title}
+                    alt={displayTitle(activePoster, currentLang)}
                     className="w-full h-full object-cover object-center"
                     loading="lazy"
                   />
                   <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/75 text-cyan-400 text-[10px] font-bold border border-cyan-800/80">
-                    {activePoster.badge}
+                    {currentLang === 'zh' ? activePoster.badge : currentLang === 'ms' ? 'Popular' : 'Popular'}
                   </div>
                   <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded bg-amber-500 text-slate-950 text-[10px] font-black flex items-center gap-0.5">
                     <Star className="w-3 h-3 fill-slate-950 text-slate-950" />
@@ -253,24 +259,24 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-950 text-cyan-300 border border-cyan-800">
-                      {activePoster.categoryLabel}
+                      {getCategoryLabel(activePoster, currentLang, copy)}
                     </span>
                     <span className="text-slate-400 text-xs">{activePoster.year}</span>
                   </div>
                   <h3 className="text-lg sm:text-xl font-black text-white leading-tight">
-                    {activePoster.title}
+                    {displayTitle(activePoster, currentLang)}
                   </h3>
-                  {activePoster.originalTitle && (
+                  {currentLang === 'zh' && activePoster.originalTitle && (
                     <p className="text-xs text-slate-400">{activePoster.originalTitle}</p>
                   )}
                 </div>
 
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  {activePoster.description}
+                  {currentLang === 'zh' ? activePoster.description : copy.availabilityNote}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1">
+                {currentLang === 'zh' && <div className="flex flex-wrap gap-1">
                   {activePoster.tags.map((tag, i) => (
                     <span
                       key={i}
@@ -279,16 +285,16 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                       {tag}
                     </span>
                   ))}
-                </div>
+                </div>}
 
                 {/* Svicloud Hardware Experience Perks */}
                 <div className="p-2.5 rounded-xl bg-cyan-950/40 border border-cyan-850 space-y-1.5 text-[11px]">
                   <p className="text-cyan-300 font-bold flex items-center gap-1.5">
                     <Tv className="w-3.5 h-3.5 text-cyan-400" />
-                    小云电视盒专属播放优势：
+                    {copy.playbackTitle}
                   </p>
                   <ul className="grid grid-cols-1 gap-1 text-slate-300">
-                    {activePoster.features.map((feat, idx) => (
+                    {(currentLang === 'zh' ? activePoster.features : [copy.originalQuality, copy.dolby, copy.adFree]).map((feat, idx) => (
                       <li key={idx} className="flex items-center gap-1.5 text-[10px] sm:text-[11px]">
                         <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
                         <span>{feat}</span>
@@ -300,17 +306,17 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
                 {/* WhatsApp Action Buttons */}
                 <div className="pt-1 flex gap-2">
                   <button
-                    onClick={() => handleOpenWhatsApp(activePoster.title)}
+                    onClick={() => handleOpenWhatsApp(displayTitle(activePoster, currentLang))}
                     className="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-lg shadow-emerald-950/50 transition-all"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
-                    <span>WhatsApp 咨询看此片</span>
+                    <span>{copy.consult}</span>
                   </button>
                   <button
                     onClick={() => setActivePoster(null)}
                     className="py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold"
                   >
-                    返回浏览
+                    {copy.back}
                   </button>
                 </div>
               </div>
@@ -325,10 +331,14 @@ export const MoviePosterWall: React.FC<MoviePosterWallProps> = ({ onSelectBox })
 // Sub-component for an Individual Movie Poster Card in the wall
 interface PosterCardProps {
   movie: MoviePoster;
+  currentLang: Language;
   onSelect: () => void;
 }
 
-const PosterCard: React.FC<PosterCardProps> = ({ movie, onSelect }) => {
+const PosterCard: React.FC<PosterCardProps> = ({ movie, currentLang, onSelect }) => {
+  const copy = UI_COPY[currentLang].movieWall;
+  const title = displayTitle(movie, currentLang);
+
   return (
     <div
       onClick={onSelect}
@@ -338,7 +348,7 @@ const PosterCard: React.FC<PosterCardProps> = ({ movie, onSelect }) => {
       <div className="relative w-full aspect-[2/3] overflow-hidden bg-slate-950 flex items-center justify-center">
         <img
           src={movie.posterUrl}
-          alt={movie.title}
+          alt={title}
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
@@ -349,7 +359,7 @@ const PosterCard: React.FC<PosterCardProps> = ({ movie, onSelect }) => {
         {/* Category Badge Top Left */}
         <div className="absolute top-1.5 left-1.5">
           <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-black/70 backdrop-blur-sm text-cyan-300 border border-cyan-800/60">
-            {movie.categoryLabel}
+            {getCategoryLabel(movie, currentLang, copy)}
           </span>
         </div>
 
@@ -371,16 +381,38 @@ const PosterCard: React.FC<PosterCardProps> = ({ movie, onSelect }) => {
         {/* Bottom Title & Specs Info */}
         <div className="absolute bottom-0 left-0 right-0 p-2 text-left">
           <span className="inline-block text-[8px] font-semibold text-emerald-400 mb-0.5 truncate max-w-full">
-            {movie.badge}
+            {currentLang === 'zh' ? movie.badge : currentLang === 'ms' ? 'Popular' : 'Popular'}
           </span>
           <h4 className="text-[11px] sm:text-xs font-bold text-white truncate drop-shadow">
-            {movie.title}
+            {title}
           </h4>
           <p className="text-[9px] text-slate-400 truncate mt-0.5">
-            {movie.tags.slice(0, 2).join(' · ')}
+            {currentLang === 'zh' ? movie.tags.slice(0, 2).join(' · ') : movie.year}
           </p>
         </div>
       </div>
     </div>
   );
+};
+
+const displayTitle = (movie: MoviePoster, currentLang: Language) =>
+  currentLang === 'zh' ? movie.title : movie.originalTitle || movie.title;
+
+const getCategoryLabel = (
+  movie: MoviePoster,
+  currentLang: Language,
+  copy: (typeof UI_COPY)[Language]['movieWall']
+) => {
+  if (currentLang === 'zh') return movie.categoryLabel;
+
+  switch (movie.category) {
+    case 'movie':
+      return copy.movies;
+    case 'drama':
+      return copy.dramas;
+    case 'anime':
+      return copy.anime;
+    case 'sports':
+      return copy.sports;
+  }
 };

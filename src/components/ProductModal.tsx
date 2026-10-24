@@ -3,6 +3,7 @@ import { X, Check, Star, ShieldCheck, Truck, Plus, Minus, CheckCircle2, Info, Me
 import { TVBoxProduct, AccessoryOption, Language } from '../types';
 import { ACCESSORY_OPTIONS } from '../data/initialData';
 import { TRANSLATIONS } from '../data/translations';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface ProductModalProps {
   product: TVBoxProduct | null;
@@ -40,6 +41,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   if (!isOpen || !product) return null;
 
   const t = TRANSLATIONS[currentLang];
+  const copy = UI_COPY[currentLang].productModal;
   const activeImage = selectedImg || product.image;
 
   const productName = currentLang === 'zh' ? product.nameZh : currentLang === 'ms' ? product.nameMs : product.name;
@@ -60,7 +62,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
   const handleWhatsAppOrder = () => {
     const accessoriesText =
       selectedAccessories.length > 0
-        ? `\n加购配件：${selectedAccessories
+        ? `\n${currentLang === 'zh' ? '加购配件' : currentLang === 'ms' ? 'Aksesori tambahan' : 'Add-on accessories'}: ${selectedAccessories
             .map(
               (a) =>
                 (currentLang === 'zh' ? a.nameZh : currentLang === 'ms' ? a.nameMs : a.nameEn) +
@@ -69,11 +71,11 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             .join('、')}`
         : '';
     const text = encodeURIComponent(
-      `你好！我想在 Svi Studio Malaysia 订购电视盒：\n` +
-      `型号：【${productName}】\n` +
-      `订购数量：${quantity} 台${accessoriesText}\n` +
-      `预估总计：RM ${grandTotal}\n` +
-      `请问目前有现货吗？想了解如何安排包邮派送。`
+      `${currentLang === 'zh' ? '你好！我想在 Svi Studio Malaysia 订购电视盒：' : currentLang === 'ms' ? 'Hai! Saya ingin memesan TV Box daripada Svi Studio Malaysia:' : 'Hi! I would like to order a TV Box from Svi Studio Malaysia:'}\n` +
+      `${currentLang === 'zh' ? '型号' : currentLang === 'ms' ? 'Model' : 'Model'}: ${productName}\n` +
+      `${currentLang === 'zh' ? '订购数量' : currentLang === 'ms' ? 'Kuantiti' : 'Quantity'}: ${quantity}${accessoriesText}\n` +
+      `${currentLang === 'zh' ? '预估总计' : currentLang === 'ms' ? 'Jumlah anggaran' : 'Estimated total'}: RM ${grandTotal}\n` +
+      `${currentLang === 'zh' ? '请问目前有现货吗？想了解如何安排包邮派送。' : currentLang === 'ms' ? 'Adakah stok tersedia dan bagaimana saya boleh mengatur penghantaran percuma?' : 'Is it in stock, and how can I arrange free delivery?'}`,
     );
     window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
   };
@@ -94,7 +96,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
           type="button"
           onClick={onClose}
           className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/95 hover:bg-rose-600 text-slate-200 hover:text-white border border-slate-600/80 hover:border-rose-500 shadow-xl backdrop-blur-md transition-all duration-150 text-xs sm:text-sm font-bold group cursor-pointer active:scale-95"
-          title="点击退出详情 (Click to exit)"
+          title={currentLang === 'zh' ? '点击退出详情' : currentLang === 'ms' ? 'Tutup butiran' : 'Exit details'}
         >
           <X className="w-4 h-4 transition-transform group-hover:rotate-90 duration-200 text-slate-300 group-hover:text-white" />
           <span>{currentLang === 'zh' ? '退出' : currentLang === 'ms' ? 'Tutup' : 'Exit'}</span>
@@ -120,7 +122,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   className={`relative w-28 h-28 shrink-0 md:w-full md:h-auto md:aspect-square rounded-xl overflow-hidden border-2 bg-slate-950 flex items-center justify-center p-3 transition-colors ${
                     activeImage === img ? 'border-cyan-400' : 'border-slate-800 opacity-60 hover:opacity-100'
                   }`}
-                  aria-label={`${productName} 图片 ${idx + 1}`}
+                  aria-label={copy.specImage.replace('{name}', productName).replace('{index}', String(idx + 1))}
                 >
                   <img src={img} alt="" className="max-w-full max-h-full w-auto h-auto object-contain object-center" />
                 </button>
@@ -142,7 +144,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   type="button"
                   onClick={() => setShowWarrantyModal(true)}
                   className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/40 text-[10px] font-bold transition-all active:scale-95 shadow-sm cursor-pointer"
-                  title="查看 1年内1对1换新保修详情"
+                  title={currentLang === 'zh' ? '查看 1年内1对1换新保修详情' : currentLang === 'ms' ? 'Lihat butiran waranti ganti 1-ke-1' : 'View 1-year replacement warranty details'}
                 >
                   <Info className="w-3 h-3 text-emerald-300" />
                   <span>{currentLang === 'zh' ? '保修说明' : currentLang === 'ms' ? 'Info Waranti' : 'Warranty Info'}</span>
@@ -150,7 +152,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </div>
               <div className="flex items-center gap-2">
                 <Truck className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>全马包邮 (西马 1-2 天 / 东马 4-5 天)</span>
+                <span>{currentLang === 'zh' ? '全马包邮 (西马 1-2 天 / 东马 4-5 天)' : currentLang === 'ms' ? 'Penghantaran percuma (1–2 hari Semenanjung / 4–5 hari Malaysia Timur)' : 'Free Malaysia delivery (1–2 days West Malaysia / 4–5 days East Malaysia)'}</span>
               </div>
             </div>
           </div>
@@ -160,7 +162,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <div>
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-                  官方正品旗舰
+                  {currentLang === 'zh' ? '官方正品旗舰' : currentLang === 'ms' ? 'Produk unggulan rasmi' : 'Official flagship'}
                 </span>
                 <div className="flex items-center gap-1 text-xs text-amber-400">
                   <Star className="w-3.5 h-3.5 fill-amber-400" />
@@ -177,16 +179,20 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div>
                 <div className="flex items-baseline gap-1.5 sm:gap-2">
                   <span className="text-2xl sm:text-3xl font-black text-cyan-400">RM {product.price}</span>
-                  <span className="text-xs sm:text-sm text-slate-500 line-through">RM {product.originalPrice}</span>
+                  <span className="text-xs sm:text-sm text-slate-500 line-through">{copy.originalPrice} RM {product.originalPrice}</span>
                 </div>
                 <p className="text-[10px] sm:text-xs text-emerald-400 mt-0.5">
-                  {product.id === 'svi-9p' ? '限时折扣 · ' : ''}
-                  立省 RM {product.originalPrice - product.price} · 全马现货免运费极速派送
+                  {product.id === 'svi-9p' ? `${currentLang === 'zh' ? '限时折扣' : currentLang === 'ms' ? 'Tawaran masa terhad' : 'Limited-time offer'} · ` : ''}
+                  {currentLang === 'zh'
+                    ? `立省 RM ${product.originalPrice - product.price} · 全马现货免运费极速派送`
+                    : currentLang === 'ms'
+                    ? `Jimat RM ${product.originalPrice - product.price} · Stok tersedia dengan penghantaran percuma`
+                    : `Save RM ${product.originalPrice - product.price} · In stock with free Malaysia delivery`}
                 </p>
               </div>
               <div className="text-right text-[11px] sm:text-xs">
-                <span className="font-semibold text-slate-300">库存状态:</span>
-                <p className="text-emerald-400 font-bold">{product.stock} 台现货可用</p>
+                <span className="font-semibold text-slate-300">{currentLang === 'zh' ? '库存状态:' : currentLang === 'ms' ? 'Status stok:' : 'Stock status:'}</span>
+                <p className="text-emerald-400 font-bold">{currentLang === 'zh' ? `${product.stock} 台现货可用` : currentLang === 'ms' ? `${product.stock} unit tersedia` : `${product.stock} units available`}</p>
               </div>
             </div>
 
@@ -212,19 +218,19 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               </h4>
               <div className="grid grid-cols-2 gap-2 text-[11px]">
                 <div className="p-2 rounded bg-slate-950 border border-slate-800/80">
-                  <span className="text-slate-400">内存组合:</span>
+                  <span className="text-slate-400">{copy.ram}:</span>
                   <p className="font-semibold text-slate-200">{product.specs.ramRom}</p>
                 </div>
                 <div className="p-2 rounded bg-slate-950 border border-slate-800/80">
-                  <span className="text-slate-400">芯片处理器:</span>
+                  <span className="text-slate-400">{copy.cpu}:</span>
                   <p className="font-semibold text-slate-200">{product.specs.cpu}</p>
                 </div>
                 <div className="p-2 rounded bg-slate-950 border border-slate-800/80">
-                  <span className="text-slate-400">最高画质:</span>
+                  <span className="text-slate-400">{copy.resolution}:</span>
                   <p className="font-semibold text-cyan-400">{product.specs.resolution}</p>
                 </div>
                 <div className="p-2 rounded bg-slate-950 border border-slate-800/80">
-                  <span className="text-slate-400">无线网络:</span>
+                  <span className="text-slate-400">{copy.wifi}:</span>
                   <p className="font-semibold text-slate-200">{product.specs.wifi}</p>
                 </div>
               </div>
@@ -236,7 +242,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider">
                   {t.products.accessoriesTitle}
                 </h4>
-                <span className="text-[11px] text-amber-400 font-semibold">特惠套餐加购</span>
+                <span className="text-[11px] text-amber-400 font-semibold">{copy.bundleDeal}</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {ACCESSORY_OPTIONS.map((acc) => {
@@ -258,7 +264,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                           <span className="text-[11px] font-bold text-cyan-400">+RM {acc.price}</span>
                           {acc.originalPrice && (
                             <span className="text-[10px] text-slate-500 line-through">
-                              原价 RM {acc.originalPrice}
+                              {copy.originalPrice} RM {acc.originalPrice}
                             </span>
                           )}
                           {acc.originalPrice && (
@@ -324,7 +330,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
             <div className="pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
               {/* Quantity */}
               <div className="flex items-center gap-3">
-                <span className="text-xs text-slate-300 font-medium">数量:</span>
+                <span className="text-xs text-slate-300 font-medium">{copy.quantity}:</span>
                 <div className="flex items-center border border-slate-700 rounded-lg bg-slate-950 overflow-hidden">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -347,9 +353,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               {/* Total & Action */}
               <div className="w-full sm:w-auto flex flex-col sm:flex-row items-end sm:items-center gap-3">
                 <div className="text-right">
-                  <span className="text-[10px] text-slate-400">预估总计金额</span>
+                  <span className="text-[10px] text-slate-400">{copy.total}</span>
                   <p className="text-xl font-black text-cyan-400">RM {grandTotal}</p>
-                  <span className="text-[9px] text-emerald-400 block">无须在线绑卡 · 专人对接确认</span>
+                  <span className="text-[9px] text-emerald-400 block">{copy.noCard}</span>
                 </div>
 
                 <button
@@ -397,22 +403,10 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div>
                 <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-bold text-emerald-400 mb-1">
                   <Sparkles className="w-3 h-3" />
-                  <span>Svi Studio 官方售后承诺</span>
+                  <span>{copy.warrantyPromise}</span>
                 </div>
-                <h3 className="text-base sm:text-lg font-black text-white">
-                  {currentLang === 'zh'
-                    ? '1年内原厂 1 对 1 换新质保细则'
-                    : currentLang === 'ms'
-                    ? 'Polisi Jaminan 1-ke-1 Ganti Baharu 1 Tahun'
-                    : '1-Year 1-to-1 Replacement Guarantee Policy'}
-                </h3>
-                <p className="text-[11px] text-slate-400">
-                  {currentLang === 'zh'
-                    ? '马来西亚官方授权店铺 · 终身技术支持与原厂质保保障'
-                    : currentLang === 'ms'
-                    ? 'Kedai Rasmi Dibenarkan Svi Studio Malaysia · Sokongan Teknikal Seumur Hidup'
-                    : 'Official Svi Studio Malaysia Authorized Store · Lifetime Tech Support'}
-                </p>
+                <h3 className="text-base sm:text-lg font-black text-white">{copy.warrantyTitle}</h3>
+                <p className="text-[11px] text-slate-400">{copy.warrantySubtitle}</p>
               </div>
             </div>
 
@@ -421,56 +415,40 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
                 <div className="flex items-center gap-2 text-emerald-400 font-bold text-xs">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span>1. 只换不修 · 1 对 1 直接换新机 (Direct Unit Replacement)</span>
+                  <span>{copy.warranty1}</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed pl-6">
-                  {currentLang === 'zh'
-                    ? '自收货日起 365 天内，若机器发生主板、CPU、电源模块、Wi-Fi/蓝牙天线或 HDMI 输出等非人为硬件故障，我们无需进行返修拆机，直接换发全新机器！'
-                    : currentLang === 'ms'
-                    ? 'Dalam tempoh 365 hari dari tarikh penerimaan, jika berlaku kerosakan perkakasan bukan akibat kemalangan (motherboard, CPU, kuasa, Wi-Fi), unit baharu akan ditukar terus tanpa baiki!'
-                    : 'Within 365 days of delivery, non-accidental hardware defects (mainboard, CPU, power module, Wi-Fi) qualify for an immediate 1-to-1 brand-new replacement without waiting for repairs!'}
+                  {copy.warranty1Text}
                 </p>
               </div>
 
               <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
                 <div className="flex items-center gap-2 text-cyan-400 font-bold text-xs">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span>2. 马来西亚本地官方售后网点 (Local Service Center)</span>
+                  <span>{copy.warranty2}</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed pl-6">
-                  {currentLang === 'zh'
-                    ? '拥有马来西亚本地专业技术团队与现货售后中心，所有保修换新均在本地快速处理，无需承担寄往国外的漫长等待与关税风险。'
-                    : currentLang === 'ms'
-                    ? 'Pusat perkhidmatan tempatan Malaysia membolehkan proses tuntutan pantas tanpa perlu pos ke luar negara.'
-                    : 'Local Malaysia support team and fulfillment hub ensure fast replacement processing without international shipping delays.'}
+                  {copy.warranty2Text}
                 </p>
               </div>
 
               <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
                 <div className="flex items-center gap-2 text-blue-400 font-bold text-xs">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span>3. 顺丰 / J&T / Ninja Van 极速换新支持 (Fast Logistics)</span>
+                  <span>{copy.warranty3}</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed pl-6">
-                  {currentLang === 'zh'
-                    ? '西马支持 1-2 个工作日极速派送新机，东马（沙巴、砂拉越）4-5 天空运送达，换新流程省心便捷。'
-                    : currentLang === 'ms'
-                    ? 'Penghantaran ekspres 1-2 hari bekerja untuk Semenanjung dan 4-5 hari untuk Sabah/Sarawak.'
-                    : 'Express courier delivery takes 1-2 working days for Peninsular and 4-5 days for East Malaysia.'}
+                  {copy.warranty3Text}
                 </p>
               </div>
 
               <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
                 <div className="flex items-center gap-2 text-amber-400 font-bold text-xs">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
-                  <span>4. 官方 WhatsApp 专属工程师 1 对 1 对接 (Dedicated Hotline)</span>
+                  <span>{copy.warranty4}</span>
                 </div>
                 <p className="text-[11px] text-slate-300 leading-relaxed pl-6">
-                  {currentLang === 'zh'
-                    ? '如遇网络设置、画质调优或保修换新需求，欢迎随时联系官方客服 WhatsApp (+601111766671)，工程师 1 对 1 在线指导与跟进。'
-                    : currentLang === 'ms'
-                    ? 'Sebarang pertanyaan teknikal atau tuntutan waranti boleh dihubungi terus melalui WhatsApp rasmi (+601111766671).'
-                    : 'Contact our official WhatsApp engineers (+601111766671) anytime for 1-on-1 setup assistance or instant RMA authorization.'}
+                  {copy.warranty4Text}
                 </p>
               </div>
             </div>
@@ -484,14 +462,14 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-emerald-400 hover:text-emerald-300 font-bold text-xs border border-emerald-500/30 flex items-center justify-center gap-1.5 transition-all"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp 咨询保修 (+601111766671)</span>
+                <span>{copy.whatsappWarranty}</span>
               </a>
 
               <button
                 onClick={() => setShowWarrantyModal(false)}
                 className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-950/40 transition-all active:scale-95"
               >
-                {currentLang === 'zh' ? '我已了解，放心选购' : currentLang === 'ms' ? 'Faham & Teruskan' : 'Understood, Shop with Confidence'}
+                {copy.understood}
               </button>
             </div>
           </div>

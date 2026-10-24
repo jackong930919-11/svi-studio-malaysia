@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Eye, Star, Share2, Check, Wifi, Cpu, ShieldCheck, Zap, MessageCircle } from 'lucide-react';
 import { TVBoxProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface ProductCardProps {
   product: TVBoxProduct;
@@ -17,6 +18,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const [copied, setCopied] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
   const t = TRANSLATIONS[currentLang];
+  const copy = UI_COPY[currentLang];
 
   const productName = currentLang === 'zh' ? product.nameZh : currentLang === 'ms' ? product.nameMs : product.name;
   const productSubtitle = currentLang === 'zh' ? product.subtitleZh : currentLang === 'ms' ? product.subtitleMs : product.subtitle;
@@ -24,7 +26,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   const handleCopyShare = (platform: 'whatsapp' | 'facebook' | 'copy') => {
     const url = window.location.href;
-    const shareText = `【Svi Studio Malaysia 官方正品】推荐这款 ${productName} (原价 RM${product.originalPrice}，限时现货特惠 RM${product.price})，全马包邮且附 1年内原厂 1对1 换新质保：${url}`;
+    const shareText = copy.productCard.shareText
+      .replace('{name}', productName)
+      .replace('{originalPrice}', String(product.originalPrice))
+      .replace('{price}', String(product.price))
+      .replace('{url}', url);
 
     if (platform === 'whatsapp') {
       window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
@@ -56,7 +62,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <button
             onClick={() => setShowShareMenu(!showShareMenu)}
             className="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-slate-800 transition-colors"
-            title="Share"
+            title={copy.nav.share}
           >
             <Share2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
@@ -67,19 +73,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                 onClick={() => handleCopyShare('whatsapp')}
                 className="w-full text-left px-3 py-1.5 text-slate-200 hover:bg-emerald-950/60 hover:text-emerald-400 flex items-center gap-2"
               >
-                <span>WhatsApp 分享</span>
+                <span>{copy.nav.shareWhatsapp}</span>
               </button>
               <button
                 onClick={() => handleCopyShare('facebook')}
                 className="w-full text-left px-3 py-1.5 text-slate-200 hover:bg-blue-950/60 hover:text-blue-400 flex items-center gap-2"
               >
-                <span>Facebook 分享</span>
+                <span>{copy.nav.facebook}</span>
               </button>
               <button
                 onClick={() => handleCopyShare('copy')}
                 className="w-full text-left px-3 py-1.5 text-slate-200 hover:bg-slate-800 flex items-center justify-between"
               >
-                <span>复制分享链接</span>
+                <span>{copied ? copy.nav.copied : copy.nav.copyLink}</span>
                 {copied && <Check className="w-3 h-3 text-cyan-400" />}
               </button>
             </div>
@@ -171,8 +177,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             </div>
             <p className="text-[9px] sm:text-[10px] text-emerald-400 font-medium">
               {product.id === 'svi-9p'
-                ? '限时折扣 · 全马包邮 · 官方正品 1对1 换新'
-                : '全马包邮 · 官方正品 1对1 换新'}
+                ? copy.productCard.limitedOffer
+                : copy.productCard.shippingWarranty}
             </p>
           </div>
         </div>
@@ -184,22 +190,24 @@ export const ProductCard: React.FC<ProductCardProps> = ({
             className="w-full py-1.5 sm:py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 hover:text-cyan-300 font-semibold text-[11px] sm:text-xs border border-slate-700 hover:border-cyan-500/50 flex items-center justify-center gap-1 transition-all active:scale-95"
           >
             <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            <span>{currentLang === 'zh' ? '查看详情' : currentLang === 'ms' ? 'Lihat Butiran' : 'Details'}</span>
+            <span>{t.products.viewDetails}</span>
           </button>
 
           <button
             onClick={(e) => {
               e.stopPropagation();
               const text = encodeURIComponent(
-                `你好！我想在 Svi Studio 咨询订购：【${productName}】(限时特惠 RM${product.price})。\n请问有现货吗？想了解如何安排包邮派送。`
+                copy.productCard.orderText
+                  .replace('{name}', productName)
+                  .replace('{price}', String(product.price))
               );
               window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
             }}
             className="w-full py-1.5 sm:py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-[11px] sm:text-xs shadow-md shadow-emerald-950/40 flex items-center justify-center gap-1 transition-all active:scale-95"
-            title="WhatsApp 专人下单"
+            title={copy.productCard.whatsappOrder}
           >
             <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-slate-950" />
-            <span>WhatsApp 下单</span>
+            <span>{copy.productCard.whatsappOrder}</span>
           </button>
         </div>
       </div>

@@ -26,6 +26,7 @@ import {
 import { Language } from '../types';
 import { ACCESSORIES_CATALOG, StandaloneAccessory } from '../data/accessoriesData';
 import { StarfieldBackground } from '../components/StarfieldBackground';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface AccessoriesPageProps {
   currentLang: Language;
@@ -43,6 +44,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
   const [selectedProduct, setSelectedProduct] = useState<StandaloneAccessory | null>(null);
   const [selectedProductImage, setSelectedProductImage] = useState('');
   const [cartInquiryItems, setCartInquiryItems] = useState<string[]>([]);
+  const copy = UI_COPY[currentLang].accessories;
 
   const openProductDetails = (item: StandaloneAccessory) => {
     setSelectedProduct(item);
@@ -80,7 +82,8 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
         item.nameZh.toLowerCase().includes(q) ||
         item.nameMs.toLowerCase().includes(q) ||
         item.features.some((f) => f.toLowerCase().includes(q)) ||
-        item.featuresZh.some((f) => f.toLowerCase().includes(q));
+        item.featuresZh.some((f) => f.toLowerCase().includes(q)) ||
+        item.featuresMs.some((f) => f.toLowerCase().includes(q));
       return matchCategory && matchSearch;
     });
   }, [activeCategory, searchQuery]);
@@ -98,14 +101,18 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
   const handleSingleItemWhatsApp = (item: StandaloneAccessory) => {
     const itemName = currentLang === 'zh' ? item.nameZh : currentLang === 'ms' ? item.nameMs : item.name;
     const warrantyNote = item.warranty.hasWarranty
-      ? '质保说明：只提供 1 个月质保'
-      : '质保特别注明：USB 风扇没有质保';
+      ? currentLang === 'zh'
+        ? '质保说明：只提供 1 个月质保'
+        : currentLang === 'ms'
+        ? 'Waranti: 1 bulan'
+        : 'Warranty: 1 month'
+      : copy.fanNoWarranty;
     const text = encodeURIComponent(
-      `你好！我想在 Svi Studio Malaysia 订购原厂配件：\n` +
-      `商品名称：【${itemName}】\n` +
-      `价格：RM ${item.price.toFixed(2)} (原价 RM ${item.originalPrice.toFixed(2)})\n` +
+      `${currentLang === 'zh' ? '你好！我想在 Svi Studio Malaysia 订购原厂配件：' : currentLang === 'ms' ? 'Hai! Saya ingin memesan aksesori rasmi daripada Svi Studio Malaysia:' : 'Hi! I would like to order an official accessory from Svi Studio Malaysia:'}\n` +
+      `${currentLang === 'zh' ? '商品名称' : currentLang === 'ms' ? 'Nama produk' : 'Product'}: ${itemName}\n` +
+      `${currentLang === 'zh' ? '价格' : currentLang === 'ms' ? 'Harga' : 'Price'}: RM ${item.price.toFixed(2)} (${currentLang === 'zh' ? '原价' : currentLang === 'ms' ? 'Harga asal' : 'Original price'} RM ${item.originalPrice.toFixed(2)})\n` +
       `${warrantyNote}\n` +
-      `请问目前有现货吗？想了解如何安排包邮派送。`
+      `${currentLang === 'zh' ? '请问目前有现货吗？想了解如何安排包邮派送。' : currentLang === 'ms' ? 'Adakah stok tersedia dan bagaimana saya boleh mengatur penghantaran percuma?' : 'Is it in stock, and how can I arrange free delivery?'}`
     );
     window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
   };
@@ -119,17 +126,19 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
     const itemsList = selectedItems
       .map(
         (i, idx) =>
-          `${idx + 1}. 【${currentLang === 'zh' ? i.nameZh : i.name}】 - RM ${i.price.toFixed(2)} (${
-            i.warranty.hasWarranty ? '1个月质保' : '特别注明:无质保'
+          `${idx + 1}. ${currentLang === 'zh' ? i.nameZh : currentLang === 'ms' ? i.nameMs : i.name} - RM ${i.price.toFixed(2)} (${
+            i.warranty.hasWarranty
+              ? currentLang === 'zh' ? '1个月质保' : currentLang === 'ms' ? 'Waranti 1 bulan' : '1-month warranty'
+              : currentLang === 'zh' ? '特别注明:无质保' : currentLang === 'ms' ? 'Tiada waranti' : 'No warranty'
           })`
       )
       .join('\n');
 
     const text = encodeURIComponent(
-      `你好！我想在 Svi Studio Malaysia 合并咨询订购以下配件：\n\n` +
+      `${currentLang === 'zh' ? '你好！我想在 Svi Studio Malaysia 合并咨询订购以下配件：' : currentLang === 'ms' ? 'Hai! Saya ingin bertanya tentang pesanan gabungan aksesori berikut:' : 'Hi! I would like to enquire about ordering these accessories together:'}\n\n` +
       `${itemsList}\n\n` +
-      `预估总计：RM ${total.toFixed(2)}\n` +
-      `请问这些配件目前都有现货吗？想了解如何一并打包包邮派送。`
+      `${currentLang === 'zh' ? '预估总计' : currentLang === 'ms' ? 'Jumlah anggaran' : 'Estimated total'}: RM ${total.toFixed(2)}\n` +
+      `${currentLang === 'zh' ? '请问这些配件目前都有现货吗？想了解如何一并打包包邮派送。' : currentLang === 'ms' ? 'Adakah semua aksesori ini tersedia dan bolehkah penghantaran percuma dibuat dalam satu bungkusan?' : 'Are these accessories in stock, and can they be shipped together for free?'}`
     );
     window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
   };
@@ -152,7 +161,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
             <button
               onClick={onNavigateToStore}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700/80 hover:border-cyan-500/50 hover:bg-slate-800 text-xs sm:text-sm font-semibold text-slate-200 hover:text-white transition-all active:scale-95 shadow-sm"
-              title="返回电视盒商城首页"
+              title={copy.backTitle}
             >
               <ArrowLeft className="w-4 h-4 text-cyan-400" />
               <span>{currentLang === 'zh' ? '返回主页' : currentLang === 'ms' ? 'Laman Utama' : 'Back to Store'}</span>
@@ -163,7 +172,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                 Svi Studio
               </span>
               <span className="rounded bg-cyan-950 px-1.5 py-0.5 text-[10px] font-bold text-cyan-400 border border-cyan-800">
-                配件专区
+                {copy.badge}
               </span>
             </div>
           </div>
@@ -174,7 +183,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="搜索遥控器, HDMI, 网线, 散热风扇..."
+              placeholder={copy.search}
               className="w-full bg-slate-900/90 text-xs text-slate-200 placeholder-slate-500 rounded-full pl-9 pr-3 py-1.5 border border-slate-700 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
             />
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -187,18 +196,18 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                 onClick={onNavigateToTeaching}
                 className="hidden sm:inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300 hover:text-cyan-400 hover:border-slate-700 transition-all"
               >
-                <span>🎬 教学视频</span>
+                <span>{copy.teaching}</span>
               </button>
             )}
 
             <a
-              href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20我想咨询订购电视盒原厂配件"
+              href={`https://api.whatsapp.com/send?phone=601111766671&text=${encodeURIComponent(copy.whatsappSupport)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-xs shadow-md shadow-emerald-950/40 transition-all active:scale-95"
             >
               <MessageCircle className="w-4 h-4 fill-slate-950" />
-              <span>WhatsApp 专人客服</span>
+              <span>{copy.whatsappSupport}</span>
             </a>
           </div>
         </div>
@@ -212,34 +221,34 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
           <div className="relative z-10 max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/80 border border-cyan-800 text-cyan-300 text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-              <span>100% Svicloud 官方授权正品配件 · 全马现货包邮</span>
+              <span>{copy.authorization}</span>
             </div>
 
             <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
-              小云原厂配件与周边专区
+              {copy.title}
             </h1>
 
             <p className="text-slate-300 text-xs sm:text-base leading-relaxed">
-              汇聚 Svicloud 原装遥控器、8K HDMI 满血线缆、Cat-7 万兆双屏蔽网线、i-10 全色背光迷你飞鼠键盘与机顶盒立式静音散热风扇。原厂配件只提供 1 个月质保（特别注明：USB 散热风扇没有质保），现货包邮，专人 WhatsApp 贴心对接。
+              {copy.introduction}
             </p>
 
             {/* 4 Guarantees Strip */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-[11px] sm:text-xs">
               <div className="flex items-center gap-1.5 p-2 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-200">
                 <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>100% 正品保障</span>
+                <span>{copy.genuine}</span>
               </div>
               <div className="flex items-center gap-1.5 p-2 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-200">
                 <Truck className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>全马现货免运费</span>
+                <span>{copy.freeShipping}</span>
               </div>
               <div className="flex items-center gap-1.5 p-2 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-200">
                 <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>只提供 1 个月质保</span>
+                <span>{copy.warranty}</span>
               </div>
               <div className="flex items-center gap-1.5 p-2 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-200">
                 <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>WhatsApp 专人速发</span>
+                <span>{copy.directOrder}</span>
               </div>
             </div>
           </div>
@@ -252,15 +261,15 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
               <ShieldCheck className="w-4 h-4" />
             </div>
             <div>
-              <span className="font-bold text-white">官方质保政策：</span>
+              <span className="font-bold text-white">{copy.warrantyPolicy}</span>
               <span className="text-amber-200/90 font-medium ml-1">
-                原厂配件 / 周边专区商品<strong>只提供 1 个月质保</strong>（签收起30天内非人为硬件故障换新）。
+                {copy.warrantyPolicyText}
               </span>
             </div>
           </div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-rose-950/80 border border-rose-500/50 text-rose-300 font-bold text-[11px] shrink-0">
             <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-            <span>另外注明：USB 风扇没有质保 (No Warranty)</span>
+            <span>{copy.fanNoWarranty}</span>
           </div>
         </div>
 
@@ -295,7 +304,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="搜索配件型号或功能..."
+                placeholder={copy.searchMobile}
                 className="w-full bg-slate-900/90 text-xs text-slate-200 placeholder-slate-500 rounded-xl pl-9 pr-3 py-2 border border-slate-800 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
               />
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -312,10 +321,10 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
 
           <div className="flex items-center justify-between text-xs text-slate-400 px-1">
             <p>
-              共找到 <span className="font-bold text-cyan-400">{filteredAccessories.length}</span> 款官方配件与周边
+              {copy.resultsPrefix} <span className="font-bold text-cyan-400">{filteredAccessories.length}</span> {copy.resultsSuffix}
             </p>
             <p className="text-[11px] text-emerald-400">
-              ✓ 支持单件 WhatsApp 直发，或勾选多件合并打包
+              {copy.bundleHint}
             </p>
           </div>
         </div>
@@ -324,8 +333,8 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
         {filteredAccessories.length === 0 ? (
           <div className="text-center py-16 space-y-3 bg-slate-900/40 rounded-2xl border border-slate-800/80">
             <Search className="w-10 h-10 text-slate-600 mx-auto" />
-            <h3 className="text-base font-bold text-white">未找到匹配的配件商品</h3>
-            <p className="text-xs text-slate-400">请尝试更换搜索关键字或清除分类筛选。</p>
+            <h3 className="text-base font-bold text-white">{copy.noMatch}</h3>
+            <p className="text-xs text-slate-400">{copy.noMatchHelp}</p>
             <button
               onClick={() => {
                 setSearchQuery('');
@@ -333,7 +342,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
               }}
               className="px-4 py-2 rounded-xl bg-slate-800 text-xs text-cyan-400 hover:text-cyan-300 font-bold"
             >
-              重置筛选条件
+              {copy.reset}
             </button>
           </div>
         ) : (
@@ -355,7 +364,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                         className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold text-white bg-gradient-to-r ${item.badge.color} shadow-sm`}
                       >
                         <Sparkles className="w-2.5 h-2.5" />
-                        <span>{item.badge.zh}</span>
+                        <span>{item.badge[currentLang === 'zh' ? 'zh' : currentLang === 'ms' ? 'ms' : 'en']}</span>
                       </span>
 
                       {/* Multi-item Checkbox Button */}
@@ -366,7 +375,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                             ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500/50'
                             : 'bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700'
                         }`}
-                        title="勾选此项加入合并 WhatsApp 咨询"
+                        title={copy.selectTitle}
                       >
                         <div
                           className={`w-3.5 h-3.5 rounded flex items-center justify-center border ${
@@ -375,7 +384,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                         >
                           {isCheckedForInquiry && <Check className="w-2.5 h-2.5 stroke-[3]" />}
                         </div>
-                        <span>合并咨询</span>
+                        <span>{copy.select}</span>
                       </button>
                     </div>
 
@@ -391,7 +400,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity flex items-end p-2 pointer-events-none">
                         <span className="text-[10px] font-bold text-cyan-300 flex items-center gap-1">
-                          <Eye className="w-3 h-3" /> 点击查看完整规格
+                          <Eye className="w-3 h-3" /> {copy.quickView}
                         </span>
                       </div>
                     </div>
@@ -413,12 +422,12 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                       {item.warranty?.hasWarranty ? (
                         <div className="inline-flex items-center gap-1 text-[10.5px] text-emerald-400 font-semibold bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded-md">
                           <ShieldCheck className="w-3 h-3 text-emerald-400 shrink-0" />
-                          <span>质保：只提供 1 个月质保</span>
+                          <span>{copy.warrantyShort}</span>
                         </div>
                       ) : (
                         <div className="inline-flex items-center gap-1 text-[10.5px] text-rose-300 font-bold bg-rose-950/80 border border-rose-500/50 px-2 py-0.5 rounded-md">
                           <span className="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0"></span>
-                          <span>另外注明：USB 风扇没有质保</span>
+                          <span>{copy.fanNoWarrantyShort}</span>
                         </div>
                       )}
                     </div>
@@ -446,7 +455,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                         </span>
                       </div>
                       <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-1.5 py-0.5 rounded">
-                        立省 RM {(item.originalPrice - item.price).toFixed(0)}
+                        {copy.savings} {(item.originalPrice - item.price).toFixed(0)}
                       </span>
                     </div>
 
@@ -456,16 +465,16 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                         className="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 hover:text-cyan-300 font-semibold text-xs border border-slate-700 hover:border-cyan-500/50 flex items-center justify-center gap-1 transition-all active:scale-95"
                       >
                         <Eye className="w-3.5 h-3.5" />
-                        <span>查看详情</span>
+                        <span>{copy.details}</span>
                       </button>
 
                       <button
                         onClick={() => handleSingleItemWhatsApp(item)}
                         className="w-full py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-xs shadow-md shadow-emerald-950/40 flex items-center justify-center gap-1 transition-all active:scale-95"
-                        title="通过 WhatsApp 订购此商品"
+                        title={copy.orderTitle}
                       >
                         <MessageCircle className="w-3.5 h-3.5 fill-slate-950" />
-                        <span>WhatsApp 下单</span>
+                        <span>{copy.order}</span>
                       </button>
                     </div>
                   </div>
@@ -486,14 +495,14 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-white">
-                      已勾选 {selectedInquiryCount} 件配件
+                      {copy.selectedPrefix} {selectedInquiryCount} {copy.selectedSuffix}
                     </span>
                     <span className="text-xs font-black text-cyan-400">
-                      小计: RM {selectedInquiryTotal.toFixed(2)}
+                      {copy.subtotal} RM {selectedInquiryTotal.toFixed(2)}
                     </span>
                   </div>
                   <p className="text-[10px] text-slate-400">
-                    点击右侧按钮，一键发送给官方客服批量确认现货与安排包邮打包
+                    {copy.selectedHelp}
                   </p>
                 </div>
               </div>
@@ -503,14 +512,14 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                   onClick={() => setCartInquiryItems([])}
                   className="px-3 py-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white text-xs font-bold transition-all"
                 >
-                  清空
+                  {copy.clear}
                 </button>
                 <button
                   onClick={handleMultiItemWhatsApp}
                   className="flex-1 sm:flex-initial px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2 transition-all active:scale-95"
                 >
                   <MessageCircle className="w-4 h-4 fill-slate-950" />
-                  <span>WhatsApp 合并咨询 (RM {selectedInquiryTotal.toFixed(2)})</span>
+                  <span>{copy.batchOrder} (RM {selectedInquiryTotal.toFixed(2)})</span>
                 </button>
               </div>
             </div>
@@ -535,10 +544,10 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
               type="button"
               onClick={() => setSelectedProduct(null)}
               className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/95 hover:bg-rose-600 text-slate-200 hover:text-white border border-slate-600 hover:border-rose-500 shadow-xl backdrop-blur-md transition-all duration-150 text-xs sm:text-sm font-bold group cursor-pointer active:scale-95"
-              title="点击退出详情"
+              title={copy.closeTitle}
             >
               <X className="w-4 h-4 transition-transform group-hover:rotate-90 duration-200 text-slate-300 group-hover:text-white" />
-              <span>退出</span>
+              <span>{copy.exit}</span>
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8">
@@ -563,7 +572,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                             ? 'border-cyan-400'
                             : 'border-slate-800 opacity-60 hover:opacity-100'
                         }`}
-                        aria-label={`查看${selectedProduct.name}图片 ${index + 1}`}
+                        aria-label={copy.imageAlt.replace('{item}', currentLang === 'zh' ? selectedProduct.nameZh : currentLang === 'ms' ? selectedProduct.nameMs : selectedProduct.name).replace('{index}', String(index + 1))}
                       >
                         <img
                           src={image}
@@ -578,24 +587,24 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                 <div className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2 text-xs text-slate-300">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0" />
-                    <span>原厂官方正品认证零件</span>
+                    <span>{copy.genuineParts}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {selectedProduct.warranty?.hasWarranty ? (
                       <>
                         <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                        <span className="font-semibold text-emerald-400">只提供 1 个月质保</span>
+                        <span className="font-semibold text-emerald-400">{copy.warranty}</span>
                       </>
                     ) : (
                       <>
                         <X className="w-4 h-4 text-rose-400 shrink-0" />
-                        <span className="font-bold text-rose-400">另外注明：USB 风扇没有质保</span>
+                        <span className="font-bold text-rose-400">{copy.fanNoWarrantyShort}</span>
                       </>
                     )}
                   </div>
                   <div className="flex items-center gap-2">
                     <Truck className="w-4 h-4 text-blue-400 shrink-0" />
-                    <span>全马包邮极速派送 (西马 1-2 天)</span>
+                    <span>{copy.express}</span>
                   </div>
                 </div>
               </div>
@@ -607,14 +616,20 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                     <span
                       className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold text-white bg-gradient-to-r ${selectedProduct.badge.color}`}
                     >
-                      {selectedProduct.badge.zh}
+                      {selectedProduct.badge[currentLang === 'zh' ? 'zh' : currentLang === 'ms' ? 'ms' : 'en']}
                     </span>
                     <span className="text-xs text-cyan-400 font-semibold">
-                      {selectedProduct.categoryLabelZh}
+                      {currentLang === 'zh'
+                        ? selectedProduct.categoryLabelZh
+                        : currentLang === 'ms'
+                        ? selectedProduct.categoryLabelMs
+                        : selectedProduct.categoryLabelEn}
                     </span>
                   </div>
                   <h2 className="text-lg sm:text-xl font-black text-white">{selectedProduct.name}</h2>
-                  <p className="text-xs text-slate-400 mt-0.5">{selectedProduct.nameZh}</p>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    {currentLang === 'zh' ? selectedProduct.nameZh : currentLang === 'ms' ? selectedProduct.nameMs : selectedProduct.name}
+                  </p>
                 </div>
 
                 {/* Price Bar */}
@@ -629,12 +644,12 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                       </span>
                     </div>
                     <p className="text-[10px] text-emerald-400 mt-0.5">
-                      立省 RM {(selectedProduct.originalPrice - selectedProduct.price).toFixed(0)} · 全马现货包邮
+                      {copy.savings} {(selectedProduct.originalPrice - selectedProduct.price).toFixed(0)} · {copy.freeShipping}
                     </p>
                   </div>
                   <div className="text-right text-xs">
-                    <span className="text-slate-400">库存:</span>
-                    <p className="text-emerald-400 font-bold">{selectedProduct.stockCount} 件可用现货</p>
+                    <span className="text-slate-400">{copy.inventory}</span>
+                    <p className="text-emerald-400 font-bold">{selectedProduct.stockCount} {copy.available}</p>
                   </div>
                 </div>
 
@@ -644,10 +659,10 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                     <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                     <div className="text-xs">
                       <span className="font-bold text-emerald-400 block">
-                        质保政策：只提供 1 个月质保 (1-Month Warranty)
+                        {copy.warrantyTitle}
                       </span>
                       <p className="text-[11px] text-slate-300 mt-0.5 leading-relaxed">
-                        本商品自收货之日起 30 天内（1个月），如遇非人为损坏之硬件故障提供原厂换新。
+                        {copy.warrantyText}
                       </p>
                     </div>
                   </div>
@@ -658,10 +673,10 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                     </div>
                     <div className="text-xs">
                       <span className="font-black text-rose-300 block">
-                        特别注明：USB 风扇没有质保 (No Warranty)
+                        {copy.fanWarrantyTitle}
                       </span>
                       <p className="text-[11px] text-rose-200/90 mt-0.5 leading-relaxed">
-                        本款 USB 散热立架风扇属于机顶盒辅助降温易耗外设，出厂前已通电测试合格出库。本品不提供免费质保、售后保修或退换服务。
+                        {copy.fanWarrantyText}
                       </p>
                     </div>
                   </div>
@@ -669,16 +684,16 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
 
                 {/* Summary */}
                 <p className="text-xs text-slate-300 leading-relaxed bg-slate-950/40 p-3 rounded-xl border border-slate-800/80">
-                  {selectedProduct.summaryZh}
+                  {currentLang === 'zh' ? selectedProduct.summaryZh : currentLang === 'ms' ? selectedProduct.summaryMs : selectedProduct.summaryEn}
                 </p>
 
                 {/* Full Features */}
                 <div>
                   <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-2">
-                    功能与核心特性 (Key Features)
+                    {copy.features}
                   </h4>
                   <ul className="space-y-1.5 text-xs text-slate-300">
-                    {selectedProduct.featuresZh.map((f, i) => (
+                    {(currentLang === 'zh' ? selectedProduct.featuresZh : currentLang === 'ms' ? selectedProduct.featuresMs : selectedProduct.features).map((f, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
                         <span>{f}</span>
@@ -689,17 +704,17 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
 
                 {/* Compatibility */}
                 <div className="p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs">
-                  <span className="font-bold text-cyan-400 block mb-0.5">适用机型与兼容性:</span>
-                  <p className="text-slate-300 text-[11px]">{selectedProduct.compatibility.zh}</p>
+                  <span className="font-bold text-cyan-400 block mb-0.5">{copy.compatible}</span>
+                  <p className="text-slate-300 text-[11px]">{selectedProduct.compatibility[currentLang]}</p>
                 </div>
 
                 {/* Specs Matrix */}
                 <div>
                   <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-1.5">
-                    技术参数规格
+                    {copy.specifications}
                   </h4>
                   <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-                    {selectedProduct.specs.zh.map((s, idx) => (
+                    {selectedProduct.specs[currentLang].map((s, idx) => (
                       <div key={idx} className="p-2 rounded bg-slate-950 border border-slate-800/80">
                         <span className="text-slate-400 block text-[10px]">{s.label}:</span>
                         <span className="font-semibold text-slate-200">{s.value}</span>
@@ -720,7 +735,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                         : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white'
                     }`}
                   >
-                    {cartInquiryItems.includes(selectedProduct.id) ? '✓ 已加入合并咨询' : '+ 加入合并咨询'}
+                    {cartInquiryItems.includes(selectedProduct.id) ? copy.addedToInquiry : copy.addToInquiry}
                   </button>
 
                   <button
@@ -728,7 +743,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
                     className="flex-1 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-emerald-950/40 flex items-center justify-center gap-2 transition-all active:scale-95"
                   >
                     <MessageCircle className="w-4 h-4 fill-slate-950" />
-                    <span>WhatsApp 专人下单订购</span>
+                    <span>{copy.orderItem}</span>
                   </button>
                 </div>
               </div>
@@ -740,15 +755,15 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
       {/* Footer */}
       <footer className="mt-12 border-t border-slate-900 bg-slate-950/80 py-8 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 space-y-2">
-          <p>© 2026 Svi Studio Malaysia. 官方授权原装配件中心 · 100% 正品保障.</p>
+          <p>{copy.footer}</p>
           <div className="flex items-center justify-center gap-4 text-slate-400">
             <button onClick={onNavigateToStore} className="hover:text-cyan-400 transition-colors">
-              返回电视盒商城
+              {copy.backStore}
             </button>
             <span>·</span>
             {onNavigateToTeaching && (
               <button onClick={onNavigateToTeaching} className="hover:text-cyan-400 transition-colors">
-                查看教学视频
+                {copy.viewTeaching}
               </button>
             )}
             <span>·</span>
@@ -758,7 +773,7 @@ export const AccessoriesPage: React.FC<AccessoriesPageProps> = ({
               rel="noopener noreferrer"
               className="text-emerald-400 hover:text-emerald-300"
             >
-              WhatsApp 客服: +601111766671
+              {copy.contact}
             </a>
           </div>
         </div>

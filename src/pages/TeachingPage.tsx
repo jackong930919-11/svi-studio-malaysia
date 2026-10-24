@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { Language } from '../types';
 import { StarfieldBackground } from '../components/StarfieldBackground';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface TeachingPageProps {
   currentLang: Language;
@@ -474,6 +475,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [activeModalVideo, setActiveModalVideo] = useState<VideoTutorialItem | null>(null);
+  const copy = UI_COPY[currentLang].teaching;
 
   // Filter tutorials based on category and search query
   const filteredTutorials = useMemo(() => {
@@ -498,6 +500,21 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
 
   const youtubeVideosCount = TUTORIAL_ITEMS.filter((i) => i.type === 'youtube').length;
   const officialGuidesCount = TUTORIAL_ITEMS.filter((i) => i.type === 'html5').length;
+  const getCategoryLabel = (item: VideoTutorialItem) => {
+    if (currentLang === 'zh') return item.categoryLabel;
+    switch (item.category) {
+      case 'remote':
+        return copy.categoryRemote;
+      case 'system':
+        return copy.categorySystem;
+      case 'apps':
+        return copy.categoryApps;
+      case 'troubleshoot':
+        return copy.categoryTroubleshoot;
+      case 'gym':
+        return copy.categoryGym;
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black overflow-x-hidden">
@@ -513,7 +530,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-cyan-500 transition-all text-xs font-semibold group"
             >
               <ArrowLeft className="w-3.5 h-3.5 text-cyan-400 group-hover:-translate-x-0.5 transition-transform" />
-              <span>返回官方商城</span>
+              <span>{copy.backStore}</span>
             </button>
 
             <div className="h-4 w-px bg-slate-800 hidden sm:block"></div>
@@ -526,7 +543,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
               />
               <div className="hidden sm:block">
                 <span className="text-[10px] text-cyan-400 font-bold ml-1.5 px-1.5 py-0.5 rounded bg-cyan-950 border border-cyan-800">
-                  官方教學中心
+                  {copy.officialCenter}
                 </span>
               </div>
             </div>
@@ -538,7 +555,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
                 onClick={onNavigateToAccessories}
                 className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-950/80 border border-amber-800/80 text-amber-300 hover:bg-amber-900/90 text-xs font-bold transition-all shadow-md shadow-amber-950/40"
               >
-                <span>⚡ 原廠配件專區</span>
+                <span>{copy.accessories}</span>
               </button>
             )}
 
@@ -549,7 +566,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
               className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-800/80 text-emerald-300 hover:bg-emerald-900/90 text-xs font-bold transition-all shadow-md shadow-emerald-950/40"
             >
               <PhoneCall className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-              <span className="hidden sm:inline">WhatsApp 人工工程師:</span>
+              <span className="hidden sm:inline">{copy.whatsappEngineer}</span>
               <span>+601111766671</span>
             </a>
           </div>
@@ -562,19 +579,18 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
         <div className="text-center space-y-3 sm:space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/90 border border-cyan-800 text-cyan-300 text-xs font-bold shadow-inner">
             <BookOpen className="w-3.5 h-3.5 text-cyan-400" />
-            <span>SVI 小雲電視盒 · 官方官方實操與視頻教學庫</span>
+            <span>{copy.banner}</span>
           </div>
 
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-            教 學 視 頻{' '}
+            {copy.title}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-blue-500">
-              Teaching Videos
+              {currentLang === 'zh' ? '官方教学中心' : 'Official Guides'}
             </span>
           </h1>
 
           <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-            為您提供全系列小雲電視盒（15P / 10P / 9P / 9MAX / 10S）的新機設定、遙控器對頻、YouTube
-            疑難排解及 ORZ 應用市場全套視頻教學與步驟圖文指南。
+            {copy.intro}
           </p>
 
           {/* Search Bar */}
@@ -583,7 +599,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="搜尋教學內容 (如: 手動學習、開機設定、遙控器、Netflix、ORZ、語言)..."
+              placeholder={copy.search}
               className="w-full bg-slate-900/90 text-xs sm:text-sm text-slate-100 placeholder-slate-500 rounded-2xl pl-11 pr-10 py-3 sm:py-3.5 border border-slate-700/80 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 shadow-xl shadow-cyan-950/20 backdrop-blur-sm transition-all"
             />
             <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 pt-1" />
@@ -602,28 +618,28 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs">
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300">
             <Youtube className="w-3.5 h-3.5 text-red-500" />
-            <span>YouTube 實操精選: <strong>{youtubeVideosCount}</strong> 部</span>
+            <span>{copy.youtubeStats.replace('{count}', String(youtubeVideosCount))}</span>
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300">
             <Film className="w-3.5 h-3.5 text-cyan-400" />
-            <span>官方功能視頻: <strong>{officialGuidesCount}</strong> 部</span>
+            <span>{copy.officialStats.replace('{count}', String(officialGuidesCount))}</span>
           </div>
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/80 border border-slate-800 text-slate-300">
             <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>大馬技術團隊 1對1 在線支援</span>
+            <span>{copy.supportStats}</span>
           </div>
         </div>
 
         {/* Category Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-1.5 rounded-2xl bg-slate-900/70 border border-slate-800/80 max-w-4xl mx-auto backdrop-blur-sm">
           {[
-            { id: 'all', label: '全部教學 (All 23)' },
-            { id: 'youtube', label: '🌟 YouTube 實操視頻 (9)' },
-            { id: 'remote', label: '遙控器與按鍵學習' },
-            { id: 'system', label: '基礎設定與系統' },
-            { id: 'apps', label: '影視串流與 ORZ 市場' },
-            { id: 'troubleshoot', label: '故障排除與測速' },
-            { id: 'gym', label: 'SVI GYM 健身配件' },
+            { id: 'all', label: copy.categoryAll.replace('{count}', String(TUTORIAL_ITEMS.length)) },
+            { id: 'youtube', label: copy.categoryYoutube.replace('{count}', String(youtubeVideosCount)) },
+            { id: 'remote', label: copy.categoryRemote },
+            { id: 'system', label: copy.categorySystem },
+            { id: 'apps', label: copy.categoryApps },
+            { id: 'troubleshoot', label: copy.categoryTroubleshoot },
+            { id: 'gym', label: copy.categoryGym },
           ].map((cat) => (
             <button
               key={cat.id}
@@ -647,11 +663,10 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             </div>
             <div>
               <h4 className="font-bold text-white text-xs sm:text-sm">
-                大馬用戶必備排查口訣：遇到卡頓或延遲？
+                {copy.noticeTitle}
               </h4>
               <p className="text-[11px] sm:text-xs text-slate-300 mt-0.5">
-                先「重啟 Wi-Fi 路由器」和「重啟電視盒」再進行嘗試！通常 90%
-                緩衝問題即可恢復正常。若仍有疑問，請隨時點擊右側 WhatsApp 聯繫官方專屬客服詢問！
+                {copy.noticeText}
               </p>
             </div>
           </div>
@@ -662,7 +677,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             className="shrink-0 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-950/50 transition-all active:scale-95"
           >
             <PhoneCall className="w-3.5 h-3.5" />
-            <span>專屬客服諮詢</span>
+            <span>{copy.supportCta}</span>
           </a>
         </div>
 
@@ -670,8 +685,8 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
         {filteredTutorials.length === 0 ? (
           <div className="text-center py-16 space-y-3">
             <HelpCircle className="w-10 h-10 text-slate-600 mx-auto" />
-            <h3 className="text-base font-bold text-white">未找到相關教學視頻</h3>
-            <p className="text-xs text-slate-400">請嘗試不同的搜索關鍵詞或切換上方分類標籤。</p>
+            <h3 className="text-base font-bold text-white">{copy.noResults}</h3>
+            <p className="text-xs text-slate-400">{copy.noResultsHelp}</p>
             <button
               onClick={() => {
                 setSearchQuery('');
@@ -679,7 +694,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
               }}
               className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-cyan-400 hover:text-cyan-300 font-bold"
             >
-              清空搜索條件
+              {copy.clearSearch}
             </button>
           </div>
         ) : (
@@ -696,16 +711,16 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
                       {item.type === 'youtube' ? (
                         <>
                           <Youtube className="w-3 h-3 text-red-500" />
-                          <span>YouTube 視頻</span>
+                          <span>{copy.youtubeVideo}</span>
                         </>
                       ) : (
                         <>
                           <Film className="w-3 h-3 text-cyan-400" />
-                          <span>官方高清教程</span>
+                          <span>{copy.officialGuide}</span>
                         </>
                       )}
                     </span>
-                    <span className="text-[10px] text-cyan-400/90 font-medium">{item.categoryLabel}</span>
+                    <span className="text-[10px] text-cyan-400/90 font-medium">{getCategoryLabel(item)}</span>
                   </div>
 
                   {/* Video Player or Preview Area */}
@@ -747,7 +762,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
                   <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1.5 text-[11px] sm:text-xs">
                     <span className="font-bold text-cyan-300 flex items-center gap-1 text-[10px] uppercase tracking-wide">
                       <Sliders className="w-3 h-3" />
-                      <span>核心操作步驟:</span>
+                      <span>{copy.stepsHeader}</span>
                     </span>
                     <ul className="space-y-1 text-slate-300">
                       {item.steps.slice(0, 3).map((step, sIdx) => (
@@ -761,7 +776,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
                     </ul>
                     {item.steps.length > 3 && (
                       <p className="text-[9.5px] text-slate-500 pt-0.5">
-                        + 還有 {item.steps.length - 3} 個詳細步驟，點擊下方查看完整指南
+                        {copy.moreSteps.replace('{count}', String(item.steps.length - 3))}
                       </p>
                     )}
                   </div>
@@ -770,14 +785,14 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
                 {/* Bottom Action Footer */}
                 <div className="pt-3 border-t border-slate-800/80 mt-3 flex items-center justify-between gap-2">
                   <span className="text-[10px] text-slate-400 truncate">
-                    {item.recommendedFor || 'SVI 官方全系列支援'}
+                    {item.recommendedFor || copy.guideSupport}
                   </span>
                   <button
                     onClick={() => setActiveModalVideo(item)}
                     className="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 hover:text-cyan-300 border border-cyan-500/30 text-xs font-bold flex items-center gap-1 transition-all active:scale-95 shrink-0"
                   >
                     <Maximize2 className="w-3 h-3" />
-                    <span>查看完整步驟</span>
+                    <span>{copy.fullSteps}</span>
                   </button>
                 </div>
               </div>
@@ -791,10 +806,9 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             <PhoneCall className="w-6 h-6" />
           </div>
           <div className="space-y-1">
-            <h3 className="text-lg sm:text-2xl font-black text-white">視頻教程仍未解決您的問題？</h3>
+            <h3 className="text-lg sm:text-2xl font-black text-white">{copy.issueTitle}</h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto">
-              Svi Studio Malaysia 提供官方 1 對 1 工程師技術支援與售後換新保障。歡迎隨時通過 WhatsApp
-              發送問題截圖或視頻，我們將在 10 分鐘內為您提供針對性排查指引！
+              {copy.issueText}
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
@@ -805,13 +819,13 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
               className="px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm flex items-center gap-2 shadow-xl shadow-emerald-500/20 transition-all transform hover:scale-105 active:scale-95"
             >
               <PhoneCall className="w-4 h-4" />
-              <span>聯絡 WhatsApp 技術專員 (+601111766671)</span>
+              <span>{copy.contactExpert}</span>
             </a>
             <button
               onClick={onNavigateToStore}
               className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm transition-all"
             >
-              返回官方電視盒商城
+              {copy.backOfficialStore}
             </button>
           </div>
         </div>
@@ -825,7 +839,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full bg-cyan-950 border border-cyan-800 text-cyan-400 text-xs font-bold">
-                  {activeModalVideo.categoryLabel}
+                  {getCategoryLabel(activeModalVideo)}
                 </span>
                 <h3 className="text-base sm:text-lg font-black text-white">{activeModalVideo.title}</h3>
               </div>
@@ -861,14 +875,14 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             {/* Detailed Steps & Instructions */}
             <div className="space-y-3">
               <div>
-                <h4 className="font-bold text-white text-xs sm:text-sm">教程概述</h4>
+                <h4 className="font-bold text-white text-xs sm:text-sm">{copy.overview}</h4>
                 <p className="text-xs text-slate-300 mt-1 leading-relaxed">{activeModalVideo.summary}</p>
               </div>
 
               <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
                 <h4 className="font-bold text-cyan-400 text-xs flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span>詳細步驟指導 (Step-by-Step):</span>
+                  <span>{copy.detailedSteps}</span>
                 </h4>
                 <ol className="space-y-2 text-xs text-slate-200">
                   {activeModalVideo.steps.map((st, i) => (
@@ -884,7 +898,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
 
               {activeModalVideo.tips && (
                 <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs">
-                  <strong>💡 專家小貼士：</strong> {activeModalVideo.tips}
+                  <strong>{copy.expertTip}</strong> {activeModalVideo.tips}
                 </div>
               )}
             </div>
@@ -892,13 +906,13 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
             {/* Modal Footer */}
             <div className="flex items-center justify-between gap-3 pt-2 border-t border-slate-800">
               <span className="text-xs text-slate-400">
-                遇到疑難？隨時截圖發送給 WhatsApp 客服：+601111766671
+                {copy.modalSupport}
               </span>
               <button
                 onClick={() => setActiveModalVideo(null)}
                 className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs"
               >
-                關閉窗口
+                {copy.close}
               </button>
             </div>
           </div>
@@ -907,7 +921,7 @@ export const TeachingPage: React.FC<TeachingPageProps> = ({
 
       {/* Simple Clean Footer */}
       <footer className="border-t border-slate-900/80 bg-slate-950/80 backdrop-blur-sm py-6 text-center text-xs text-slate-500">
-        <p>© 2026 Svi Studio Malaysia. 官方正品教學視頻庫 · 保留所有權利.</p>
+        <p>{copy.footer}</p>
       </footer>
     </div>
   );

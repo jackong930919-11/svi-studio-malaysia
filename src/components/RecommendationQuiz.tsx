@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Sparkles, Check, ArrowRight, RotateCcw, MessageCircle, Eye, Zap } from 'lucide-react';
 import { TVBoxProduct, Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface RecommendationQuizProps {
   isOpen: boolean;
@@ -28,6 +29,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
   if (!isOpen) return null;
 
   const t = TRANSLATIONS[currentLang];
+  const copy = UI_COPY[currentLang].quiz;
 
   // Match calculation logic
   const calculateBestMatch = (): { product: TVBoxProduct; score: number; reason: string } => {
@@ -37,10 +39,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
       return {
         product: p,
         score: 99,
-        reason:
-          currentLang === 'zh'
-            ? 'Svicloud Soundbar 10 (RM1399) 拥有 300W 峰值功率与 6.5 寸无线深沉低音炮，支持真实杜比全景声 3D 环绕，完美升级客厅家庭影院！'
-            : 'Svicloud Soundbar 10 (RM1399) features 300W peak power and wireless deep subwoofer with Dolby Atmos for full living room cinema immersion!',
+        reason: copy.soundbarReason,
       };
     }
 
@@ -50,10 +49,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
       return {
         product: p,
         score: 99,
-        reason:
-          currentLang === 'zh'
-            ? 'Svicloud 10S (RM549) 简易大图标界面，开机直接播放直播电视台，长辈一键语音呼出频道，RM549 高性价比首选！'
-            : 'Svicloud 10S (RM549) features oversized easy icons and boots directly into live TV channels with voice commands!',
+        reason: copy.familyReason,
       };
     }
 
@@ -63,10 +59,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
       return {
         product: p,
         score: 98,
-        reason:
-          currentLang === 'zh'
-            ? 'Svicloud 15P (RM749) 搭载晶晨 S928X 强芯、8GB 超大运存、千兆网口与英超/欧冠零延迟专线服务器，性能天花板当之无愧！'
-            : 'Svicloud 15P (RM749) with 8GB RAM, Gigabit LAN, and dedicated sports stream engine ensures zero-lag live football!',
+        reason: copy.sportsReason,
       };
     }
 
@@ -76,10 +69,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
       return {
         product: p,
         score: 97,
-        reason:
-          currentLang === 'zh'
-            ? 'Svicloud 10P (RM699) 全面升级 8K AV1 解码与双频 WiFi 6，内置家庭 KTV 点歌娱乐系统，新一代旗舰全能机型！'
-            : 'Svicloud 10P (RM699) features 8K AV1 decoding, WiFi 6, and built-in home karaoke KTV system for family entertainment!',
+        reason: copy.karaokeReason,
       };
     }
 
@@ -88,10 +78,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
     return {
       product: p,
       score: 96,
-      reason:
-        currentLang === 'zh'
-          ? 'Svicloud 9P (RM699) 是全马销量第一经典旗舰，4G+64G 内存、双频 WiFi 6、8K 超清解码与终身免费直播，品质有口皆碑！'
-          : 'Svicloud 9P (RM699) is Malaysia #1 best-selling flagship with 4GB+64GB, WiFi 6, and 8K clarity for family living rooms!',
+      reason: copy.flagshipReason,
     };
   };
 
@@ -153,7 +140,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
                   <p className="font-semibold text-sm text-slate-200 group-hover:text-cyan-400">
                     {t.quiz.step1Opt1}
                   </p>
-                  <span className="text-xs text-slate-400">日常 1080P / 4K 播放，性价比第一</span>
+                  <span className="text-xs text-slate-400">{copy.dailyUse}</span>
                 </div>
                 <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-transform group-hover:translate-x-1" />
               </button>
@@ -169,7 +156,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
                   <p className="font-semibold text-sm text-slate-200 group-hover:text-cyan-400">
                     {t.quiz.step1Opt2}
                   </p>
-                  <span className="text-xs text-slate-400">超大尺寸 OLED/QLED，发烧画质追求</span>
+                  <span className="text-xs text-slate-400">{copy.largeScreen}</span>
                 </div>
                 <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-transform group-hover:translate-x-1" />
               </button>
@@ -315,7 +302,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
                 />
                 <div>
                   <h4 className="text-lg font-black text-white">
-                    {currentLang === 'zh' ? result.product.nameZh : result.product.name}
+                    {currentLang === 'zh' ? result.product.nameZh : currentLang === 'ms' ? result.product.nameMs : result.product.name}
                   </h4>
                   <p className="text-xs text-slate-400 line-clamp-1">{result.product.specs.ramRom}</p>
                   <p className="text-xl font-black text-cyan-400 mt-1">
@@ -345,9 +332,9 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
 
               <button
                 onClick={() => {
-                  const pName = currentLang === 'zh' ? result.product.nameZh : result.product.name;
+                  const pName = currentLang === 'zh' ? result.product.nameZh : currentLang === 'ms' ? result.product.nameMs : result.product.name;
                   const text = encodeURIComponent(
-                    `你好！我在 Svi Studio 智能测验中匹配了推荐型号：【${pName}】(RM${result.product.price})，请问有现货吗？想通过 WhatsApp 专人下单订购！`
+                    copy.whatsapp.replace('{name}', pName).replace('{price}', String(result.product.price))
                   );
                   window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
                   onClose();
@@ -355,7 +342,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
                 className="flex-1 w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/40 active:scale-95 transition-all"
               >
                 <MessageCircle className="w-4 h-4 fill-slate-950" />
-                <span>WhatsApp 订购此推荐机型</span>
+                <span>{currentLang === 'zh' ? 'WhatsApp 订购此推荐机型' : currentLang === 'ms' ? 'Pesan model ini melalui WhatsApp' : 'Order this recommendation via WhatsApp'}</span>
               </button>
 
               {onSelectProduct && (
@@ -367,7 +354,7 @@ export const RecommendationQuiz: React.FC<RecommendationQuizProps> = ({
                   className="w-full sm:w-auto px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors"
                 >
                   <Eye className="w-3.5 h-3.5" />
-                  <span>查看详情</span>
+                  <span>{copy.details}</span>
                 </button>
               )}
             </div>

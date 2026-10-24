@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface NavbarProps {
   currentLang: Language;
@@ -43,6 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const t = TRANSLATIONS[currentLang];
+  const copy = UI_COPY[currentLang].nav;
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-md">
@@ -116,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center gap-1.5 hover:text-indigo-300 text-indigo-400 transition-colors whitespace-nowrap py-1"
           >
             <Bot className="w-4 h-4 text-indigo-400" />
-            <span>{currentLang === 'zh' ? 'AI 客服' : currentLang === 'ms' ? 'AI Khidmat' : 'AI Help'}</span>
+            <span>{currentLang === 'zh' ? 'AI 客服' : currentLang === 'ms' ? 'Bantuan AI' : 'AI Help'}</span>
           </button>
         </nav>
 
@@ -126,13 +128,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={
-              currentLang === 'zh'
-                ? '搜索机型 (9P, 9Max...)'
-                : currentLang === 'ms'
-                ? 'Cari model...'
-                : 'Search models...'
-            }
+            placeholder={copy.search}
             className="w-full bg-slate-900/90 text-xs text-slate-200 placeholder-slate-500 rounded-full pl-8 pr-3 py-1.5 border border-slate-800 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
           />
           <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
@@ -145,20 +141,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onNavigateToAccessories}
               className="md:hidden flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-950/80 border border-amber-800 text-[10px] text-amber-300 font-bold hover:bg-amber-900 transition-all whitespace-nowrap"
-              title="原厂配件"
+              title={copy.accessoryShort}
             >
               <Radio className="w-3 h-3 text-amber-400" />
-              <span>配件</span>
+              <span>{copy.accessoryShort}</span>
             </button>
           )}
 
           <button
             onClick={onNavigateToTeaching}
             className="md:hidden flex items-center gap-1 px-2 py-1 rounded-lg bg-cyan-950/80 border border-cyan-800 text-[10px] text-cyan-300 font-bold hover:bg-cyan-900 transition-all whitespace-nowrap"
-            title="教學視頻"
+            title={copy.teachingShort}
           >
             <Video className="w-3 h-3 text-cyan-400" />
-            <span>教學</span>
+            <span>{copy.teachingShort}</span>
           </button>
 
           {/* Language Switcher Dropdown */}
@@ -217,21 +213,21 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={onOpenAuth}
             className="p-1.5 sm:p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all shrink-0"
-            title="Account"
+            title={copy.account}
           >
             <User className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
           </button>
 
           {/* Direct WhatsApp Consultation / Order Button (Hidden on Mobile) */}
           <a
-            href="https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20我想咨询订购小云电视盒"
+            href={`https://api.whatsapp.com/send?phone=601111766671&text=${encodeURIComponent(copy.whatsapp)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-bold text-xs shadow-md shadow-emerald-950/40 transition-all active:scale-95 whitespace-nowrap shrink-0"
-            title="WhatsApp 订购咨询"
+            title={copy.whatsapp}
           >
             <MessageCircle className="w-4 h-4 fill-slate-950" />
-            <span>WhatsApp 咨询</span>
+            <span>{copy.whatsapp}</span>
           </a>
         </div>
       </div>

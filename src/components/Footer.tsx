@@ -2,6 +2,7 @@ import React from 'react';
 import { ShieldCheck, Truck, Award, Headphones, Phone, MessageCircle, Lock, Lightbulb } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface FooterProps {
   currentLang: Language;
@@ -19,9 +20,11 @@ export const Footer: React.FC<FooterProps> = ({
   onNavigateToAccessories,
 }) => {
   const t = TRANSLATIONS[currentLang];
+  const copy = UI_COPY[currentLang].footer;
 
   const handleOpenWhatsApp = () => {
-    window.open('https://api.whatsapp.com/send?phone=601111766671&text=Hi%20Svi%20Studio%20Malaysia,%20I%20would%20like%20to%20inquire%20about%20TV%20Box%20models', '_blank');
+    const text = encodeURIComponent(copy.whatsappMessage);
+    window.open(`https://api.whatsapp.com/send?phone=601111766671&text=${text}`, '_blank');
   };
 
   return (
@@ -36,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-white text-sm">{t.footer.g1}</h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">每台机身配带专属电子核验防伪标</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{copy.serial}</p>
               </div>
             </div>
 
@@ -46,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-white text-sm">{t.footer.g2}</h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">硬件非人为损坏原厂直接换新</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{copy.replacement}</p>
               </div>
             </div>
 
@@ -56,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-white text-sm">{t.footer.g3}</h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">西马 1-2 天送到 · 东马航空直发</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{copy.shipping}</p>
               </div>
             </div>
 
@@ -66,7 +69,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
               <div>
                 <h4 className="font-bold text-white text-sm">{t.footer.g4}</h4>
-                <p className="text-[11px] text-slate-400 mt-0.5">全马本地工程师在线指导网络配置</p>
+                <p className="text-[11px] text-slate-400 mt-0.5">{copy.engineers}</p>
               </div>
             </div>
           </div>
@@ -101,38 +104,38 @@ export const Footer: React.FC<FooterProps> = ({
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-all active:scale-95"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>官方 WhatsApp 咨询: +601111766671</span>
+              <span>{copy.whatsapp}</span>
             </button>
           </div>
 
           {/* Quick Links */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider">客户服务 & 导航</h4>
+            <h4 className="font-bold text-white text-xs uppercase tracking-wider">{copy.quickLinks}</h4>
             <ul className="space-y-2 text-xs">
               {onNavigateToAccessories && (
                 <li>
                   <button onClick={onNavigateToAccessories} className="hover:text-amber-400 text-amber-300 font-semibold transition-colors flex items-center gap-1">
-                    <span>⚡ 原厂配件与周边专区 (Accessories)</span>
+                    <span>{copy.accessories}</span>
                   </button>
                 </li>
               )}
               {onNavigateToTeaching && (
                 <li>
                   <button onClick={onNavigateToTeaching} className="hover:text-cyan-400 text-cyan-300 font-semibold transition-colors flex items-center gap-1">
-                    <span>🎬 官方教學視頻庫 (Teaching Videos)</span>
+                    <span>{copy.teaching}</span>
                   </button>
                 </li>
               )}
               <li>
                 <button onClick={onOpenAi} className="hover:text-cyan-400 transition-colors">
-                  SviBot 24/7 AI 客服咨询
+                  {copy.ai}
                 </button>
               </li>
               <li>
-                <span className="text-slate-400">100% 官方正品 (SIRIM & MCMC 认证)</span>
+                <span className="text-slate-400">{copy.genuine}</span>
               </li>
               <li>
-                <span className="text-slate-400">只有 1年内原厂 1对1 换新质保</span>
+                <span className="text-slate-400">{copy.warranty}</span>
               </li>
             </ul>
           </div>
@@ -150,25 +153,25 @@ export const Footer: React.FC<FooterProps> = ({
                 className="p-2.5 rounded-xl bg-slate-900 border border-emerald-500/30 hover:border-emerald-500 text-left font-bold text-[11px] text-emerald-400 flex items-center gap-2 transition-colors"
               >
                 <MessageCircle className="w-4 h-4 fill-emerald-400 text-slate-900 shrink-0" />
-                <span>WhatsApp 专人下单</span>
+                <span>{copy.order}</span>
               </a>
               <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-left font-bold text-[11px] text-cyan-400 flex items-center gap-2">
                 <Truck className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>全马包邮现货直发</span>
+                <span>{copy.freeShipping}</span>
               </div>
               <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-left font-bold text-[11px] text-blue-400 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-blue-400 shrink-0" />
-                <span>1年原厂1对1换新</span>
+                <span>{copy.replacementShort}</span>
               </div>
               <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-left font-bold text-[11px] text-amber-400 flex items-center gap-2">
                 <Award className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>SIRIM / MCMC 正品</span>
+                <span>{copy.certification}</span>
               </div>
             </div>
 
             <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center gap-2.5 text-[11px] text-slate-300">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span>官方专员 1 对 1 售前咨询与现货确认，安排极速安全派送，安心无忧。</span>
+              <span>{copy.support}</span>
             </div>
           </div>
         </div>
@@ -178,7 +181,7 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="border-t border-slate-900 py-6 px-4 text-center text-slate-400 text-[11px] relative">
         <p>{t.footer.copyright}</p>
         <p className="mt-1 text-slate-500">
-          Svi Studio Malaysia 官方指定直属专卖店 · 认准 SIRIM QAS 贴纸
+          {copy.legal}
         </p>
 
         {/* Discreet Bulb Logo at the Bottom Right Corner (Disguised Admin Entrance) */}

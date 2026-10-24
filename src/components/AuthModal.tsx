@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, User, Mail, Phone, Lock, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
 import { UserProfile, Language } from '../types';
+import { UI_COPY } from '../data/uiTranslations';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -23,13 +24,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   const [emailOrPhone, setEmailOrPhone] = useState('user.malaysia@gmail.com');
   const [otpCode, setOtpCode] = useState('');
   const [isSentOtp, setIsSentOtp] = useState(false);
+  const copy = UI_COPY[currentLang].auth;
 
   if (!isOpen) return null;
 
   const handleQuickLogin = (method: 'google' | 'guest') => {
     const newUser: UserProfile = {
       id: `usr-${Date.now()}`,
-      name: method === 'google' ? 'Google User (大马买家)' : '快速访客 (Guest Shopper)',
+      name: method === 'google' ? copy.googleBuyer : copy.guestName,
       email: method === 'google' ? 'google.buyer@gmail.com' : 'guest@svistudio.my',
       phone: '+60 12-883 9182',
       role: 'customer',
@@ -88,12 +90,12 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <h3 className="text-lg font-bold text-white">{currentUser.name}</h3>
               <p className="text-xs text-slate-400">{currentUser.email || currentUser.phone}</p>
               <span className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">
-                SVI 官方会员已登录
+                {copy.loggedIn}
               </span>
             </div>
 
             <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 text-left text-xs text-slate-300 space-y-1.5">
-              <span className="font-semibold text-slate-400 text-[10px]">默认收件信息:</span>
+              <span className="font-semibold text-slate-400 text-[10px]">{copy.address}</span>
               <p className="text-white font-medium">Tan Wei Loon (+60 12-384 9182)</p>
               <p className="text-slate-400">Subang Jaya, Selangor 47620</p>
             </div>
@@ -103,13 +105,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 onClick={onClose}
                 className="flex-1 py-2.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs"
               >
-                继续购物
+                {copy.continue}
               </button>
               <button
                 onClick={onLogout}
                 className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-rose-400 font-semibold text-xs border border-slate-700"
               >
-                退出登录
+                {copy.logout}
               </button>
             </div>
           </div>
@@ -117,8 +119,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           /* Login Form */
           <div className="space-y-4">
             <div className="text-center space-y-1">
-              <h3 className="text-xl font-black text-white">极简快捷登录 / 注册</h3>
-              <p className="text-xs text-slate-400">支持一键 Google 授权或手机验证码直达，免去繁琐密码</p>
+              <h3 className="text-xl font-black text-white">{copy.title}</h3>
+              <p className="text-xs text-slate-400">{copy.subtitle}</p>
             </div>
 
             {/* Google One-Click Button */}
@@ -144,27 +146,27 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                   d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
                 />
               </svg>
-              <span>使用 Google 账号一键秒登</span>
+              <span>{copy.google}</span>
             </button>
 
             <div className="relative flex items-center justify-center my-3">
               <div className="border-t border-slate-800 w-full"></div>
               <span className="bg-slate-900 px-3 text-[10px] text-slate-500 uppercase tracking-widest absolute">
-                或者使用手机/邮箱验证
+                {copy.orVerify}
               </span>
             </div>
 
             {/* OTP Form */}
             <form onSubmit={handleVerifyOtp} className="space-y-3">
               <div>
-                <label className="text-[11px] text-slate-400 block mb-1">大马手机号 / 邮箱</label>
+                <label className="text-[11px] text-slate-400 block mb-1">{copy.phoneEmail}</label>
                 <div className="flex gap-2">
                   <input
                     type="text"
                     required
                     value={emailOrPhone}
                     onChange={(e) => setEmailOrPhone(e.target.value)}
-                    placeholder="+60 12-xxxxxxx 或 email@..."
+                    placeholder={copy.phonePlaceholder}
                     className="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-500"
                   />
                   <button
@@ -172,7 +174,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                     onClick={handleSendOtp}
                     className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs font-semibold shrink-0"
                   >
-                    {isSentOtp ? '已发送验证码' : '获取验证码'}
+                    {isSentOtp ? copy.sentOtp : copy.sendOtp}
                   </button>
                 </div>
               </div>
@@ -180,7 +182,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               {isSentOtp && (
                 <div className="animate-in fade-in">
                   <label className="text-[11px] text-slate-400 block mb-1">
-                    输入收到的 6 位数验证码 (测试请输入 888888)
+                    {copy.enterOtp}
                   </label>
                   <input
                     type="text"
@@ -197,7 +199,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 type="submit"
                 className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs shadow-md shadow-cyan-900/30"
               >
-                验证并进入店铺
+                {currentLang === 'zh' ? '验证并进入店铺' : currentLang === 'ms' ? 'Sahkan dan teruskan' : 'Verify and continue'}
               </button>
             </form>
 
@@ -206,7 +208,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               onClick={() => handleQuickLogin('guest')}
               className="w-full text-center text-xs text-slate-400 hover:text-cyan-400 py-1 transition-colors"
             >
-              直接以访客身份结算 (无需注册) →
+              {copy.guest}
             </button>
           </div>
         )}
