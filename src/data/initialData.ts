@@ -15,7 +15,7 @@ export const INITIAL_PRODUCTS: TVBoxProduct[] = [
     subtitle: '4GB+64GB | 8K Ultra HD | Dual WiFi 6 | AI Voice Remote',
     subtitleZh: '4G运存+64G闪存 | 8K超清解码 | 双频WiFi 6 | 智能语音遥控',
     subtitleMs: '4GB RAM + 64GB ROM | 8K Ultra HD | WiFi 6 Dwi-jalur | Kawalan Suara AI',
-    price: 699,
+    price: 599,
     originalPrice: 769,
     stock: 45,
     lowStockThreshold: 15,

@@ -180,6 +180,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                   <span className="text-xs sm:text-sm text-slate-500 line-through">RM {product.originalPrice}</span>
                 </div>
                 <p className="text-[10px] sm:text-xs text-emerald-400 mt-0.5">
+                  {product.id === 'svi-9p' ? '限时折扣 · ' : ''}
                   立省 RM {product.originalPrice - product.price} · 全马现货免运费极速派送
                 </p>
               </div>

@@ -39,7 +39,7 @@ class StorageService {
       if (data) {
         const parsed: TVBoxProduct[] = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length >= 5) {
-          let productImagesChanged = false;
+          let productDataChanged = false;
           const products = parsed.map((product) => {
             const currentProduct = INITIAL_PRODUCTS.find((item) => item.id === product.id);
             const galleryIsCurrent =
@@ -47,19 +47,23 @@ class StorageService {
               Array.isArray(product.gallery) &&
               product.gallery.length === currentProduct.gallery.length &&
               product.gallery.every((image, index) => image === currentProduct.gallery[index]);
+            const imagesNeedUpdate =
+              currentProduct &&
+              (product.image !== currentProduct.image || !galleryIsCurrent);
+            const priceNeedsUpdate = product.id === 'svi-9p' && product.price === 699;
 
-            if (
-              !currentProduct ||
-              (product.image === currentProduct.image && galleryIsCurrent)
-            ) {
+            if (!currentProduct || (!imagesNeedUpdate && !priceNeedsUpdate)) {
               return product;
             }
 
-            productImagesChanged = true;
+            productDataChanged = true;
             return {
               ...product,
-              image: currentProduct.image,
-              gallery: currentProduct.gallery,
+              ...(imagesNeedUpdate && {
+                image: currentProduct.image,
+                gallery: currentProduct.gallery,
+              }),
+              ...(priceNeedsUpdate && { price: 599 }),
             };
           });
 
@@ -70,7 +74,7 @@ class StorageService {
             }
           });
 
-          if (productImagesChanged) {
+          if (productDataChanged) {
             this.saveProducts(products);
           }
           return products;

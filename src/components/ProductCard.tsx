@@ -170,7 +170,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               <span className="text-[10px] sm:text-xs text-slate-500 line-through">RM {product.originalPrice}</span>
             </div>
             <p className="text-[9px] sm:text-[10px] text-emerald-400 font-medium">
-              全马包邮 · 官方正品 1对1 换新
+              {product.id === 'svi-9p'
+                ? '限时折扣 · 全马包邮 · 官方正品 1对1 换新'
+                : '全马包邮 · 官方正品 1对1 换新'}
             </p>
           </div>
         </div>
