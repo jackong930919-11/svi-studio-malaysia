@@ -39,13 +39,41 @@ class StorageService {
       if (data) {
         const parsed: TVBoxProduct[] = JSON.parse(data);
         if (Array.isArray(parsed) && parsed.length >= 5) {
+          let productImagesChanged = false;
+          const products = parsed.map((product) => {
+            const currentProduct = INITIAL_PRODUCTS.find((item) => item.id === product.id);
+            const galleryIsCurrent =
+              currentProduct &&
+              Array.isArray(product.gallery) &&
+              product.gallery.length === currentProduct.gallery.length &&
+              product.gallery.every((image, index) => image === currentProduct.gallery[index]);
+
+            if (
+              !currentProduct ||
+              (product.image === currentProduct.image && galleryIsCurrent)
+            ) {
+              return product;
+            }
+
+            productImagesChanged = true;
+            return {
+              ...product,
+              image: currentProduct.image,
+              gallery: currentProduct.gallery,
+            };
+          });
+
           // Ensure warranty is 1 Year 1-to-1 Hardware Replacement across all items
-          parsed.forEach((p) => {
+          products.forEach((p) => {
             if (p.specs) {
               p.specs.warranty = '1 Year 1-to-1 Hardware Replacement';
             }
           });
-          return parsed;
+
+          if (productImagesChanged) {
+            this.saveProducts(products);
+          }
+          return products;
         }
       }
     } catch (e) {
