@@ -286,7 +286,7 @@ export const DECISION_TREE: Record<string, QuestionNode> = {
             '大型赛事（如英超强强对决、奥运羽毛球决赛）时，优先选择带有「VIP 专线」或「低延迟专线」标识的线路。',
             '建议插网线或连 5G Wi-Fi，享受 60 帧无拖影流畅体验。',
           ],
-          warningOrTip: '💡 Svicloud 15P supports Wi-Fi 6 dual-band 2.4GHz + 5GHz and up to 4K@60fps video.',
+          warningOrTip: '💡 Svicloud 15P 支持 Wi-Fi 6 双频 2.4GHz + 5GHz，并支持最高 4K@60fps。',
         },
       },
       {
