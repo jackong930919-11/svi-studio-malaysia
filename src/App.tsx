@@ -12,7 +12,6 @@ import {
   ChevronDown,
   PhoneCall,
   Search,
-  Lightbulb,
 } from 'lucide-react';
 import { TVBoxProduct, Order, CustomerReview, Language, UserProfile } from './types';
 import { storageService } from './services/storageService';
@@ -24,10 +23,8 @@ import { ProductModal } from './components/ProductModal';
 import { RecommendationQuiz } from './components/RecommendationQuiz';
 import { ReviewsSection } from './components/ReviewsSection';
 import { AiCustomerServiceModal } from './components/AiCustomerServiceModal';
-import { AdminPage } from './pages/AdminPage';
 import { TeachingPage } from './pages/TeachingPage';
 import { AccessoriesPage } from './pages/AccessoriesPage';
-import { AdminLoginModal } from './components/AdminLoginModal';
 import { AuthModal } from './components/AuthModal';
 import { Footer } from './components/Footer';
 import { StarfieldBackground } from './components/StarfieldBackground';
@@ -40,11 +37,10 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // Standalone Page Routing for Storefront, Admin Page, Teaching Page, and Accessories Page
+  // Standalone Page Routing for the Storefront, Teaching Page, and Accessories Page
   const getInitialPath = (): string => {
     if (typeof window !== 'undefined') {
       const pathname = window.location.pathname;
-      if (pathname === '/admin' || pathname === '/admin.html') return '/admin';
       if (
         pathname === '/teaching' ||
         pathname === '/teaching.html' ||
@@ -60,10 +56,8 @@ export default function App() {
       )
         return '/accessories';
       const params = new URLSearchParams(window.location.search);
-      if (params.get('page') === 'admin') return '/admin';
       if (params.get('page') === 'teaching') return '/teaching';
       if (params.get('page') === 'accessories') return '/accessories';
-      if (window.location.hash === '#admin') return '/admin';
       if (window.location.hash === '#teaching') return '/teaching';
       if (window.location.hash === '#accessories') return '/accessories';
     }
@@ -77,13 +71,6 @@ export default function App() {
       const pathname = window.location.pathname;
       const params = new URLSearchParams(window.location.search);
       if (
-        pathname === '/admin' ||
-        pathname === '/admin.html' ||
-        params.get('page') === 'admin' ||
-        window.location.hash === '#admin'
-      ) {
-        setCurrentPath('/admin');
-      } else if (
         pathname === '/teaching' ||
         pathname === '/teaching.html' ||
         pathname === '/tutorials' ||
@@ -112,16 +99,6 @@ export default function App() {
       window.removeEventListener('hashchange', syncRoute);
     };
   }, []);
-
-  const navigateToAdmin = () => {
-    try {
-      window.history.pushState(null, '', '/admin');
-    } catch {
-      window.location.hash = 'admin';
-    }
-    setCurrentPath('/admin');
-    window.scrollTo(0, 0);
-  };
 
   const navigateToTeaching = () => {
     try {
@@ -160,36 +137,6 @@ export default function App() {
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
-  // Hidden / Disguised Admin Portal Security States
-  const [isAdminAuth, setIsAdminAuth] = useState<boolean>(() => {
-    if (typeof window !== 'undefined') {
-      return sessionStorage.getItem('svi_admin_auth') === 'true';
-    }
-    return false;
-  });
-  const [isAdminLoginOpen, setIsAdminLoginOpen] = useState(false);
-
-  const handleAdminLoginSuccess = () => {
-    setIsAdminAuth(true);
-    navigateToAdmin();
-  };
-
-  const handleAdminLogout = () => {
-    setIsAdminAuth(false);
-    if (typeof window !== 'undefined') {
-      sessionStorage.removeItem('svi_admin_auth');
-    }
-    navigateToStore();
-  };
-
-  const handleOpenDisguisedAdmin = () => {
-    if (isAdminAuth) {
-      navigateToAdmin();
-    } else {
-      setIsAdminLoginOpen(true);
-    }
-  };
-
   const t = TRANSLATIONS[currentLang];
 
   const refreshAllData = () => {
@@ -219,32 +166,6 @@ export default function App() {
 
     return matchesCategory && matchesSearch;
   });
-
-  if (currentPath === '/admin') {
-    if (!isAdminAuth) {
-      return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-          <AdminLoginModal
-            isOpen={true}
-            onClose={navigateToStore}
-            onLoginSuccess={handleAdminLoginSuccess}
-          />
-        </div>
-      );
-    }
-
-    return (
-      <AdminPage
-        products={products}
-        orders={orders}
-        onRefreshData={refreshAllData}
-        currentLang={currentLang}
-        onSelectLang={setCurrentLang}
-        onNavigateToStore={navigateToStore}
-        onLogout={handleAdminLogout}
-      />
-    );
-  }
 
   if (currentPath === '/teaching') {
     return (
@@ -277,7 +198,6 @@ export default function App() {
         onSelectLang={setCurrentLang}
         onOpenQuiz={() => setIsQuizOpen(true)}
         onOpenAi={() => setIsAiOpen(true)}
-        onOpenAdmin={navigateToAdmin}
         onOpenAuth={() => setIsAuthOpen(true)}
         onNavigateToTeaching={navigateToTeaching}
         onNavigateToAccessories={navigateToAccessories}
@@ -569,33 +489,15 @@ export default function App() {
         </button>
       </div>
 
-      {/* Disguised Admin Entrance: Subtle Lightbulb at Bottom-Right Corner */}
-      <button
-        onClick={handleOpenDisguisedAdmin}
-        className="fixed bottom-2 right-2 z-30 p-1.5 rounded-full bg-slate-900/60 hover:bg-slate-800 text-slate-600 hover:text-amber-400 border border-slate-800/80 hover:border-amber-400/40 transition-all opacity-40 hover:opacity-100 shadow-sm"
-        title="Tips"
-        aria-label="Tips"
-      >
-        <Lightbulb className="w-3.5 h-3.5" />
-      </button>
-
       {/* Footer */}
       <Footer
         currentLang={currentLang}
-        onOpenAdmin={handleOpenDisguisedAdmin}
         onOpenAi={() => setIsAiOpen(true)}
         onNavigateToTeaching={navigateToTeaching}
         onNavigateToAccessories={navigateToAccessories}
       />
 
       {/* MODALS */}
-      {/* Disguised Admin Login Modal requiring ID and Password */}
-      <AdminLoginModal
-        isOpen={isAdminLoginOpen}
-        onClose={() => setIsAdminLoginOpen(false)}
-        onLoginSuccess={handleAdminLoginSuccess}
-      />
-
       {/* Product Details Modal */}
       <ProductModal
         product={activeModalProduct}

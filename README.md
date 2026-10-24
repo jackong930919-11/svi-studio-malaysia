@@ -1,20 +1,30 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Svi Studio Malaysia
 
-# Run and deploy your AI Studio app
+## Run locally
 
-This contains everything you need to run your app locally.
+Install dependencies and start the Express development server:
 
-View your app in AI Studio: https://ai.studio/apps/fe5f129a-a1a2-48c4-a8c4-563b35eb1698
+```sh
+npm install
+npm run dev
+```
 
-## Run Locally
+Set `GEMINI_API_KEY` in a local `.env` file to enable Gemini replies in the Express server. Without it, chat uses the built-in multilingual knowledge base.
 
-**Prerequisites:**  Node.js
+## Deploy to Cloudflare Pages
 
+The site is a Vite static build with Pages Functions for `/api/chat` and `/api/health`.
+The deployed version uses built-in chat replies; the browser-only demo admin portal is disabled.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```sh
+npm run build
+npx wrangler pages deploy dist --project-name svi-studio-malaysia
+```
+
+Wrangler must be authenticated and the `svi-studio-malaysia` Pages project must exist. To enable Gemini replies, add the API key as a Pages secret:
+
+```sh
+npx wrangler pages secret put GEMINI_API_KEY --project-name svi-studio-malaysia
+```
+
+Never commit API keys or place them in frontend environment variables.

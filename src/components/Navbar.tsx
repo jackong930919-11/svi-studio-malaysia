@@ -20,7 +20,6 @@ interface NavbarProps {
   onSelectLang: (lang: Language) => void;
   onOpenQuiz: () => void;
   onOpenAi: () => void;
-  onOpenAdmin: () => void;
   onOpenAuth: () => void;
   onNavigateToTeaching: () => void;
   onNavigateToAccessories?: () => void;
@@ -34,7 +33,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLang,
   onOpenQuiz,
   onOpenAi,
-  onOpenAdmin,
   onOpenAuth,
   onNavigateToTeaching,
   onNavigateToAccessories,

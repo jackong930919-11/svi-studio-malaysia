@@ -1,12 +1,11 @@
 import React from 'react';
-import { ShieldCheck, Truck, Award, Headphones, Phone, MessageCircle, Lock, Lightbulb } from 'lucide-react';
+import { ShieldCheck, Truck, Award, Headphones, Phone, MessageCircle } from 'lucide-react';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { UI_COPY } from '../data/uiTranslations';
 
 interface FooterProps {
   currentLang: Language;
-  onOpenAdmin: () => void;
   onOpenAi: () => void;
   onNavigateToTeaching?: () => void;
   onNavigateToAccessories?: () => void;
@@ -14,7 +13,6 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({
   currentLang,
-  onOpenAdmin,
   onOpenAi,
   onNavigateToTeaching,
   onNavigateToAccessories,
@@ -184,17 +182,6 @@ export const Footer: React.FC<FooterProps> = ({
           {copy.legal}
         </p>
 
-        {/* Discreet Bulb Logo at the Bottom Right Corner (Disguised Admin Entrance) */}
-        <div className="mt-3 flex justify-center sm:absolute sm:right-6 sm:bottom-5 sm:mt-0">
-          <button
-            onClick={onOpenAdmin}
-            className="p-1.5 rounded-full text-slate-700 hover:text-amber-400 hover:bg-slate-900/80 transition-all opacity-40 hover:opacity-100"
-            title="Tips"
-            aria-label="Tips"
-          >
-            <Lightbulb className="w-4 h-4" />
-          </button>
-        </div>
       </div>
     </footer>
   );
