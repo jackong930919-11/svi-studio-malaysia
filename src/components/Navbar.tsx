@@ -47,7 +47,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const copy = UI_COPY[currentLang].nav;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-800/80 bg-slate-950/95 backdrop-blur-md">
       {/* Single Clean Unified Navbar Row */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3 sm:gap-6">
         
@@ -70,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         </button>
 
         {/* Navigation Links - Single Harmonious Row */}
-        <nav className="hidden md:flex items-center gap-3.5 lg:gap-5 text-sm font-medium text-slate-700 whitespace-nowrap">
+        <nav className="hidden md:flex items-center gap-3.5 lg:gap-5 text-sm font-medium text-slate-300 whitespace-nowrap">
           <button
             onClick={() => onScrollToSection('products-section')}
             className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors whitespace-nowrap py-1"
@@ -82,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {onNavigateToAccessories && (
             <button
               onClick={onNavigateToAccessories}
-              className="flex items-center gap-1.5 hover:text-amber-600 text-amber-700 transition-colors whitespace-nowrap py-1 font-semibold"
+              className="flex items-center gap-1.5 hover:text-amber-400 text-amber-300 transition-colors whitespace-nowrap py-1 font-semibold"
             >
               <Radio className="w-4 h-4 text-amber-400" />
               <span>{t.nav.accessories}</span>
@@ -91,7 +91,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onNavigateToTeaching}
-            className="flex items-center gap-1.5 hover:text-cyan-700 text-cyan-700 transition-colors whitespace-nowrap py-1 font-semibold"
+            className="flex items-center gap-1.5 hover:text-cyan-400 text-cyan-300 transition-colors whitespace-nowrap py-1 font-semibold"
           >
             <Video className="w-4 h-4 text-cyan-400" />
             <span>{t.nav.teaching}</span>
@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onOpenAi}
-            className="flex items-center gap-1.5 hover:text-indigo-700 text-indigo-700 transition-colors whitespace-nowrap py-1"
+            className="flex items-center gap-1.5 hover:text-indigo-300 text-indigo-400 transition-colors whitespace-nowrap py-1"
           >
             <Bot className="w-4 h-4 text-indigo-400" />
             <span>{currentLang === 'zh' ? 'AI 客服' : currentLang === 'ms' ? 'Bantuan AI' : 'AI Help'}</span>
@@ -129,9 +129,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={copy.search}
-            className="w-full bg-white text-xs text-slate-800 placeholder-slate-500 rounded-full pl-8 pr-3 py-1.5 border border-slate-300 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+            className="w-full bg-slate-900/90 text-xs text-slate-200 placeholder-slate-500 rounded-full pl-8 pr-3 py-1.5 border border-slate-800 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
           />
-          <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
         </div>
 
         {/* Right Action Icons: Language, Mobile buttons, WhatsApp */}
@@ -140,7 +140,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {onNavigateToAccessories && (
             <button
               onClick={onNavigateToAccessories}
-              className="md:hidden flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-50 border border-amber-200 text-[10px] text-amber-800 font-bold hover:bg-amber-100 transition-all whitespace-nowrap"
+              className="md:hidden flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-950/80 border border-amber-800 text-[10px] text-amber-300 font-bold hover:bg-amber-900 transition-all whitespace-nowrap"
               title={copy.accessoryShort}
             >
               <Radio className="w-3 h-3 text-amber-400" />
@@ -150,7 +150,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onNavigateToTeaching}
-            className="md:hidden flex items-center gap-1 px-2 py-1 rounded-lg bg-cyan-50 border border-cyan-200 text-[10px] text-cyan-800 font-bold hover:bg-cyan-100 transition-all whitespace-nowrap"
+            className="md:hidden flex items-center gap-1 px-2 py-1 rounded-lg bg-cyan-950/80 border border-cyan-800 text-[10px] text-cyan-300 font-bold hover:bg-cyan-900 transition-all whitespace-nowrap"
             title={copy.teachingShort}
           >
             <Video className="w-3 h-3 text-cyan-400" />
@@ -161,7 +161,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="relative">
             <button
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex items-center gap-1 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg border border-slate-300 bg-white text-[11px] sm:text-xs text-slate-700 hover:text-slate-950 hover:border-slate-400 transition-all whitespace-nowrap"
+              className="flex items-center gap-1 px-2 py-1 sm:px-2.5 sm:py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-[11px] sm:text-xs text-slate-300 hover:text-white hover:border-slate-700 transition-all whitespace-nowrap"
             >
               <Languages className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-400" />
               <span className="font-semibold uppercase">{currentLang}</span>
@@ -212,7 +212,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* User Account / Login */}
           <button
             onClick={onOpenAuth}
-            className="p-1.5 sm:p-2 rounded-lg text-slate-700 hover:text-slate-950 hover:bg-slate-100 border border-transparent hover:border-slate-200 transition-all shrink-0"
+            className="p-1.5 sm:p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all shrink-0"
             title={copy.account}
           >
             <User className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
