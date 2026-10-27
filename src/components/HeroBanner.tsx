@@ -20,6 +20,9 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 }) => {
   const t = TRANSLATIONS[currentLang];
   const copy = UI_COPY[currentLang].hero;
+  const campaignStart = new Date('2026-10-01T00:00:00+08:00').getTime();
+  const campaignEnd = new Date('2026-12-01T00:00:00+08:00').getTime();
+  const isTradeInCampaignActive = Date.now() >= campaignStart && Date.now() < campaignEnd;
 
   return (
     <section className="relative overflow-hidden pt-5 pb-6 sm:pt-10 sm:pb-12 lg:pt-12 lg:pb-16 border-b border-slate-900/60 bg-radial-[at_50%_0%] from-cyan-950/20 via-slate-950/30 to-transparent">
@@ -92,6 +95,24 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
           {/* Right Column: Interactive Flagship Hardware Showcase Card */}
           <div className="lg:col-span-5 relative">
+            {isTradeInCampaignActive ? (
+              <a
+                href={`https://wa.me/60186663311?text=${encodeURIComponent('你好，我想了解 Svicloud 以旧换新立减 RM100 优惠（升级 15P）。')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp 咨询以旧换新"
+                className="block max-w-md mx-auto transition-transform hover:scale-[1.02]"
+              >
+                <img
+                  src="/images/Posters/tradein-15p.webp"
+                  alt="Svicloud 以旧换新升级 15P，立减 RM100"
+                  width={900}
+                  height={1125}
+                  loading="eager"
+                  className="block w-full rounded-2xl shadow-2xl shadow-cyan-950/40"
+                />
+              </a>
+            ) : (
             <div className="relative mx-auto max-w-md rounded-2xl bg-gradient-to-b from-slate-800/90 to-slate-900/95 p-1 sm:p-1.5 border border-slate-700/80 shadow-2xl shadow-cyan-950/40">
               {/* Inner Preview Window */}
               <div className="relative overflow-hidden rounded-xl bg-slate-950 p-2 sm:p-4 space-y-2 sm:space-y-3">
@@ -174,6 +195,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 </div>
               </div>
             </div>
+            )}
           </div>
         </div>
       </div>
