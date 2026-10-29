@@ -13,7 +13,7 @@ import {
   PhoneCall,
   Search,
 } from 'lucide-react';
-import { TVBoxProduct, Order, CustomerReview, Language, UserProfile } from './types';
+import { TVBoxProduct, Order, CustomerReview, Language } from './types';
 import { storageService } from './services/storageService';
 import { TRANSLATIONS } from './data/translations';
 import { Navbar } from './components/Navbar';
@@ -25,7 +25,6 @@ import { ReviewsSection } from './components/ReviewsSection';
 import { AiCustomerServiceModal } from './components/AiCustomerServiceModal';
 import { TeachingPage } from './pages/TeachingPage';
 import { AccessoriesPage } from './pages/AccessoriesPage';
-import { AuthModal } from './components/AuthModal';
 import { Footer } from './components/Footer';
 import { StarfieldBackground } from './components/StarfieldBackground';
 
@@ -134,8 +133,6 @@ export default function App() {
   const [activeModalProduct, setActiveModalProduct] = useState<TVBoxProduct | null>(null);
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isAiOpen, setIsAiOpen] = useState(false);
-  const [isAuthOpen, setIsAuthOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
 
   const t = TRANSLATIONS[currentLang];
 
@@ -198,7 +195,6 @@ export default function App() {
         onSelectLang={setCurrentLang}
         onOpenQuiz={() => setIsQuizOpen(true)}
         onOpenAi={() => setIsAiOpen(true)}
-        onOpenAuth={() => setIsAuthOpen(true)}
         onNavigateToTeaching={navigateToTeaching}
         onNavigateToAccessories={navigateToAccessories}
         onScrollToSection={scrollToSection}
@@ -523,15 +519,6 @@ export default function App() {
         currentLang={currentLang}
       />
 
-      {/* User Login/Register Modal */}
-      <AuthModal
-        isOpen={isAuthOpen}
-        onClose={() => setIsAuthOpen(false)}
-        currentUser={currentUser}
-        onLoginSuccess={setCurrentUser}
-        onLogout={() => setCurrentUser(null)}
-        currentLang={currentLang}
-      />
     </div>
   );
 }

@@ -15,7 +15,6 @@ export const TRANSLATIONS = {
       faq: '常见疑问 FAQ',
       teaching: '教學視頻',
       admin: '商家后台',
-      login: '登录 / 注册',
       myOrders: '我的订单',
     },
     hero: {
@@ -239,7 +238,6 @@ export const TRANSLATIONS = {
       faq: 'FAQ',
       teaching: 'Tutorials',
       admin: 'Admin Portal',
-      login: 'Login / Register',
       myOrders: 'My Orders',
     },
     hero: {
@@ -463,7 +461,6 @@ export const TRANSLATIONS = {
       faq: 'Soalan Lazim FAQ',
       teaching: 'Tutorial',
       admin: 'Portal Peniaga',
-      login: 'Log Masuk / Daftar',
       myOrders: 'Pesanan Saya',
     },
     hero: {

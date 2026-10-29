@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Search,
   Languages,
-  User,
   MessageSquareQuote,
   Bot,
   Video,
@@ -20,7 +19,6 @@ interface NavbarProps {
   onSelectLang: (lang: Language) => void;
   onOpenQuiz: () => void;
   onOpenAi: () => void;
-  onOpenAuth: () => void;
   onNavigateToTeaching: () => void;
   onNavigateToAccessories?: () => void;
   onScrollToSection: (sectionId: string) => void;
@@ -33,7 +31,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectLang,
   onOpenQuiz,
   onOpenAi,
-  onOpenAuth,
   onNavigateToTeaching,
   onNavigateToAccessories,
   onScrollToSection,
@@ -206,15 +203,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
           </div>
-
-          {/* User Account / Login */}
-          <button
-            onClick={onOpenAuth}
-            className="p-1.5 sm:p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900 border border-transparent hover:border-slate-800 transition-all shrink-0"
-            title={copy.account}
-          >
-            <User className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
-          </button>
 
           {/* Direct WhatsApp Consultation / Order Button (Hidden on Mobile) */}
           <a

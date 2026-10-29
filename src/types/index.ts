@@ -128,16 +128,6 @@ export interface CustomerReview {
   tags: string[];
 }
 
-export interface UserProfile {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  avatar?: string;
-  addresses: OrderShippingAddress[];
-  role: 'customer' | 'admin';
-}
-
 export interface SalesAnalytics {
   totalRevenue: number;
   totalOrders: number;
